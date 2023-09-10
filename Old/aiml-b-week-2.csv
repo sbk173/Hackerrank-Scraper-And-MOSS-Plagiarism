@@ -1,0 +1,5201 @@
+studentId,studentUserName,challenge,score,code
+8647313,PES1UG22AM079,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node 
+{
+    int data;
+    struct Node* next;
+};
+
+
+void insert(struct Node** head, int data) 
+{
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) 
+    {
+        *head = newNode;
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next != NULL) 
+    {
+        current = current->next;
+    }
+
+    current->next = newNode;
+}
+
+
+struct Node* reverse(struct Node* head) 
+{
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* next = NULL;
+
+    while (current != NULL) 
+    {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+
+    return prev;
+}
+
+
+void printList(struct Node* head) 
+{
+    while (head != NULL) 
+    {
+        printf(""%d"", head->data);
+        head = head->next;
+    }
+}
+
+int main() {
+    struct Node* head = NULL;
+    int n;
+    int data; 
+
+    scanf(""%d"", &n);
+
+    for (int i = 0; i < n; i++) 
+    {
+        scanf(""%d"", &data);
+        insert(&head, data);
+    }
+
+
+
+    head = reverse(head);
+    printList(head);
+
+
+
+    return 0;
+}"
+8647313,PES1UG22AM079,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int info;
+    struct Node* next;
+};
+
+struct Node* reverseList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* curr = head;
+
+    while (curr != NULL) {
+        struct Node* nextNode = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = nextNode;
+    }
+
+    return prev;
+}
+
+void printList(struct Node* head) {
+    struct Node* curr = head;
+    while (curr != NULL) {
+        printf(""%d"", curr->info);
+        if (curr->next != NULL) {
+            printf("" "");
+            // prinnitng space if therse a next node
+        }
+        curr = curr->next;
+    }
+}
+
+struct Node* addLists(struct Node* p1, struct Node* p2) {
+    struct Node* finalhead = (struct Node*)malloc(sizeof(struct Node));
+    finalhead->info = 0;
+    finalhead->next = NULL;
+    struct Node* curr = finalhead;
+    int carry = 0;
+
+    while (p1 != NULL || p2 != NULL || carry != 0) {
+        int sum = carry;
+        if (p1 != NULL) {
+            sum += p1->info;
+            p1 = p1->next;
+        }
+        if (p2 != NULL) {
+            sum += p2->info;
+            p2 = p2->next;
+        }
+
+        carry = sum / 10;
+        sum %= 10;
+
+        curr->next = (struct Node*)malloc(sizeof(struct Node));
+        curr = curr->next;
+        curr->info = sum;
+        curr->next = NULL;
+    }
+
+    struct Node* result = finalhead->next;
+    free(finalhead);
+    return result;
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->info = digit;
+        newNode->next = list1;
+        list1 = newNode;
+    }
+
+    for (int i = 0; i < n2; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->info = digit;
+        newNode->next = list2;
+        list2 = newNode;
+    }
+
+    list1 = reverseList(list1);
+    list2 = reverseList(list2);
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+    printf(""\n"");
+
+    struct Node* temp = sumList;
+    while (temp != NULL) {
+        struct Node* nextTemp = temp->next;
+        free(temp);
+        temp = nextTemp;
+    }
+
+    return 0;
+}"
+22676527,PES1UG22AM912,Reversing a Linked List 1,15,undefined
+22676527,PES1UG22AM912,ADD TWO NUMBERS 104,15,undefined
+22707281,PES1UG22AM913,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct Node
+{
+    int data;
+    struct Node* link;
+}Node;
+
+Node* create(int data)
+{
+    Node* newNode = malloc(sizeof(Node));
+    newNode->data = data;
+    newNode->link = NULL;
+    return newNode;
+}
+
+Node* insertNode(Node* head, int data)
+{
+    Node* newNode = create(data);
+    if (head == NULL)
+    {
+        head = newNode;
+    }
+    else
+    {
+        Node* current = head;
+        while (current->link != NULL)
+        {
+            current = current->link;
+        }
+        current->link=newNode;
+    }
+    return head;
+}
+
+Node* reverseLinkedList(Node* head)
+{
+    Node* prev = NULL;
+    Node* current = head;
+    Node* nextNode;
+
+    while (current != NULL)
+    {
+        nextNode = current->link;
+        current->link=prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printList(Node* head)
+{
+    Node* current = head;
+    while (current != NULL)
+    {
+        printf(""%d"", current->data);
+        current = current->link;
+    }
+}
+
+int main()
+{
+    int n;
+    scanf(""%d"", &n);
+
+    Node* head = NULL;
+
+    for (int i = 0; i < n; i++)
+    {
+        int data;
+        scanf(""%d"", &data);
+        head = insertNode(head, data);
+    }
+
+    head = reverseLinkedList(head);
+    printList(head);
+    return 0;
+}"
+22707281,PES1UG22AM913,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node* link;
+}NODE;
+
+
+NODE* create(int x)
+{
+    NODE *new_node = (malloc(sizeof(NODE)));
+    new_node->data=x;
+    new_node->link=NULL;
+    return new_node;
+}
+
+void insertlast(int x, NODE **pstart)
+{
+    NODE *dstart;
+    NODE *new_node = create(x);
+    if(*pstart==NULL)
+        *pstart=new_node;
+    else
+    {
+        dstart=*pstart;
+        while(dstart->link!=NULL)
+        {
+            dstart=dstart->link;
+        }
+        dstart->link=new_node;
+    }
+}
+
+void display(NODE* start)
+{
+    
+    if(start==NULL) 
+        printf(""Empty List "");
+    else
+    {
+        while(start!=NULL)
+        { 
+            printf(""%d "", start->data); 
+            start=start->link;
+        } 
+        printf(""\n"");
+    }
+}
+
+int num(NODE **head)
+{
+    NODE *p = *head;
+    int revnumber=0,number=0;
+    while(p!=NULL)
+    {
+        revnumber=revnumber*10+p->data;
+        p=p->link;
+    }
+    while(revnumber!=0)
+    {
+        number=number*10+(revnumber%10);
+        revnumber/=10;
+    }
+    return number;
+}
+
+int sum(int num1, int num2)
+{
+    return num1+num2;
+}
+
+int main()
+{
+    int size1,size2,ele;
+    scanf(""%d%d"",&size1,&size2);
+    NODE* head1=NULL;
+    NODE* head2=NULL;
+    for(int i=0;i<size1;i++)
+    {
+        scanf(""%d"",&ele);
+        insertlast(ele,&head1);
+    }
+    for(int i=0;i<size2;i++)
+    {
+        scanf(""%d"",&ele);
+        insertlast(ele,&head2);
+    }
+    int ans = sum(num(&head1),num(&head2));
+    if(ans==0)
+    {
+        printf(""%d"",ans);
+    }
+    while(ans!=0)
+    {
+        printf(""%d "",ans%10);
+        ans/=10;
+    }
+    printf(""\n"");
+    
+    return 0;
+}
+"
+22716376,PES1UG22AM126,Reversing a Linked List 1,15,undefined
+22716376,PES1UG22AM126,ADD TWO NUMBERS 104,15,undefined
+22716379,PES1UG22AM100,Reversing a Linked List 1,15,undefined
+22716379,PES1UG22AM100,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Node* insertNode(struct Node* head, int data) {
+    struct Node* newNode = createNode(data);
+    if (head == NULL) {
+        head = newNode;
+    } else {
+        struct Node* current = head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+    return head;
+}
+
+struct Node* addLists(struct Node* num1, struct Node* num2) {
+    struct Node* result = NULL;
+    struct Node* currentResult = NULL;
+    int carry = 0;
+
+    while (num1 != NULL || num2 != NULL) {
+        int sum = carry;
+        if (num1 != NULL) {
+            sum += num1->data;
+            num1 = num1->next;
+        }
+        if (num2 != NULL) {
+            sum += num2->data;
+            num2 = num2->next;
+        }
+
+        carry = sum / 10;
+        sum = sum % 10;
+
+        if (result == NULL) {
+            result = createNode(sum);
+            currentResult = result;
+        } else {
+            currentResult->next = createNode(sum);
+            currentResult = currentResult->next;
+        }
+    }
+
+    if (carry > 0) {
+        currentResult->next = createNode(carry);
+    }
+
+    return result;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        current = current->next;
+        if (current != NULL) {
+            printf("" "");
+        }
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    struct Node* num1 = NULL;
+    struct Node* num2 = NULL;
+    
+    for (int i = 0; i < n; i++) {
+        int data;
+        scanf(""%d"", &data);
+        num1 = insertNode(num1, data);
+    }
+    
+    for (int i = 0; i < m; i++) {
+        int data;
+        scanf(""%d"", &data);
+        num2 = insertNode(num2, data);
+    }
+    
+    struct Node* sum = addLists(num1, num2);
+    printLinkedList(sum);
+    
+    return 0;
+}
+
+"
+22716381,PES1UG22AM102,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct NODE {
+    int data;
+    struct NODE* next;
+};
+
+int main()
+{
+    int n;
+    scanf(""%d"", &n);
+    
+    struct NODE* list1 = NULL;
+    for (int i = 0; i < n; i++) {
+        int data;
+        scanf(""%d"", &data);
+        struct NODE* nd = malloc(sizeof(struct NODE));
+        nd->data = data;
+        nd->next = list1;
+        list1 = nd;
+    }
+    for (int i=0;i<n;i++)
+    {
+        printf(""%d"",list1->data);
+        list1=list1->next;
+    }
+}"
+22716381,PES1UG22AM102,ADD TWO NUMBERS 104,15,undefined
+22716382,PES1UG22AM110,Reversing a Linked List 1,15,undefined
+22716382,PES1UG22AM110,ADD TWO NUMBERS 104,15,undefined
+22716389,PES1UG22AM114,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct NODE{
+    int val;
+    struct NODE* next;
+}NODE;
+
+NODE* Add(NODE* head,int m){
+    if(head == NULL){
+        head = malloc(sizeof(NODE));
+        head->val = m;
+        head->next = NULL;
+        return head;
+    }
+    NODE* temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    NODE* add = malloc(sizeof(NODE));
+    add->val = m;
+    add->next = NULL;
+    temp->next = add;
+    return head;
+}
+
+void display(NODE* head){
+    if(head != NULL){
+    while(head!=NULL){
+        printf(""%d"",head->val);
+        head = head->next;
+    }
+    printf(""\n"");
+    }
+}
+
+NODE* Insert(NODE* ans,NODE* head){
+    NODE* temp = malloc(sizeof(NODE));
+    temp->val = head->val;
+    temp->next = ans;
+    return temp;
+}
+
+NODE* Reverse(NODE* head){
+    if(head == NULL){
+        return NULL;
+    }
+    if(head->next == NULL){
+        return head;
+    }
+    NODE* ans = malloc(sizeof(NODE));
+    ans->val = head->val;
+    ans->next = NULL;
+    head = head->next;
+    while(head!=NULL){
+        ans = Insert(ans,head);
+        head = head->next;
+    }
+    return ans;
+}
+
+int main() {
+    NODE* head = NULL;
+    int n;
+    scanf("" %d"",&n);
+    int m;
+    while(n > 0){
+        scanf("" %d"",&m);
+        head = Add(head,m);  
+        n -= 1;
+    }
+    head = Reverse(head);
+    display(head);
+    return 0;
+}
+"
+22716389,PES1UG22AM114,ADD TWO NUMBERS 104,15,"#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+
+typedef struct NODE{
+    int val;
+    struct NODE* next;
+}NODE;
+
+NODE* Add(NODE* head,int m){
+    if(head == NULL){
+        head = malloc(sizeof(NODE));
+        head->val = m;
+        head->next = NULL;
+        return head;
+    }
+    NODE* temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    NODE* add = malloc(sizeof(NODE));
+    add->val = m;
+    add->next = NULL;
+    temp->next = add;
+    return head;
+}
+
+NODE* addTwoNumbers(NODE* l1, NODE* l2){
+    if(l1 == NULL && l2 == NULL){
+        return NULL;
+    }
+    else if(l1 == NULL){
+        return l2;
+    }
+    else if(l2 == NULL){
+        return l1;
+    }
+    NODE* tt = l1;
+    long int o1 = 0;
+    int dgts = 0;
+    do{
+        o1 += (tt->val * pow(10,dgts));
+        dgts++;
+        tt = tt->next;
+    }while(tt!=NULL);
+    tt = l2;
+    long int o2 = 0;
+    dgts = 0;
+    do{
+        o2 += (tt->val * pow(10,dgts));
+        dgts++;
+        tt = tt->next;
+    }while(tt!=NULL);
+    NODE* aa = NULL;
+    // printf(""%d %d "",o1,o2);
+    long int o = o1 + o2;
+    while(o!=0){
+        aa = Add(aa,o%10);
+        o = o / 10;
+    }
+    return aa;
+}
+
+void display(NODE* head){
+    if(head!=NULL){
+    while(head->next!=NULL){
+        printf(""%d "",head->val);
+        head = head->next;
+    }
+    printf(""%d"",head->val);
+    }
+    else{
+        printf(""0"");
+    }
+}
+int main() {
+    NODE* head1 = NULL;
+    NODE* head2 = NULL;
+    int n, z;
+    scanf(""%d %d"", &n, &z);
+
+    for (int i = 0; i < n; i++) {
+        int m;
+        scanf(""%d"", &m);
+        head1 = Add(head1, m);
+    }
+
+    for (int i = 0; i < z; i++) {
+        int m1;
+        scanf(""%d"", &m1);
+        head2 = Add(head2, m1);
+    }
+
+    NODE* head3 = NULL;
+    head3 = addTwoNumbers(head1, head2);
+    display(head3);
+
+    return 0;
+}"
+22716405,pes1ug22am067,Reversing a Linked List 1,15,undefined
+22716405,pes1ug22am067,ADD TWO NUMBERS 104,15,undefined
+22716407,PES1UG22AM097,Reversing a Linked List 1,15,undefined
+22716407,PES1UG22AM097,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertAtEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+struct Node* addReversedDigitLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    int carry = 0;
+
+    while (list1 != NULL || list2 != NULL || carry != 0) {
+        int sum = carry;
+
+        if (list1 != NULL) {
+            sum += list1->data;
+            list1 = list1->next;
+        }
+
+        if (list2 != NULL) {
+            sum += list2->data;
+            list2 = list2->next;
+        }
+
+        carry = sum / 10;
+        sum = sum % 10;
+
+        insertAtEnd(&result, sum);
+    }
+
+    return result;
+}
+
+void printLinkedlist(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertAtEnd(&list1, digit);
+    }
+
+    for (int i = 0; i < m; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertAtEnd(&list2, digit);
+    }
+
+    struct Node* result = addReversedDigitLists(list1, list2);
+    printLinkedlist(result);
+
+    while (list1 != NULL) {
+        struct Node* temp = list1;
+        list1 = list1->next;
+        free(temp);
+    }
+
+    while (list2 != NULL) {
+        struct Node* temp = list2;
+        list2 = list2->next;
+        free(temp);
+    }
+
+    while (result != NULL) {
+        struct Node* temp = result;
+        result = result->next;
+        free(temp);
+    }
+
+    return 0;
+}"
+22716408,PES1UGAM22080,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+
+    // Reverse the linked list
+    head = reverseLinkedList(head);
+
+    // Print the reversed linked list
+    printLinkedList(head);
+
+    // Free allocated memory
+    current = head;
+    while (current != NULL) {
+        struct Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+
+    return 0;
+}"
+22716408,PES1UGAM22080,ADD TWO NUMBERS 104,15,undefined
+22716412,pes1ug22am128,Reversing a Linked List 1,15,undefined
+22716412,pes1ug22am128,ADD TWO NUMBERS 104,15,undefined
+22716413,PES1UG22AM117,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+   int info;
+   struct node *next;   
+}node;
+typedef struct list
+{
+   node *head;
+}list;
+void initlist(list *p1)
+{
+    p1->head=NULL;
+}
+node* creatnode(int ele)
+{
+    node *newnode=malloc(sizeof(node));
+    newnode->info=ele;
+    newnode->next=NULL;
+    return newnode;
+}
+void insertlast(list *p1,int ele)
+{
+    node *newnode=creatnode(ele);
+    if(p1->head==NULL)
+    {
+        p1->head=newnode;
+    }
+    else
+    {
+        node *p=p1->head;
+        while (p->next!=NULL)
+        {
+            p=p->next;
+        }
+        p->next=newnode;
+    }
+}
+node* reverseLinkedList(list *p1)
+{
+    node *previous = NULL;
+    node *current = p1->head;
+ 
+    while (current != NULL)
+    {
+        node *next = current->next;
+        current->next = previous;
+        previous = current;
+        current = next;
+    }
+
+    p1->head = previous;
+    return p1->head;
+}
+
+void display(list *p1)
+{
+    if(p1->head!=NULL)
+    
+    {
+        node *p=p1->head;
+        while (p!=NULL)
+        {
+            printf(""%d"",p->info);
+            p=p->next;
+        }
+        
+    }
+}
+  
+
+
+int main() {
+    list obj;
+    initlist(&obj);
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+    {
+        int b;
+        scanf(""%d"",&b);
+        insertlast(&obj,b);    
+    }
+    reverseLinkedList(&obj);
+    display(&obj);
+    return 0;
+}
+
+"
+22716413,PES1UG22AM117,ADD TWO NUMBERS 104,15,"#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+typedef struct linkedList{
+    int val;
+    struct linkedList *next;
+}LL;
+
+LL* insert(LL *head, int val){
+    LL* check = head;
+    if(head == NULL){
+        LL* new = malloc(sizeof(LL));
+        new->val = val;
+        new->next = NULL;
+        head = new;
+        return head;
+    }
+    else{
+        LL* new = malloc(sizeof(LL));
+        new->val = val;
+        while(head->next != NULL){
+            head = head->next;
+        }
+        new->next = NULL;
+        head->next = new;
+        return check;
+    }
+}
+
+LL* addTwoNumbers(LL* l1, LL* l2){
+
+    if(l1 == NULL){
+        return l2;
+    }
+    else if(l2 == NULL){
+        return l1;
+    }
+
+    int sum1 = 0;
+    int sum2 = 0;
+    int i =0;
+    while(l1 != NULL){
+        sum1 += (l1->val)*pow(10,i);
+        i++;
+        l1 = l1->next;
+    }
+    i = 0;
+    while(l2 != NULL){
+        sum2 += (l2->val)*pow(10,i);
+        i++;
+        l2 = l2->next;
+    }
+    int sum;
+    sum = sum1 + sum2;
+    LL* ans = NULL;
+    while(sum != 0){
+        ans = insert(ans,sum%10);
+        sum /= 10;
+    }
+
+    return ans;
+    
+}
+
+void display(LL*head){
+
+    while(head!= NULL){
+        printf(""%d "",head->val);
+        head = head->next;
+    }
+
+}
+
+int main(){
+    int n,m;
+    scanf("" %d %d"",&n,&m);
+
+    LL* a = NULL;
+    LL* b = NULL;
+    for(int i = 0; i < n+m;i++){
+        int x;
+        scanf("" %d"",&x);
+        if(i<n){
+            a = insert(a,x);
+        }
+        else{
+        b = insert(b,x);
+        }
+    }
+
+    LL* c = NULL;
+    c = addTwoNumbers(a,b);
+
+    display(c);
+
+
+}"
+22716424,PES1UG22AM077,Reversing a Linked List 1,15,undefined
+22716424,PES1UG22AM077,ADD TWO NUMBERS 104,15,undefined
+22716431,PES1UG22AM084,Reversing a Linked List 1,15,undefined
+22716431,PES1UG22AM084,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct ListNode 
+{
+int val;
+struct ListNode* next;
+};
+
+struct ListNode* add_linked_lists(struct ListNode* l1, struct ListNode* l2) 
+{
+struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+struct ListNode* current = dummy;
+int carry = 0;
+
+while (l1 || l2 || carry) 
+{
+int val1 = l1 ? l1->val : 0;
+int val2 = l2 ? l2->val : 0;
+
+int total = val1 + val2 + carry;
+carry = total / 10;
+int digit = total % 10;
+
+current->next = (struct ListNode*)malloc(sizeof(struct ListNode));
+current = current->next;
+current->val = digit;
+current->next = NULL;
+
+if (l1) 
+{
+l1 = l1->next;
+}
+if (l2) 
+{
+l2 = l2->next;
+}
+}
+
+struct ListNode* result = dummy->next;
+free(dummy);
+return result;
+}
+
+
+struct ListNode* create_linked_list(int* digits, int size) 
+{
+struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+struct ListNode* current = dummy;
+for (int i = 0; i < size; i++) 
+{
+current->next = (struct ListNode*)malloc(sizeof(struct ListNode));
+current = current->next;
+current->val = digits[i];
+current->next = NULL;
+}
+struct ListNode* result = dummy->next;
+free(dummy);
+return result;
+}
+
+
+void print_linked_list(struct ListNode* node) 
+{
+while (node) 
+{
+printf(""%d "", node->val);
+node = node->next;
+}
+printf(""\n"");
+}
+
+int main() 
+{
+int n, m;
+scanf(""%d %d"", &n, &m);
+
+int* digits1 = (int*)malloc(n * sizeof(int));
+int* digits2 = (int*)malloc(m * sizeof(int));
+
+for (int i = 0; i < n; i++) 
+{
+scanf(""%d"", &digits1[i]);
+}
+for (int i = 0; i < m; i++) 
+{
+scanf(""%d"", &digits2[i]);
+}
+
+struct ListNode* l1 = create_linked_list(digits1, n);
+struct ListNode* l2 = create_linked_list(digits2, m);
+
+struct ListNode* result = add_linked_lists(l1, l2);
+
+print_linked_list(result);
+
+free(digits1);
+free(digits2);
+
+
+while (result) 
+{
+struct ListNode* temp = result;
+result = result->next;
+free(temp);
+}
+
+return 0;
+}
+"
+22716432,PES1UG22AM082,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+
+    // Reverse the linked list
+    head = reverseLinkedList(head);
+
+    // Print the reversed linked list
+    printLinkedList(head);
+
+    // Free allocated memory
+    current = head;
+    while (current != NULL) {
+        struct Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+
+    return 0;
+}
+"
+22716432,PES1UG22AM082,ADD TWO NUMBERS 104,15,undefined
+22716433,PES1UG22AM085,Reversing a Linked List 1,15,undefined
+22716433,PES1UG22AM085,ADD TWO NUMBERS 104,15,undefined
+22716439,PES1UG22AM131,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+
+    
+    head = reverseLinkedList(head);
+
+   
+    printLinkedList(head);
+
+    
+    current = head;
+    while (current != NULL) {
+        struct Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+
+    return 0;
+}"
+22716439,PES1UG22AM131,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* reverseList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+
+    while (current != NULL) {
+        struct Node* nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next != NULL) {
+            printf("" ""); // Print space if there's a next node
+        }
+        current = current->next;
+    }
+}
+
+struct Node* addLists(struct Node* l1, struct Node* l2) {
+    struct Node* head = (struct Node*)malloc(sizeof(struct Node));
+    head->data = 0;
+    head->next = NULL;
+    struct Node* current = head;
+    int carry = 0;
+
+    while (l1 != NULL || l2 != NULL || carry != 0) {
+        int sum = carry;
+        if (l1 != NULL) {
+            sum += l1->data;
+            l1 = l1->next;
+        }
+        if (l2 != NULL) {
+            sum += l2->data;
+            l2 = l2->next;
+        }
+
+        carry = sum / 10;
+        sum %= 10;
+
+        current->next = (struct Node*)malloc(sizeof(struct Node));
+        current = current->next;
+        current->data = sum;
+        current->next = NULL;
+    }
+
+    struct Node* result = head->next;
+    free(head);
+    return result;
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->data = digit;
+        newNode->next = list1;
+        list1 = newNode;
+    }
+
+    for (int i = 0; i < n2; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->data = digit;
+        newNode->next = list2;
+        list2 = newNode;
+    }
+
+    list1 = reverseList(list1);
+    list2 = reverseList(list2);
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+    printf(""\n"");
+
+    struct Node* temp = sumList;
+    while (temp != NULL) {
+        struct Node* nextTemp = temp->next;
+        free(temp);
+        temp = nextTemp;
+    }
+
+    return 0;
+}"
+22716440,PES1UG22AM111,Reversing a Linked List 1,15,undefined
+22716440,PES1UG22AM111,ADD TWO NUMBERS 104,15,undefined
+22716442,PES1UG22AM115,Reversing a Linked List 1,15,undefined
+22716442,PES1UG22AM115,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int val;
+    struct Node* next;
+};
+
+struct Node* reverseList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+
+    while (current != NULL) {
+        struct Node* nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->val);
+        if (current->next != NULL) {
+            printf("" ""); // Print space if there's a next node
+        }
+        current = current->next;
+    }
+}
+
+struct Node* addLists(struct Node* l1, struct Node* l2) {
+    struct Node* dummyHead = (struct Node*)malloc(sizeof(struct Node));
+    dummyHead->val = 0;
+    dummyHead->next = NULL;
+    struct Node* current = dummyHead;
+    int carry = 0;
+
+    while (l1 != NULL || l2 != NULL || carry != 0) {
+        int sum = carry;
+        if (l1 != NULL) {
+            sum += l1->val;
+            l1 = l1->next;
+        }
+        if (l2 != NULL) {
+            sum += l2->val;
+            l2 = l2->next;
+        }
+
+        carry = sum / 10;
+        sum %= 10;
+
+        current->next = (struct Node*)malloc(sizeof(struct Node));
+        current = current->next;
+        current->val = sum;
+        current->next = NULL;
+    }
+
+    struct Node* result = dummyHead->next;
+    free(dummyHead);
+    return result;
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->val = digit;
+        newNode->next = list1;
+        list1 = newNode;
+    }
+
+    for (int i = 0; i < n2; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->val = digit;
+        newNode->next = list2;
+        list2 = newNode;
+    }
+
+    list1 = reverseList(list1);
+    list2 = reverseList(list2);
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+    printf(""\n"");
+
+    struct Node* temp = sumList;
+    while (temp != NULL) {
+        struct Node* nextTemp = temp->next;
+        free(temp);
+        temp = nextTemp;
+    }
+
+    return 0;
+}"
+22716444,PES1UG22AM129,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+
+    for (int i = 0; i < n; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        struct Node* newNode = malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+
+    head = reverseLinkedList(head);
+
+    printLinkedList(head);
+
+    return 0;
+}
+"
+22716444,PES1UG22AM129,ADD TWO NUMBERS 104,15,undefined
+22716450,PES1UG22AM130,Reversing a Linked List 1,15,undefined
+22716450,PES1UG22AM130,ADD TWO NUMBERS 104,15,undefined
+22716460,PES1UG22AM068,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a linked list node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to create a new linked list node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Function to reverse the linked list by rearranging nodes
+struct Node* reverseLinkedList(struct Node* curr, struct Node* prev) {
+    if (curr == NULL) {
+        return prev;
+    }
+    
+    struct Node* nextNode = curr->next;
+    curr->next = prev;
+
+    return reverseLinkedList(nextNode, curr);
+}
+
+// Function to print the linked list values without separation
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d"", head->data);
+        head = head->next;
+    }
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* tail = NULL;
+
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = createNode(value);
+        if (head == NULL) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    head = reverseLinkedList(head, NULL);
+    printLinkedList(head);
+
+    return 0;
+}"
+22716460,PES1UG22AM068,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct ListNode {
+    int val;
+    struct ListNode* next;
+};
+
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* dummyHead = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummyHead;
+    int carry = 0;
+
+    while (l1 != NULL || l2 != NULL) {
+        int x = (l1 != NULL) ? l1->val : 0;
+        int y = (l2 != NULL) ? l2->val : 0;
+        int sum = carry + x + y;
+        carry = sum / 10;
+
+        current->next = (struct ListNode*)malloc(sizeof(struct ListNode));
+        current = current->next;
+        current->val = sum % 10;
+
+        if (l1 != NULL) l1 = l1->next;
+        if (l2 != NULL) l2 = l2->next;
+    }
+
+    if (carry > 0) {
+        current->next = (struct ListNode*)malloc(sizeof(struct ListNode));
+        current = current->next;
+        current->val = carry;
+    }
+
+    current->next = NULL;
+    return dummyHead->next;
+}
+
+struct ListNode* createLinkedList(int* digits, int numDigits) {
+    struct ListNode* head = NULL;
+    struct ListNode* current = NULL;
+
+    for (int i = 0; i < numDigits; i++) {
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->val = digits[i];
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = head;
+        } else {
+            current->next = newNode;
+            current = current->next;
+        }
+    }
+
+    return head;
+}
+
+void printLinkedList(struct ListNode* head) {
+    while (head != NULL) {
+        printf(""%d "", head->val);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int numDigits1, numDigits2;
+    scanf(""%d %d"", &numDigits1, &numDigits2);
+
+    int digits1[numDigits1];
+    for (int i = 0; i < numDigits1; i++) {
+        scanf(""%d"", &digits1[i]);
+    }
+
+    int digits2[numDigits2];
+    for (int i = 0; i < numDigits2; i++) {
+        scanf(""%d"", &digits2[i]);
+    }
+
+    struct ListNode* l1 = createLinkedList(digits1, numDigits1);
+    struct ListNode* l2 = createLinkedList(digits2, numDigits2);
+
+    struct ListNode* result = addTwoNumbers(l1, l2);
+    printLinkedList(result);
+
+    return 0;
+}"
+22716468,PES1UG22AM088,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+void append(struct Node** head, int value) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->value = value;
+    new_node->next = NULL;
+    if (*head == NULL) {
+        *head = new_node;
+        return;
+    }
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = new_node;
+}
+
+void reverse(struct Node** head) {
+    struct Node* prev = NULL;
+    struct Node* current = *head;
+    while (current != NULL) {
+        struct Node* next_node = current->next;
+        current->next = prev;
+        prev = current;
+        current = next_node;
+    }
+    *head = prev;
+}
+
+void print_values(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        append(&head, value);
+    }
+
+    reverse(&head);
+    print_values(head);
+
+    return 0;
+}
+"
+22716468,PES1UG22AM088,ADD TWO NUMBERS 104,15,undefined
+22716469,PES1UG22AM074,Reversing a Linked List 1,15,undefined
+22716469,PES1UG22AM074,ADD TWO NUMBERS 104,15,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+struct ListNode {
+    int value;
+    struct ListNode* next;
+};
+
+struct ListNode* add_linked_lists(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    int carry = 0;
+    
+    while (l1 || l2 || carry) {
+        int val1 = l1 ? l1->value : 0;
+        int val2 = l2 ? l2->value : 0;
+        
+        int total = val1 + val2 + carry;
+        carry = total / 10;
+        int digit = total % 10;
+        
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = digit;
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+        
+        if (l1) {
+            l1 = l1->next;
+        }
+        if (l2) {
+            l2 = l2->next;
+        }
+    }
+    
+    return dummy->next;
+}
+
+struct ListNode* create_linked_list(int* arr, int size) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    
+    for (int i = 0; i < size; i++) {
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = arr[i];
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+    }
+    
+    return dummy->next;
+}
+
+void print_linked_list(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current) {
+        printf(""%d "", current->value);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    int digits1[n];
+    int digits2[m];
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &digits1[i]);
+    }
+    for (int i = 0; i < m; i++) {
+        scanf(""%d"", &digits2[i]);
+    }
+    
+    struct ListNode* l1 = create_linked_list(digits1, n);
+    struct ListNode* l2 = create_linked_list(digits2, m);
+    
+    struct ListNode* result = add_linked_lists(l1, l2);
+    
+    print_linked_list(result);
+    
+    return 0;
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    
+}"
+22716475,PES1UG22AM089,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    current->next = newNode;
+}
+
+
+struct Node* reverse(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* next = NULL;
+
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+
+    return prev;
+}
+
+
+void printList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d"", head->data);
+        head = head->next;
+    }
+}
+
+int main() {
+    struct Node* head = NULL;
+    int n;
+    int data; 
+
+    scanf(""%d"", &n);
+
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &data);
+        insert(&head, data);
+    }
+
+
+
+    head = reverse(head);
+    printList(head);
+
+
+
+    return 0;
+}
+"
+22716475,PES1UG22AM089,ADD TWO NUMBERS 104,15,"
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int val;
+    struct Node* next;
+};
+
+struct Node* revList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+
+    while (current != NULL) {
+        struct Node* nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->val);
+        if (current->next != NULL) {
+            printf("" ""); 
+        }
+        current = current->next;
+    }
+}
+
+struct Node* addLists(struct Node* l1, struct Node* l2) {
+    struct Node* dummyHead = (struct Node*)malloc(sizeof(struct Node));
+    dummyHead->val = 0;
+    dummyHead->next = NULL;
+    struct Node* current = dummyHead;
+    int carry = 0;
+
+    while (l1 != NULL || l2 != NULL || carry != 0) {
+        int sum = carry;
+        if (l1 != NULL) {
+            sum += l1->val;
+            l1 = l1->next;
+        }
+        if (l2 != NULL) {
+            sum += l2->val;
+            l2 = l2->next;
+        }
+
+        carry = sum / 10;
+        sum %= 10;
+
+        current->next = (struct Node*)malloc(sizeof(struct Node));
+        current = current->next;
+        current->val = sum;
+        current->next = NULL;
+    }
+
+    struct Node* result = dummyHead->next;
+    free(dummyHead);
+    return result;
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->val = digit;
+        newNode->next = list1;
+        list1 = newNode;
+    }
+
+    for (int i = 0; i < n2; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->val = digit;
+        newNode->next = list2;
+        list2 = newNode;
+    }
+
+    list1 = revList(list1);
+    list2 = revList(list2);
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+    printf(""\n"");
+
+    struct Node* temp = sumList;
+    while (temp != NULL) {
+        struct Node* nextTemp = temp->next;
+        free(temp);
+        temp = nextTemp;
+    }
+
+    return 0;
+}
+
+"
+22716479,PES1UG22AM073,Reversing a Linked List 1,15,undefined
+22716479,PES1UG22AM073,ADD TWO NUMBERS 104,15,undefined
+22716483,PES1UG22AM083,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+
+    // Reverse the linked list
+    head = reverseLinkedList(head);
+
+    // Print the reversed linked list
+    printLinkedList(head);
+
+    // Free allocated memory
+    current = head;
+    while (current != NULL) {
+        struct Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+
+    return 0;
+}"
+22716483,PES1UG22AM083,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode =malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22716485,PES1UG22AM098,Reversing a Linked List 1,15,undefined
+22716485,PES1UG22AM098,ADD TWO NUMBERS 104,15,undefined
+22716486,PES1UG22AM075,Reversing a Linked List 1,15,undefined
+22716486,PES1UG22AM075,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct ListNode {
+    int val;
+    struct ListNode* next;
+};
+
+struct ListNode* add_linked_lists(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    int carry = 0;
+    
+    while (l1 || l2 || carry) {
+        int val1 = l1 ? l1->val : 0;
+        int val2 = l2 ? l2->val : 0;
+        
+        int total = val1 + val2 + carry;
+        carry = total / 10;
+        int digit = total % 10;
+        
+        current->next = (struct ListNode*)malloc(sizeof(struct ListNode));
+        current = current->next;
+        current->val = digit;
+        current->next = NULL;
+        
+        if (l1) {
+            l1 = l1->next;
+        }
+        if (l2) {
+            l2 = l2->next;
+        }
+    }
+    
+    struct ListNode* result = dummy->next;
+    free(dummy);
+    return result;
+}
+
+
+struct ListNode* create_linked_list(int* digits, int size) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    for (int i = 0; i < size; i++) {
+        current->next = (struct ListNode*)malloc(sizeof(struct ListNode));
+        current = current->next;
+        current->val = digits[i];
+        current->next = NULL;
+    }
+    struct ListNode* result = dummy->next;
+    free(dummy);
+    return result;
+}
+
+
+void print_linked_list(struct ListNode* node) {
+    while (node) {
+        printf(""%d "", node->val);
+        node = node->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    int* digits1 = (int*)malloc(n * sizeof(int));
+    int* digits2 = (int*)malloc(m * sizeof(int));
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &digits1[i]);
+    }
+    for (int i = 0; i < m; i++) {
+        scanf(""%d"", &digits2[i]);
+    }
+    
+    struct ListNode* l1 = create_linked_list(digits1, n);
+    struct ListNode* l2 = create_linked_list(digits2, m);
+    
+    struct ListNode* result = add_linked_lists(l1, l2);
+    
+    print_linked_list(result);
+    
+    free(digits1);
+    free(digits2);
+    
+
+    while (result) {
+        struct ListNode* temp = result;
+        result = result->next;
+        free(temp);
+    }
+    
+    return 0;
+}"
+22716487,PES1UG22AM090,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode = NULL;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d"", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* tail = NULL;
+
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = createNode(value);
+        if (head == NULL) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    head = reverseLinkedList(head);
+    printLinkedList(head);
+
+    return 0;
+}"
+22716487,PES1UG22AM090,ADD TWO NUMBERS 104,15,undefined
+22716489,PES1UG22AM121,Reversing a Linked List 1,15,undefined
+22716489,PES1UG22AM121,ADD TWO NUMBERS 104,15,undefined
+22716500,PES1UG22AM092,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node {
+    int data;
+    struct node* next;
+} NODE;
+
+NODE* reverse(NODE* head) {
+    NODE* prev = NULL;
+    NODE* current = head;
+    NODE* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void print(NODE* head) {
+    NODE* newNode = head;
+    while (newNode != NULL) {
+        printf(""%d"", newNode->data);
+        newNode = newNode->next;
+    }
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+    NODE* head = NULL;
+    NODE* last = NULL; // Corrected variable name
+
+    int num;
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &num);
+        NODE* newNode = (NODE*)malloc(sizeof(NODE));
+        newNode->data = num;
+        newNode->next = NULL;
+        if (head == NULL) {
+            head = newNode;
+            last = newNode; // Corrected variable name
+        } else {
+            last->next = newNode; // Corrected variable name
+            last = newNode; // Corrected variable name
+        }
+    }
+
+    head = reverse(head);
+    print(head);
+
+    while (head != NULL) {
+        NODE* temp = head;
+        head = head->next;
+        free(temp);
+    }
+
+    return 0;
+}
+"
+22716500,PES1UG22AM092,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertAtEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+struct Node* addReversedDigitLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    int carry = 0;
+
+    while (list1 != NULL || list2 != NULL || carry != 0) {
+        int sum = carry;
+
+        if (list1 != NULL) {
+            sum += list1->data;
+            list1 = list1->next;
+        }
+
+        if (list2 != NULL) {
+            sum += list2->data;
+            list2 = list2->next;
+        }
+
+        carry = sum / 10;
+        sum = sum % 10;
+
+        insertAtEnd(&result, sum);
+    }
+
+    return result;
+}
+
+void printLinkedlist(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertAtEnd(&list1, digit);
+    }
+
+    for (int i = 0; i < m; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertAtEnd(&list2, digit);
+    }
+
+    struct Node* result = addReversedDigitLists(list1, list2);
+    printLinkedlist(result);
+
+    while (list1 != NULL) {
+        struct Node* temp = list1;
+        list1 = list1->next;
+        free(temp);
+    }
+
+    while (list2 != NULL) {
+        struct Node* temp = list2;
+        list2 = list2->next;
+        free(temp);
+    }
+
+    while (result != NULL) {
+        struct Node* temp = result;
+        result = result->next;
+        free(temp);
+    }
+
+    return 0;
+}
+"
+22716505,PES1UG22AM123,Reversing a Linked List 1,15,undefined
+22716505,PES1UG22AM123,ADD TWO NUMBERS 104,15,undefined
+22716506,PES1UG22AM093,Reversing a Linked List 1,15,undefined
+22716506,PES1UG22AM093,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int val;
+    struct Node* next;
+};
+
+struct Node* rev(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+
+    while (current != NULL) {
+        struct Node* nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->val);
+        if (current->next != NULL) {
+            printf("" ""); 
+        }
+        current = current->next;
+    }
+}
+
+struct Node* addLists(struct Node* l1, struct Node* l2) {
+    struct Node* dummyHead = (struct Node*)malloc(sizeof(struct Node));
+    dummyHead->val = 0;
+    dummyHead->next = NULL;
+    struct Node* current = dummyHead;
+    int carry = 0;
+
+    while (l1 != NULL || l2 != NULL || carry != 0) {
+        int sum = carry;
+        if (l1 != NULL) {
+            sum += l1->val;
+            l1 = l1->next;
+        }
+        if (l2 != NULL) {
+            sum += l2->val;
+            l2 = l2->next;
+        }
+
+        carry = sum / 10;
+        sum %= 10;
+
+        current->next = (struct Node*)malloc(sizeof(struct Node));
+        current = current->next;
+        current->val = sum;
+        current->next = NULL;
+    }
+
+    struct Node* result = dummyHead->next;
+    free(dummyHead);
+    return result;
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->val = digit;
+        newNode->next = list1;
+        list1 = newNode;
+    }
+
+    for (int i = 0; i < n2; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->val = digit;
+        newNode->next = list2;
+        list2 = newNode;
+    }
+
+    list1 = rev(list1);
+    list2 = rev(list2);
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+    printf(""\n"");
+
+    struct Node* temp = sumList;
+    while (temp != NULL) {
+        struct Node* nextTemp = temp->next;
+        free(temp);
+        temp = nextTemp;
+    }
+
+    return 0;
+}"
+22716508,PES1UG22AM107,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode = NULL;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    struct Node* tail = NULL;
+
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        struct Node* newNode = createNode(value);
+        
+        if (head == NULL) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    head = reverseLinkedList(head);
+    printLinkedList(head);
+
+    return 0;
+}
+"
+22716508,PES1UG22AM107,ADD TWO NUMBERS 104,15,undefined
+22716520,PES1UG22AM094,Reversing a Linked List 1,0,undefined
+22716520,PES1UG22AM094,ADD TWO NUMBERS 104,15,undefined
+22716544,PES1UG22AM070,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct LinkedList {
+    struct Node* head;
+};
+
+void append(struct LinkedList* list, int data) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data = data;
+    new_node->next = NULL;
+
+    if (list->head == NULL) {
+        list->head = new_node;
+    } else {
+        struct Node* current = list->head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = new_node;
+    }
+}
+
+void reverse(struct LinkedList* list) {
+    struct Node* prev = NULL;
+    struct Node* current = list->head;
+    struct Node* next_node;
+
+    while (current != NULL) {
+        next_node = current->next;
+        current->next = prev;
+        prev = current;
+        current = next_node;
+    }
+
+    list->head = prev;
+}
+
+void printList(struct LinkedList* list) {
+    struct Node* current = list->head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    struct LinkedList linkedList;
+    linkedList.head = NULL;
+
+    int n;
+    scanf(""%d"",&n);
+    int values[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d "",&values[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+        append(&linkedList, values[i]);
+    }
+
+
+    reverse(&linkedList);
+
+    printList(&linkedList);
+
+    return 0;
+}
+
+       
+
+"
+22716544,PES1UG22AM070,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct ListNode {
+    int value;
+    struct ListNode* next;
+};
+
+struct ListNode* add_linked_lists(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    int carry = 0;
+    
+    while (l1 || l2 || carry) {
+        int val1 = l1 ? l1->value : 0;
+        int val2 = l2 ? l2->value : 0;
+        
+        int total = val1 + val2 + carry;
+        carry = total / 10;
+        int digit = total % 10;
+        
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = digit;
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+        
+        if (l1) {
+            l1 = l1->next;
+        }
+        if (l2) {
+            l2 = l2->next;
+        }
+    }
+    
+    return dummy->next;
+}
+
+struct ListNode* create_linked_list(int* arr, int size) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    
+    for (int i = 0; i < size; i++) {
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = arr[i];
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+    }
+    
+    return dummy->next;
+}
+
+void print_linked_list(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current) {
+        printf(""%d "", current->value);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    int digits1[n];
+    int digits2[m];
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &digits1[i]);
+    }
+    for (int i = 0; i < m; i++) {
+        scanf(""%d"", &digits2[i]);
+    }
+    
+    struct ListNode* l1 = create_linked_list(digits1, n);
+    struct ListNode* l2 = create_linked_list(digits2, m);
+    
+    struct ListNode* result = add_linked_lists(l1, l2);
+    
+    print_linked_list(result);
+      
+    return 0;
+}
+"
+22716559,PES1UG22AM091,Reversing a Linked List 1,15,undefined
+22716559,PES1UG22AM091,ADD TWO NUMBERS 104,15,undefined
+22716562,PES1UG22AM086,Reversing a Linked List 1,15,undefined
+22716562,PES1UG22AM086,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct linkedList{
+    int val;
+    struct linkedList *next;
+}LL;
+
+LL* insert(LL *head, int val){
+    LL* check = head;
+    if(head == NULL){
+        LL* new = malloc(sizeof(LL));
+        new->val = val;
+        new->next = NULL;
+        head = new;
+        return head;
+    }
+    else{
+        LL* new = malloc(sizeof(LL));
+        new->val = val;
+        while(head->next != NULL){
+            head = head->next;
+        }
+        new->next = NULL;
+        head->next = new;
+        return check;
+    }
+}
+
+LL* addTwoNumbers(LL* l1, LL* l2){
+
+    if(l1 == NULL){
+        return l2;
+    }
+    else if(l2 == NULL){
+        return l1;
+    }
+
+    int sum1 = 0;
+    int sum2 = 0;
+    int i =0;
+    while(l1 != NULL){
+        sum1 += (l1->val)*pow(10,i);
+        i++;
+        l1 = l1->next;
+    }
+    i = 0;
+    while(l2 != NULL){
+        sum2 += (l2->val)*pow(10,i);
+        i++;
+        l2 = l2->next;
+    }
+    int sum;
+    sum = sum1 + sum2;
+    LL* ans = NULL;
+    while(sum != 0){
+        ans = insert(ans,sum%10);
+        sum /= 10;
+    }
+
+    return ans;
+    
+}
+
+void display(LL*head){
+
+    while(head!= NULL){
+        printf(""%d "",head->val);
+        head = head->next;
+    }
+
+}
+
+int main(){
+    int n,m;
+    scanf("" %d %d"",&n,&m);
+
+    LL* a = NULL;
+    LL* b = NULL;
+    for(int i = 0; i < n+m;i++){
+        int x;
+        scanf("" %d"",&x);
+        if(i<n){
+            a = insert(a,x);
+        }
+        else{
+        b = insert(b,x);
+        }
+    }
+
+    LL* c = NULL;
+    c = addTwoNumbers(a,b);
+
+    display(c);
+
+
+}"
+22716569,PES1UG22AM106,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLinkedList(struct Node* head) 
+{
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* next_node;
+    
+    while (current != NULL) 
+    {
+        next_node = current->next;
+        current->next = prev;
+        prev = current;
+        current = next_node;
+    }
+    
+    return prev;
+}
+
+void printLinkedList(struct Node* head) 
+{
+    struct Node* current = head;
+    while (current != NULL) 
+    {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() 
+{
+    int num_nodes;
+    scanf(""%d"", &num_nodes);
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+
+    for (int i = 0; i < num_nodes; ++i) 
+    {
+        int value;
+        scanf(""%d"", &value);
+        
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+        
+        if (head == NULL) 
+        {
+            head = newNode;
+            current = newNode;
+        } 
+        else 
+        {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+    
+    struct Node* reversed_head = reverseLinkedList(head);
+    printLinkedList(reversed_head);
+
+    while (reversed_head != NULL) 
+    {
+        struct Node* temp = reversed_head;
+        reversed_head = reversed_head->next;
+        free(temp);
+    }
+    
+    return 0;
+}
+"
+22716569,PES1UG22AM106,ADD TWO NUMBERS 104,15,undefined
+22716660,PES1UG22AM120,Reversing a Linked List 1,15,undefined
+22716660,PES1UG22AM120,ADD TWO NUMBERS 104,15,undefined
+22716916,PES1UG22AM125,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+
+    // Reverse the linked list
+    head = reverseLinkedList(head);
+
+    // Print the reversed linked list
+    printLinkedList(head);
+
+    // Free allocated memory
+    current = head;
+    while (current != NULL) {
+        struct Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+
+    return 0;
+}
+
+
+"
+22716916,PES1UG22AM125,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct ListNode {
+    int value;
+    struct ListNode* next;
+};
+
+struct ListNode* add_linked_lists(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    int carry = 0;
+    
+    while (l1 || l2 || carry) {
+        int val1 = l1 ? l1->value : 0;
+        int val2 = l2 ? l2->value : 0;
+        
+        int total = val1 + val2 + carry;
+        carry = total / 10;
+        int digit = total % 10;
+        
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = digit;
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+        
+        if (l1) {
+            l1 = l1->next;
+        }
+        if (l2) {
+            l2 = l2->next;
+        }
+    }
+    
+    return dummy->next;
+}
+
+struct ListNode* create_linked_list(int* arr, int size) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    
+    for (int i = 0; i < size; i++) {
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = arr[i];
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+    }
+    
+    return dummy->next;
+}
+
+void print_linked_list(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current) {
+        printf(""%d "", current->value);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    int digits1[n];
+    int digits2[m];
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &digits1[i]);
+    }
+    for (int i = 0; i < m; i++) {
+        scanf(""%d"", &digits2[i]);
+    }
+    
+    struct ListNode* l1 = create_linked_list(digits1, n);
+    struct ListNode* l2 = create_linked_list(digits2, m);
+    
+    struct ListNode* result = add_linked_lists(l1, l2);
+    
+    print_linked_list(result);
+    
+    return 0;
+      
+    
+}
+
+
+
+"
+22717676,PES1UG22AM096,Reversing a Linked List 1,15,undefined
+22717676,PES1UG22AM096,ADD TWO NUMBERS 104,15,undefined
+22720353,PES1UG22AM095,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode = NULL;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    struct Node* tail = NULL;
+
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        struct Node* newNode = createNode(value);
+        
+        if (head == NULL) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    head = reverseLinkedList(head);
+    printLinkedList(head);
+
+    return 0;
+}"
+22720353,PES1UG22AM095,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertAtEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+struct Node* addReversedDigitLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    int carry = 0;
+
+    while (list1 != NULL || list2 != NULL || carry != 0) {
+        int sum = carry;
+
+        if (list1 != NULL) {
+            sum += list1->data;
+            list1 = list1->next;
+        }
+
+        if (list2 != NULL) {
+            sum += list2->data;
+            list2 = list2->next;
+        }
+
+        carry = sum / 10;
+        sum = sum % 10;
+
+        insertAtEnd(&result, sum);
+    }
+
+    return result;
+}
+
+void printLinkedlist(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertAtEnd(&list1, digit);
+    }
+
+    for (int i = 0; i < m; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertAtEnd(&list2, digit);
+    }
+
+    struct Node* result = addReversedDigitLists(list1, list2);
+    printLinkedlist(result);
+
+    while (list1 != NULL) {
+        struct Node* temp = list1;
+        list1 = list1->next;
+        free(temp);
+    }
+
+    while (list2 != NULL) {
+        struct Node* temp = list2;
+        list2 = list2->next;
+        free(temp);
+    }
+
+    while (result != NULL) {
+        struct Node* temp = result;
+        result = result->next;
+        free(temp);
+    }
+
+    return 0;
+}"
+22721072,PES1UG22AM081,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode = NULL;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d"", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* tail = NULL;
+
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = createNode(value);
+        if (head == NULL) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+
+    head = reverseLinkedList(head);
+    printLinkedList(head);
+
+    return 0;
+}"
+22721072,PES1UG22AM081,ADD TWO NUMBERS 104,15,undefined
+22721485,PES1UG22AM101,Reversing a Linked List 1,7.5,undefined
+22721485,PES1UG22AM101,ADD TWO NUMBERS 104,0,undefined
+22722467,pes1ug22am103,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct ListNode {
+    int value;
+    struct ListNode* next;
+};
+
+struct ListNode* reverse_linked_list(struct ListNode* head) {
+    struct ListNode* prev = NULL;
+    struct ListNode* current = head;
+    struct ListNode* next = NULL;
+    
+    while (current != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    
+    return prev;
+}
+
+struct ListNode* create_linked_list(int* arr, int size) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    
+    for (int i = 0; i < size; i++) {
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = arr[i];
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+    }
+    
+    return dummy->next;
+}
+
+void print_linked_list(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main()
+{
+    int n;
+    scanf(""%d"", &n);
+    
+    int values[n];
+    
+    for (int i = 0; i < n; i++) 
+    {
+        scanf(""%d"", &values[i]);
+    }
+    
+    struct ListNode* originalList = create_linked_list(values, n);
+    struct ListNode* reversedList = reverse_linked_list(originalList);
+    
+    print_linked_list(reversedList);
+    
+    return 0;
+}
+
+    
+"
+22722467,pes1ug22am103,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct ListNode {
+    int value;
+    struct ListNode* next;
+};
+
+struct ListNode* add_linked_lists(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    int carry = 0;
+    
+    while (l1 || l2 || carry) {
+        int val1 = l1 ? l1->value : 0;
+        int val2 = l2 ? l2->value : 0;
+        
+        int total = val1 + val2 + carry;
+        carry = total / 10;
+        int digit = total % 10;
+        
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = digit;
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+        
+        if (l1) {
+            l1 = l1->next;
+        }
+        if (l2) {
+            l2 = l2->next;
+        }
+    }
+    
+    return dummy->next;
+}
+
+struct ListNode* create_linked_list(int* arr, int size) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    
+    for (int i = 0; i < size; i++) {
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = arr[i];
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+    }
+    
+    return dummy->next;
+}
+
+void print_linked_list(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current) {
+        printf(""%d "", current->value);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    int digits1[n];
+    int digits2[m];
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &digits1[i]);
+    }
+    for (int i = 0; i < m; i++) {
+        scanf(""%d"", &digits2[i]);
+    }
+    
+    struct ListNode* l1 = create_linked_list(digits1, n);
+    struct ListNode* l2 = create_linked_list(digits2, m);
+    
+    struct ListNode* result = add_linked_lists(l1, l2);
+    
+    print_linked_list(result);
+    
+    return 0;
+}"
+22722599,PES1UG22AM078,Reversing a Linked List 1,15,undefined
+22722599,PES1UG22AM078,ADD TWO NUMBERS 104,15,undefined
+22723332,PES1UG22AM109,Reversing a Linked List 1,15,undefined
+22723332,PES1UG22AM109,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct ListNode {
+    int val;
+    struct ListNode* next;
+};
+
+typedef struct ListNode ListNode;
+
+ListNode* add_linked_lists(ListNode* l1, ListNode* l2) {
+    ListNode* dummy = (ListNode*)malloc(sizeof(ListNode));
+    ListNode* current = dummy;
+    int carry = 0;
+
+    while (l1 || l2 || carry) {
+        int val1 = l1 ? l1->val : 0;
+        int val2 = l2 ? l2->val : 0;
+
+        int total = val1 + val2 + carry;
+        carry = total / 10;
+
+        current->next = (ListNode*)malloc(sizeof(ListNode));
+        current = current->next;
+        current->val = total % 10;
+        current->next = NULL;
+
+        if (l1) {
+            l1 = l1->next;
+        }
+        if (l2) {
+            l2 = l2->next;
+        }
+    }
+
+    return dummy->next;
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    ListNode* l1 = NULL;
+    ListNode* current1 = l1;
+    for (int i = 0; i < n1; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+
+        ListNode* new_node = (ListNode*)malloc(sizeof(ListNode));
+        new_node->val = digit;
+        new_node->next = NULL;
+
+        if (!l1) {
+            l1 = new_node;
+            current1 = l1;
+        } else {
+            current1->next = new_node;
+            current1 = current1->next;
+        }
+    }
+
+    ListNode* l2 = NULL;
+    ListNode* current2 = l2;
+    for (int i = 0; i < n2; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+
+        ListNode* new_node = (ListNode*)malloc(sizeof(ListNode));
+        new_node->val = digit;
+        new_node->next = NULL;
+
+        if (!l2) {
+            l2 = new_node;
+            current2 = l2;
+        } else {
+            current2->next = new_node;
+            current2 = current2->next;
+        }
+    }
+
+    ListNode* result = add_linked_lists(l1, l2);
+
+    while (result) {
+        printf(""%d "", result->val);
+        ListNode* temp = result;
+        result = result->next;
+        free(temp);
+    }
+
+    // Free allocated memory for input linked lists
+    while (l1) {
+        ListNode* temp = l1;
+        l1 = l1->next;
+        free(temp);
+    }
+    while (l2) {
+        ListNode* temp = l2;
+        l2 = l2->next;
+        free(temp);
+    }
+
+    return 0;
+}"
+22724106,PES1UG22AM099,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct LinkedList {
+    struct Node* head;
+};
+
+void append(struct LinkedList* list, int data) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data = data;
+    new_node->next = NULL;
+
+    if (list->head == NULL) {
+        list->head = new_node;
+    } else {
+        struct Node* current = list->head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = new_node;
+    }
+}
+
+void reverse(struct LinkedList* list) {
+    struct Node* prev = NULL;
+    struct Node* current = list->head;
+    struct Node* next_node;
+
+    while (current != NULL) {
+        next_node = current->next;
+        current->next = prev;
+        prev = current;
+        current = next_node;
+    }
+
+    list->head = prev;
+}
+
+void printList(struct LinkedList* list) {
+    struct Node* current = list->head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    struct LinkedList linkedList;
+    linkedList.head = NULL;
+
+    int n;
+    scanf(""%d"",&n);
+    int values[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d "",&values[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+        append(&linkedList, values[i]);
+    }
+
+
+    reverse(&linkedList);
+
+    printList(&linkedList);
+
+    return 0;
+}"
+22724106,PES1UG22AM099,ADD TWO NUMBERS 104,15,undefined
+22724347,PES1UG22AM069,Reversing a Linked List 1,15,undefined
+22724347,PES1UG22AM069,ADD TWO NUMBERS 104,15,undefined
+22724688,PES1UG22AM105,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node
+{
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLL(struct Node* head) 
+{
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* next_node;
+    
+    while (current != NULL) 
+    {
+        next_node = current->next;
+        current->next = prev;
+        prev = current;
+        current = next_node;
+    }
+    
+    return prev;
+}
+
+void printLL(struct Node* head) 
+{
+    struct Node* current = head;
+    while (current != NULL) 
+    {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() 
+{
+    int nodes;
+    scanf(""%d"", &nodes);
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+
+    for (int i = 0; i < nodes; ++i) 
+    {
+        int value;
+        scanf(""%d"", &value);
+        
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+        
+        if (head == NULL) 
+        {
+            head = newNode;
+            current = newNode;
+        } 
+        else 
+        {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+    
+    struct Node* reversed_head = reverseLL(head);
+    printLL(reversed_head);
+
+    while (reversed_head != NULL) 
+    {
+        struct Node* temp = reversed_head;
+        reversed_head = reversed_head->next;
+        free(temp);
+    }
+    
+    return 0;
+}"
+22724688,PES1UG22AM105,ADD TWO NUMBERS 104,15,"#include<stdio.h>
+#include<math.h>
+#include<stdlib.h>
+
+typedef struct NODE{
+    int val;
+    struct NODE* next;
+}NODE;
+
+NODE* Add(NODE* head,int m){
+    if(head == NULL){
+        head = malloc(sizeof(NODE));
+        head->val = m;
+        head->next = NULL;
+        return head;
+    }
+    NODE* temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    NODE* add = malloc(sizeof(NODE));
+    add->val = m;
+    add->next = NULL;
+    temp->next = add;
+    return head;
+}
+
+NODE* addTwoNumbers(NODE* l1, NODE* l2){
+    if(l1 == NULL && l2 == NULL){
+        return NULL;
+    }
+    else if(l1 == NULL){
+        return l2;
+    }
+    else if(l2 == NULL){
+        return l1;
+    }
+    NODE* tt = l1;
+    long int o1 = 0;
+    int dgts = 0;
+    do{
+        o1 += (tt->val * pow(10,dgts));
+        dgts++;
+        tt = tt->next;
+    }while(tt!=NULL);
+    tt = l2;
+    long int o2 = 0;
+    dgts = 0;
+    do{
+        o2 += (tt->val * pow(10,dgts));
+        dgts++;
+        tt = tt->next;
+    }while(tt!=NULL);
+    NODE* aa = NULL;
+    // printf(""%d %d "",o1,o2);
+    long int o = o1 + o2;
+    while(o!=0){
+        aa = Add(aa,o%10);
+        o = o / 10;
+    }
+    return aa;
+}
+
+void display(NODE* head){
+    if(head!=NULL){
+    while(head->next!=NULL){
+        printf(""%d "",head->val);
+        head = head->next;
+    }
+    printf(""%d"",head->val);
+    }
+    else{
+        printf(""0"");
+    }
+}
+int main() {
+    NODE* head1 = NULL;
+    NODE* head2 = NULL;
+    int n, z;
+    scanf(""%d %d"", &n, &z);
+
+    for (int i = 0; i < n; i++) {
+        int m;
+        scanf(""%d"", &m);
+        head1 = Add(head1, m);
+    }
+
+    for (int i = 0; i < z; i++) {
+        int m1;
+        scanf(""%d"", &m1);
+        head2 = Add(head2, m1);
+    }
+
+    NODE* head3 = NULL;
+    head3 = addTwoNumbers(head1, head2);
+    display(head3);
+
+    return 0;
+}"
+22724935,PES1UG22AM104,Reversing a Linked List 1,15,undefined
+22724935,PES1UG22AM104,ADD TWO NUMBERS 104,15,undefined
+22725101,PES1UG22AM119,Reversing a Linked List 1,15,undefined
+22725101,PES1UG22AM119,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int newData) {
+    struct Node* newNode = malloc(sizeof(struct Node));
+    newNode->data = newData;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Node* insertNode(struct Node* currentNode, int newData) {
+    struct Node* newNode = createNode(newData);
+    if (currentNode == NULL) {
+        currentNode = newNode;
+    } else {
+        struct Node* tempNode = currentNode;
+        while (tempNode->next != NULL) {
+            tempNode = tempNode->next;
+        }
+        tempNode->next = newNode;
+    }
+    return currentNode;
+}
+
+struct Node* addLists(struct Node* numList1, struct Node* numList2) {
+    struct Node* result = NULL;
+    struct Node* currentResult = NULL;
+    int carry = 0;
+
+    while (numList1 != NULL || numList2 != NULL) {
+        int sum = carry;
+        if (numList1 != NULL) {
+            sum += numList1->data;
+            numList1 = numList1->next;
+        }
+        if (numList2 != NULL) {
+            sum += numList2->data;
+            numList2 = numList2->next;
+        }
+
+        carry = sum / 10;
+        sum = sum % 10;
+
+        if (result == NULL) {
+            result = createNode(sum);
+            currentResult = result;
+        } else {
+            currentResult->next = createNode(sum);
+            currentResult = currentResult->next;
+        }
+    }
+
+    if (carry > 0) {
+        currentResult->next = createNode(carry);
+    }
+
+    return result;
+}
+
+void printLinkedList(struct Node* currentNode) {
+    struct Node* tempNode = currentNode;
+    while (tempNode != NULL) {
+        printf(""%d"", tempNode->data);
+        tempNode = tempNode->next;
+        if (tempNode != NULL) {
+            printf("" "");
+        }
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int num1Size, num2Size;
+    scanf(""%d %d"", &num1Size, &num2Size);
+    
+    struct Node* numList1 = NULL;
+    struct Node* numList2 = NULL;
+    
+    for (int i = 0; i < num1Size; i++) {
+        int data;
+        scanf(""%d"", &data);
+        numList1 = insertNode(numList1, data);
+    }
+    
+    for (int i = 0; i < num2Size; i++) {
+        int data;
+        scanf(""%d"", &data);
+        numList2 = insertNode(numList2, data);
+    }
+    
+    struct Node* sum = addLists(numList1, numList2);
+    printLinkedList(sum);
+    
+    return 0;
+}"
+22728313,PES1UG22AM122,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node{
+    int value;
+    struct Node*next;
+};
+
+struct Node*reverseLinkedList(struct Node*head){
+    struct Node*prev=NULL;
+    struct Node*current=head;
+    struct Node*nextNode;
+    
+    while(current!=NULL){
+        nextNode=current->next;
+        current->next=prev;
+        prev=current;
+        current=nextNode;
+    }
+    
+    return prev;
+}
+
+void printLinkedList(struct Node*head){
+    struct Node*current=head;
+    while(current!=NULL){
+        printf(""%d"",current->value);
+        current=current->next;
+    }
+}
+
+int main(){
+    int numNodes;
+    scanf(""%d"",&numNodes);
+    
+    struct Node*head=NULL;
+    struct Node*current=NULL;
+    for(int i=0;i<numNodes;i++){
+        int value;
+        scanf(""%d"",&value);
+        
+        struct Node*newNode=(struct Node*)malloc(sizeof(struct Node));
+        newNode->value=value;
+        newNode->next=NULL;
+        
+        if(head==NULL){
+            head=newNode;
+            current=newNode;
+        }else{
+            current->next=newNode;
+            current=newNode;
+        }
+    }
+    //Reverse the linked list
+    head=reverseLinkedList(head);
+    
+    //Print the reversed linked list
+    printLinkedList(head);
+    
+    //Free allocated memory
+    current=head;
+    while(current!=NULL){
+        struct Node*temp=current;
+        current=current->next;
+        free(temp);
+    }
+    
+    return 0;
+}"
+22728313,PES1UG22AM122,ADD TWO NUMBERS 104,0,undefined
+22729627,PES1UG22AM132,Reversing a Linked List 1,11.25,undefined
+22729627,PES1UG22AM132,ADD TWO NUMBERS 104,0,undefined
+22729705,PES1UG22AM118,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+typedef struct node {
+    int info;
+    struct node* next;
+} NODE;
+
+typedef struct List {
+    NODE* head;
+} LIST;
+
+
+void initList(LIST* pl) {
+    pl->head = NULL;
+}
+
+
+NODE* createNode(int ele) {
+    NODE* newNode = (NODE*)malloc(sizeof(NODE));
+    newNode->info = ele;
+    newNode->next = NULL;
+    return newNode; 
+}
+
+
+void insertLast(LIST* pl, int ele) {
+    NODE* newNode = createNode(ele);
+    if (pl->head == NULL) {
+        pl->head = newNode;
+    } else {
+        NODE* p = pl->head;
+        while (p->next != NULL) {
+            p = p->next;
+        }
+        p->next = newNode;
+    }
+}
+
+
+void insertFront(LIST* pl, int ele) {
+    NODE* newNode = createNode(ele);
+    newNode->next = pl->head;
+    pl->head = newNode;
+}
+
+
+void deleteLast(LIST* pl) {
+    if (pl->head == NULL) {
+        printf(""List is empty\n"");
+    } else if (pl->head->next == NULL) {
+        free(pl->head);
+        pl->head = NULL;
+    } else {
+        NODE* p = pl->head;
+        while (p->next->next != NULL) {
+            p = p->next;
+        }
+        free(p->next);
+        p->next = NULL;
+    }
+}
+
+
+void reverse(LIST* pl) {
+    NODE* prev = NULL;
+    NODE* current = pl->head;
+    NODE* nextNode = NULL;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    pl->head = prev;
+}
+
+
+void display(LIST* pl) {
+    NODE* p = pl->head;
+    while (p != NULL) {
+        printf(""%d"", p->info);
+        p = p->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    LIST lobj;
+    int n;
+    initList(&lobj);
+    scanf(""%d"", &n);
+
+    
+    for (int i = 0; i < n; i++) {
+        int ele;
+        scanf(""%d"", &ele);
+        insertLast(&lobj, ele);
+    }
+    reverse(&lobj);
+    display(&lobj);
+
+    return 0;
+}
+"
+22729705,PES1UG22AM118,ADD TWO NUMBERS 104,0,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+   ;
+}
+"
+22730698,PES1UG22AM112,Reversing a Linked List 1,15,undefined
+22730698,PES1UG22AM112,ADD TWO NUMBERS 104,15,undefined
+22730845,PES1UG22AM108,Reversing a Linked List 1,15,undefined
+22730845,PES1UG22AM108,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int info;
+    struct Node* next;
+}NODE;
+
+typedef struct Node Node;
+
+void append(Node** head, int info) {
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    new_node->info = info;
+    new_node->next = NULL;
+
+    if (*head == NULL) {
+        *head = new_node;
+    } else {
+        Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = new_node;
+    }
+}
+
+Node* addLists(Node* list1, Node* list2) {
+    Node* result = NULL;
+    Node* current = NULL;
+    int carry = 0;
+
+    while (list1 != NULL || list2 != NULL) {
+        int sum = carry;
+        if (list1 != NULL) {
+            sum += list1->info;
+            list1 = list1->next;
+        }
+        if (list2 != NULL) {
+            sum += list2->info;
+            list2 = list2->next;
+        }
+
+        carry = sum / 10;
+        sum = sum % 10;
+
+        append(&result, sum);
+
+        if (current == NULL) {
+            current = result;
+        } else {
+            current = current->next;
+        }
+    }
+
+    if (carry > 0) {
+        append(&result, carry);
+    }
+
+    return result;
+}
+
+void printList(Node* head) {
+    Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->info);
+        current = current->next;
+    }
+}
+
+int main() {
+    int num_digits1, num_digits2;
+    scanf(""%d %d"", &num_digits1, &num_digits2);
+
+    Node* list1 = NULL;
+    Node* list2 = NULL;
+
+    for (int i = 0; i < num_digits1; ++i) {
+        int digit;
+        scanf(""%d"", &digit);
+        append(&list1, digit);
+    }
+
+    for (int i = 0; i < num_digits2; ++i) {
+        int digit;
+        scanf(""%d"", &digit);
+        append(&list2, digit);
+    }
+
+    Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    Node* current = sumList;
+    while (current != NULL) {
+        Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+    return 0;
+}
+
+"
+22730899,PES1UG22AM909,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct NODE {
+    int data;
+    struct NODE* link;
+};
+
+void insert(struct NODE** phead, int data) 
+{
+    struct NODE* new_NODE = (struct NODE*)malloc(sizeof(struct NODE));
+    new_NODE->data = data;
+    new_NODE->link = NULL;
+
+    if (*phead == NULL) 
+    {
+        *phead = new_NODE;
+        return;
+    }
+
+    struct NODE* temp = *phead;
+    while (temp->link != NULL)
+    {
+        temp = temp->link;
+    }
+    temp->link = new_NODE;
+}
+
+void reverse(struct NODE** phead) 
+{
+    struct NODE* prev = NULL;
+    struct NODE* temp = *phead;
+    struct NODE* link_NODE = NULL;
+
+    while (temp != NULL) 
+    {
+        link_NODE = temp->link;
+        temp->link = prev;
+        prev = temp;
+        temp = link_NODE;
+    }
+    *phead = prev;
+}
+
+void display(struct NODE* head) 
+{
+    struct NODE* temp = head;
+    while (temp != NULL) 
+    {
+        printf(""%d"", temp->data);
+        temp = temp->link;
+    }
+}
+
+int main()
+{
+    int size;
+    scanf(""%d"", &size);
+
+    struct NODE* head = NULL;
+    int data;
+
+    for(int i=0;i<size;i++) 
+    {
+        scanf(""%d"",&data);
+        insert(&head,data);
+    }
+    reverse(&head);
+    display(head);
+
+    return 0;
+}
+"
+22730899,PES1UG22AM909,ADD TWO NUMBERS 104,15,undefined
+22730999,PES1UG22AM124,Reversing a Linked List 1,15,undefined
+22730999,PES1UG22AM124,ADD TWO NUMBERS 104,15,undefined
+22732064,PES1UG22AM072,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+
+    // Reverse the linked list
+    head = reverseLinkedList(head);
+
+    // Print the reversed linked list
+    printLinkedList(head);
+
+    // Free allocated memory
+    current = head;
+    while (current != NULL) {
+        struct Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+
+    return 0;
+}"
+22732064,PES1UG22AM072,ADD TWO NUMBERS 104,15,"#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+
+typedef struct linkedList{
+    int val;
+    struct linkedList *next;
+}LL;
+
+LL* insert(LL *head, int val){
+    LL* check = head;
+    if(head == NULL){
+        LL* new = malloc(sizeof(LL));
+        new->val = val;
+        new->next = NULL;
+        head = new;
+        return head;
+    }
+    else{
+        LL* new = malloc(sizeof(LL));
+        new->val = val;
+        while(head->next != NULL){
+            head = head->next;
+        }
+        new->next = NULL;
+        head->next = new;
+        return check;
+    }
+}
+
+LL* addTwoNumbers(LL* l1, LL* l2){
+
+    if(l1 == NULL){
+        return l2;
+    }
+    else if(l2 == NULL){
+        return l1;
+    }
+
+    int sum1 = 0;
+    int sum2 = 0;
+    int i =0;
+    while(l1 != NULL){
+        sum1 += (l1->val)*pow(10,i);
+        i++;
+        l1 = l1->next;
+    }
+    i = 0;
+    while(l2 != NULL){
+        sum2 += (l2->val)*pow(10,i);
+        i++;
+        l2 = l2->next;
+    }
+    int sum;
+    sum = sum1 + sum2;
+    LL* ans = NULL;
+    while(sum != 0){
+        ans = insert(ans,sum%10);
+        sum /= 10;
+    }
+
+    return ans;
+    
+}
+
+void display(LL*head){
+
+    while(head!= NULL){
+        printf(""%d "",head->val);
+        head = head->next;
+    }
+
+}
+
+int main(){
+    int n,m;
+    scanf("" %d %d"",&n,&m);
+
+    LL* a = NULL;
+    LL* b = NULL;
+    for(int i = 0; i < n+m;i++){
+        int x;
+        scanf("" %d"",&x);
+        if(i<n){
+            a = insert(a,x);
+        }
+        else{
+        b = insert(b,x);
+        }
+    }
+
+    LL* c = NULL;
+    c = addTwoNumbers(a,b);
+
+    display(c);
+
+
+}"
+22732108,PES1UG22AM071,Reversing a Linked List 1,15,undefined
+22732108,PES1UG22AM071,ADD TWO NUMBERS 104,15,undefined
+22732173,PES1UG22AM127,Reversing a Linked List 1,15,undefined
+22732173,PES1UG22AM127,ADD TWO NUMBERS 104,15,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+struct ListNode {
+    int value;
+    struct ListNode* next;
+};
+
+struct ListNode* add_linked_lists(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    int carry = 0;
+    
+    while (l1 || l2 || carry) {
+        int val1 = l1 ? l1->value : 0;
+        int val2 = l2 ? l2->value : 0;
+        
+        int total = val1 + val2 + carry;
+        carry = total / 10;
+        int digit = total % 10;
+        
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = digit;
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+        
+        if (l1) {
+            l1 = l1->next;
+        }
+        if (l2) {
+            l2 = l2->next;
+        }
+    }
+    
+    return dummy->next;
+}
+
+struct ListNode* create_linked_list(int* arr, int size) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    
+    for (int i = 0; i < size; i++) {
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = arr[i];
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+    }
+    
+    return dummy->next;
+}
+
+void print_linked_list(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current) {
+        printf(""%d "", current->value);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    int digits1[n];
+    int digits2[m];
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &digits1[i]);
+    }
+    for (int i = 0; i < m; i++) {
+        scanf(""%d"", &digits2[i]);
+    }
+    
+    struct ListNode* l1 = create_linked_list(digits1, n);
+    struct ListNode* l2 = create_linked_list(digits2, m);
+    
+    struct ListNode* result = add_linked_lists(l1, l2);
+    
+    print_linked_list(result);
+    
+    return 0;
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    
+}"
+22732361,PES1UG22AM113,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseLinkedList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printLinkedList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+
+    
+    head = reverseLinkedList(head);
+
+   
+    printLinkedList(head);
+
+    
+    current = head;
+    while (current != NULL) {
+        struct Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+
+    return 0;
+}
+"
+22732361,PES1UG22AM113,ADD TWO NUMBERS 104,15,undefined
+22812399,PES1UG22AM908,Reversing a Linked List 1,15,undefined
+22812399,PES1UG22AM908,ADD TWO NUMBERS 104,15,undefined
+22815227,PES1UG22AM915,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int value;
+    struct Node* next;
+};
+
+struct Node* reverseList(struct Node* head) {
+    struct Node* prev = NULL;
+    struct Node* current = head;
+    struct Node* nextNode;
+
+    while (current != NULL) {
+        nextNode = current->next;
+        current->next = prev;
+        prev = current;
+        current = nextNode;
+    }
+
+    return prev;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->value);
+        current = current->next;
+    }
+}
+
+int main() {
+    int numNodes;
+    scanf(""%d"", &numNodes);
+
+    struct Node* head = NULL;
+    struct Node* current = NULL;
+    for (int i = 0; i < numNodes; i++) {
+        int value;
+        scanf(""%d"", &value);
+
+        struct Node* newNode = malloc(sizeof(struct Node));
+        newNode->value = value;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = newNode;
+        } else {
+            current->next = newNode;
+            current = newNode;
+        }
+    }
+    head = reverseList(head);
+    printList(head);
+    current = head;
+    while (current != NULL) {
+        struct Node* temp = current;
+        current = current->next;
+        free(temp);
+    }
+
+    return 0;
+}"
+22815227,PES1UG22AM915,ADD TWO NUMBERS 104,15,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+struct ListNode {
+    int value;
+    struct ListNode* next;
+};
+
+struct ListNode* add_linked_lists(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    int carry = 0;
+    
+    while (l1 || l2 || carry) {
+        int val1 = l1 ? l1->value : 0;
+        int val2 = l2 ? l2->value : 0;
+        
+        int total = val1 + val2 + carry;
+        carry = total / 10;
+        int digit = total % 10;
+        
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = digit;
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+        
+        if (l1) {
+            l1 = l1->next;
+        }
+        if (l2) {
+            l2 = l2->next;
+        }
+    }
+    
+    return dummy->next;
+}
+
+struct ListNode* create_linked_list(int* arr, int size) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    
+    for (int i = 0; i < size; i++) {
+        struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+        newNode->value = arr[i];
+        newNode->next = NULL;
+        
+        current->next = newNode;
+        current = current->next;
+    }
+    
+    return dummy->next;
+}
+
+void print_linked_list(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current) {
+        printf(""%d "", current->value);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    int digits1[n];
+    int digits2[m];
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &digits1[i]);
+    }
+    for (int i = 0; i < m; i++) {
+        scanf(""%d"", &digits2[i]);
+    }
+    
+    struct ListNode* l1 = create_linked_list(digits1, n);
+    struct ListNode* l2 = create_linked_list(digits2, m);
+    
+    struct ListNode* result = add_linked_lists(l1, l2);
+    
+    print_linked_list(result);
+    
+    return 0;
+}
+    
+"
+22816050,PES1UG22AM911,Reversing a Linked List 1,15,undefined
+22816050,PES1UG22AM911,ADD TWO NUMBERS 104,15,undefined
+22817597,PES1UG22AM914,Reversing a Linked List 1,15,undefined
+22817597,PES1UG22AM914,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertAtEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+struct Node* addReversedDigitLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    int carry = 0;
+
+    while (list1 != NULL || list2 != NULL || carry != 0) {
+        int sum = carry;
+
+        if (list1 != NULL) {
+            sum += list1->data;
+            list1 = list1->next;
+        }
+
+        if (list2 != NULL) {
+            sum += list2->data;
+            list2 = list2->next;
+        }
+
+        carry = sum / 10;
+        sum = sum % 10;
+
+        insertAtEnd(&result, sum);
+    }
+
+    return result;
+}
+
+void printLinkedlist(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertAtEnd(&list1, digit);
+    }
+
+    for (int i = 0; i < m; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertAtEnd(&list2, digit);
+    }
+
+    struct Node* result = addReversedDigitLists(list1, list2);
+    printLinkedlist(result);
+
+    while (list1 != NULL) {
+        struct Node* temp = list1;
+        list1 = list1->next;
+        free(temp);
+    }
+
+    while (list2 != NULL) {
+        struct Node* temp = list2;
+        list2 = list2->next;
+        free(temp);
+    }
+
+    while (result != NULL) {
+        struct Node* temp = result;
+        result = result->next;
+        free(temp);
+    }
+
+    return 0;
+}"
+22818326,PES1UG22AM910,Reversing a Linked List 1,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct LinkedList {
+    struct Node* head;
+};
+
+void append(struct LinkedList* list, int data) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data = data;
+    new_node->next = NULL;
+
+    if (list->head == NULL) {
+        list->head = new_node;
+    } else {
+        struct Node* current = list->head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = new_node;
+    }
+}
+
+void reverse(struct LinkedList* list) {
+    struct Node* prev = NULL;
+    struct Node* current = list->head;
+    struct Node* next_node;
+
+    while (current != NULL) {
+        next_node = current->next;
+        current->next = prev;
+        prev = current;
+        current = next_node;
+    }
+
+    list->head = prev;
+}
+
+void printList(struct LinkedList* list) {
+    struct Node* current = list->head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        current = current->next;
+    }
+}
+
+int main() {
+    struct LinkedList linkedList;
+    linkedList.head = NULL;
+
+    int n;
+    scanf(""%d"",&n);
+    int values[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d "",&values[i]);
+    }
+
+    for (int i = 0; i < n; i++) {
+        append(&linkedList, values[i]);
+    }
+
+
+    reverse(&linkedList);
+
+    printList(&linkedList);
+
+    return 0;
+}"
+22818326,PES1UG22AM910,ADD TWO NUMBERS 104,15,undefined
+22825733,PES1UG22AM087_,Reversing a Linked List 1,15,undefined
+22825733,PES1UG22AM087_,ADD TWO NUMBERS 104,15,undefined

@@ -1,0 +1,6286 @@
+studentId,studentUserName,challenge,score,code
+22716376,PES1UG22AM126,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size) { 
+    int max = arr[0];
+    for(int i = 0 ; i < size; i++){
+        if(*(arr+i) > max){
+            max = *(arr+i);
+        }
+    }
+    return max;
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int n;
+    scanf(""%d"",&n);
+    int a[n];
+    for(int i = 0; i < n;i++){
+        scanf("" %d"",&a[i] );
+    }
+    
+    printf(""%d\n"",findMax(a,n));
+    
+    
+    return 0;
+}
+"
+22716376,PES1UG22AM126,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct car{
+    char name[20];
+    char model[20];
+    int year;
+}Car;
+
+void takeInput(Car ca[], int n){
+    for(int i = 0; i < n; i++){
+        scanf(""%s %s %d"",ca[i].name,ca[i].model,&ca[i].year);
+    }
+}
+
+void printAll(Car ca[], int n){
+    
+    for(int i = n-1; i >=0; i--){
+        printf(""%d %s %s\n"",ca[i].year,&ca[i].model,&ca[i].name);
+    }
+    
+    
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    Car ca[n];
+    takeInput(ca,n);
+    printAll(ca,n);
+    
+    
+    return 0;
+}
+"
+22716376,PES1UG22AM126,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int BOR(int *a, int size){
+    int bitwise = a[0];
+    for(int i = 1 ; i < size; i++){
+        bitwise |= a[i];
+    }
+    return bitwise;
+}
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    
+    int n;
+    scanf(""%d"",&n);
+    
+    int *a = malloc(n*sizeof(int));
+    
+    for(int i = 0 ; i<n; i++){
+        scanf("" %d"",a+i);
+    }
+    
+    printf(""%d"",BOR(a,n));
+    return 0;
+}
+"
+22716379,PES1UG22AM100,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size)
+{
+    int max = *arr;
+    for(int i=1; i<size; i++){
+        if(*(arr+i)>max){
+            max = *(arr+i);
+        }
+    }
+    return max;
+}
+
+
+int main() {
+    int size; 
+    scanf(""%d"", &size);
+    int arr[size];
+    
+    for(int i=0; i<size; i++){
+        scanf(""%d"", &arr[i]);
+    }
+    
+    int maximum = findMax(arr, size);
+    printf(""%d"", maximum);
+
+    return 0;
+}
+"
+22716379,PES1UG22AM100,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car
+{
+    char name[100];
+    char model[100];
+    int year;
+};
+
+void takeInput(struct Car *ca)
+{
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(struct Car ca)
+{
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+
+}
+
+int main()
+{
+    int n;
+    scanf(""%d"", &n);
+    struct Car cars[n];
+    
+    for(int i=0; i<n; i++){
+        takeInput(&cars[i]);
+    }
+    
+    for(int i=n-1; i>=0; i--){
+        printAll(cars[i]);
+    }
+    return 0;
+}
+"
+22716379,PES1UG22AM100,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int size;
+    scanf(""%d"", &size);
+    
+    int *arr = (int*)malloc(size*sizeof(int));
+    
+    for(int i=0; i<size; i++){
+        scanf(""%d"", &arr[i]);
+    }
+    
+    int bitwise_or= arr[0];
+    for(int i=1; i<size; i++){
+        bitwise_or |= arr[i];
+    }
+    
+    printf(""%d"", bitwise_or);
+    free(arr);
+    return 0;
+}
+"
+22716381,PES1UG22AM102,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int getmax(int *x,int n){
+    int i;
+    int max=*(x);
+    for(i=0;i<n;i++){
+        if(max<*(x+i))
+            max=*(x+i);
+    }
+    return max;
+}
+int main() {
+    int comp[30];
+    int n;
+    // printf(""Enter the number of array elements"");
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++){
+        scanf(""%d"",&comp[i]);
+    }
+    int max=getmax(comp,n);
+    printf(""%d"",max);
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+"
+22716381,PES1UG22AM102,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car{
+    char name[50];
+    char model[20];
+    int year;
+    
+};
+
+void takeInput(struct Car *c){
+   
+        scanf(""%s"",c->name);
+        scanf(""%s"",c->model);
+        scanf(""%d"",&c->year);
+        
+}
+void printAll(struct Car c){
+    printf(""%d "",c.year);
+    printf(""%s "",c.model);
+    printf(""%s "",c.name);
+    printf(""\n"");
+ }
+
+
+
+
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    struct Car Cars[n];
+    for(int i=0;i<n;i++){
+        takeInput(&Cars[i]);
+            
+    }
+    for(int i=0;i<n;i++){
+        printAll(Cars[n-i-1]);
+    }
+    
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+"
+22716381,PES1UG22AM102,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findor(int *x,int n){
+    int value=0;
+    int i;
+    for(i=0;i<n;i++){
+        value=value|x[i];
+    }
+    return value;
+}
+
+int main() {
+    int ar,n;
+    scanf(""%d"",&n);
+    int *x=malloc(n*sizeof(int));
+    for(int i=0;i<n;i++){
+        scanf(""%d"",&ar);
+        x[i]=ar;
+    }
+    int orres=findor(x,n);
+    printf(""%d"",orres);
+    
+    
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+"
+22716382,PES1UG22AM110,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int FindMax(int *arr,int size);
+int main() 
+{
+    int n;
+    scanf(""%d"",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d "",&arr[i]);
+    }  
+    int Max=FindMax(arr,n);
+    printf(""%d"",Max);
+    return 0;
+}
+    
+int FindMax(int *arr, int n)
+{
+    int *ptr=arr;
+    int max=*ptr;
+    for(int i=0;i<n;i++)
+    {
+        if(max<*(ptr+i))
+            max=*(ptr+i);
+    }
+    return max;
+}
+       
+   
+
+"
+22716382,PES1UG22AM110,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+
+#define MAX_CARS 100
+
+struct Car {
+    char name[50];
+    char model[50];
+    int year;
+};
+
+int main() {
+    struct Car cars[MAX_CARS];
+    int numCars;
+    scanf(""%d"", &numCars);
+
+    if (numCars <= 0 || numCars > MAX_CARS)
+    {
+        printf(""Invalid number of cars.\n"");
+        return 1;
+    }
+
+    
+    for (int i = 0; i < numCars; i++) {
+        
+        scanf(""%s"", cars[i].name);
+       
+        scanf(""%s"", cars[i].model);
+       
+        scanf(""%d"", &cars[i].year);
+    }
+
+    for (int i = numCars - 1; i >= 0; i--)
+    {
+        
+        printf(""%d "", cars[i].year);
+        printf(""%s "", cars[i].model);
+        printf(""%s "", cars[i].name);
+        printf(""\n"");
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+"
+22716382,PES1UG22AM110,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+
+    if (n < 1 || n > 1000) {
+        printf(""Invalid input for number of elements.\n"");
+        return 1; 
+    }
+
+    
+    int *arr = (int *)calloc(n, sizeof(int));
+    if (arr == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0];
+    for (int i = 1; i < n; i++) {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+
+    
+    free(arr);
+
+    
+/* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+
+    "
+22716389,PES1UG22AM114,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size){
+    int max = *arr;
+    for(int i = 1; i < size; i++){
+        if(*(arr+i) > max){
+            max = *(arr+i);
+        }
+    }
+    return max;
+}
+
+int main() {
+    int n;
+    scanf("" %d"",&n);
+    int arr[n];
+    for(int i = 0; i < n; i++){
+        scanf("" %d"",&arr[i]);
+    }
+    int max = findMax(arr,n);
+    printf(""%d"",max);
+}
+"
+22716389,PES1UG22AM114,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct Car{
+    char name[20];
+    char model[20];
+    int year;
+}Car;
+
+void takeInput(Car* ca){
+    scanf("" %s"",ca->name);
+    scanf("" %s"",ca->model);
+    scanf("" %d"",&ca->year);
+}
+
+void printAll(Car ca){
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+
+int main() {
+    int n;
+    scanf("" %d"",&n);
+    Car ca[n];
+    for(int i = 0; i < n; i++){
+        takeInput(&ca[i]);
+    }
+    for(int i = 0; i < n; i++){
+        printAll(ca[n-1-i]);
+    }
+}
+"
+22716389,PES1UG22AM114,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int BOR(int arr[],int n){
+    int br = arr[0];
+    for(int i = 1; i < n; i++){
+        br |= arr[i];
+    }
+    return br;
+}
+
+int main() {
+    int n;
+    scanf("" %d"",&n);
+    int* arr = malloc(n*sizeof(int));
+    for(int i = 0; i < n; i++){
+        int x;
+        scanf("" %d"",&x);
+        arr[i] = x;
+    }
+    printf(""%d"",BOR(arr,n));
+}
+"
+22716405,pes1ug22am067,maximum element,10,"// Maximun 
+#include <stdio.h>
+int Max(int *arr,int n)
+{   int max=*arr;
+    for(int i=1;i<n;i++)
+    {
+        if(max<*(arr+i))
+            max= *(arr+i);
+    }
+    return max;
+}
+int main() {
+    int arr[20];
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)scanf(""%d"",&arr[i]);
+    int max= Max(arr,n);
+    printf(""%d "",max);
+    return 0;
+}"
+22716405,pes1ug22am067,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+
+struct Car {
+char name[50];
+char model[10];
+int year;
+};
+
+void input(struct Car *c) {
+//printf(""Enter Car's name: "");
+    scanf(""%s"", c->name);
+    scanf(""%s"", c->model);
+    scanf(""%d"", &c->year);
+}
+
+void display(struct Car c) {
+printf(""%d "", c.year);
+printf(""%s "", c.model);
+printf(""%s\n"", c.name);
+}
+
+int main() {
+int num;
+scanf(""%d"", &num);
+
+struct Car Cars[num];
+
+for (int i = 0; i < num; i++) {
+    input(&Cars[i]);
+}
+
+for (int i = 0; i < num; i++) {
+    display(Cars[num-i-1]);
+}
+return 0;
+}
+"
+22716405,pes1ug22am067,Dynamic Array OR,10,"#include<stdio.h>
+#include<stdlib.h>
+
+int bitor(int *ar,int n){
+    int value=0;
+    for(int i=0; i<n; i++)
+    {
+        value= (value | ar[i]);
+    }
+    return value;
+}
+
+int main(){
+    int n;
+    int ele;
+    scanf(""%d"", &n);
+    int *ar = malloc(n*sizeof(int));
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"", &ele);
+        ar[i]=ele;  
+    }
+    int res = bitor(ar,n);
+    printf(""%d"", res);
+}"
+22716407,PES1UG22AM097,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findmax(int* arr, int size)
+{
+    int max=*arr;
+    for(int i=1;i<size;i++)
+    {
+        if(max<*(arr+i))
+        {
+            max = *(arr+i);
+            
+        }
+    }
+    return max;
+}
+
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    int a[n];
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&a[i]);
+    int* p=a;
+    printf(""%d"",findmax(p,n));
+    return 0;
+
+     
+    return 0;
+}
+"
+22716407,PES1UG22AM097,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct car{
+    char car_name[100];
+    char model[100];
+    int year;
+};
+
+void TakeInput(struct car *ca,int n){
+    for(int i=0;i<n;i++){
+        scanf(""%s"",ca[i].car_name);
+        scanf(""%s"",ca[i].model);
+        scanf(""%d"",&ca[i].year);
+        
+    }
+}
+
+void printall(struct car *ca,int n){
+    for (int i=n-1;i>=0;i--){ 
+        printf(""%d\t"",ca[i].year);
+        printf(""%s\t"",ca[i].model);
+        printf(""%s\t"",ca[i].car_name);
+        printf(""\n"");
+    }
+}
+
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    struct car ca[n];
+    TakeInput(ca,n);
+    printall(ca,n);
+    return 0;
+}
+"
+22716407,PES1UG22AM097,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    
+    int n,c=0;
+    scanf(""%d"",&n);
+    int* p = malloc(n*sizeof(int));
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",(p+i));
+    }
+    for(int i =1;i<(n-1);i++)
+    {
+        c=c|*(p+i);
+        
+    }
+    printf(""%d"",c);
+    return 0;
+}
+"
+22716408,PES1UGAM22080,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int *array,int size)
+{
+    if(size<=0)
+    {
+        return -1;
+    }
+    int max=*array;
+    for(int i=1;i<size;i++)
+    {
+        if(*(array+i)>max)
+        {
+            max=*(array+i);
+        }
+    }
+    return max;
+}
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    if(n<-1000||n>1000)
+    {
+        printf(""the input entered is not in range.\n"");
+        return 1;
+    }
+    int array[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&array[i]);
+    }
+    int max=findMax(array,n);
+    if(max==-1)
+    {
+        printf(""The array size is invalid.\n"");
+        return 1;
+    }
+    printf(""%d\n"",max);
+    return 0;
+}
+"
+22716408,PES1UGAM22080,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car
+{
+    char name[10];
+    char model[10];
+    int year;
+};
+void takeInput(struct Car* ca)
+{
+    scanf(""%s"",ca->name);
+    scanf(""%s"",ca->model);
+    scanf(""%d"",&ca->year);
+}
+void printAll(struct Car ca)
+{
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    struct Car cars[n];
+    for(int i=0;i<n;i++)
+    {
+        takeInput(&cars[i]);
+    }
+    for(int i=n-1;i>=0;i--)
+    {
+        printAll(cars[i]);
+    }
+    return 0;
+}
+"
+22716408,PES1UGAM22080,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int n;
+    scanf(""%d"",&n);
+    if(n<1)
+    {
+        printf(""invalid number of elements.\n"");
+        return 1;
+    }
+    int *array=(int*)malloc(n*sizeof(int));
+    if(array==NULL)
+    {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&array[i]);
+    }
+    int result=array[0];
+    for(int i=1;i<n;i++)
+    {
+        result=result|array[i];
+    }
+    printf(""%d"",result);
+    free(array);
+    return 0;
+}
+"
+22716412,pes1ug22am128,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findmaxxi(int *arr, int n){
+    int maxx;
+    maxx=*(arr);
+    for(int i=1;i<n;i++){
+        if(maxx<*(arr+i)){
+            maxx=*(arr+i);
+        }
+    }
+    return maxx;
+}
+
+int main() {
+
+    int arr[20];
+    int n;
+    scanf(""%d"", &n);
+    for(int i =0; i<n; i++){
+        scanf(""%d"", &arr[i]);
+    }
+    int max = findmaxxi(arr,n);
+    printf(""%d"", max);
+    return 0;
+}
+"
+22716412,pes1ug22am128,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car{
+    char *name[20];
+    char *model[20];
+    int year;
+}; 
+
+void takeInput(struct Car *c){
+    scanf(""%s"",&c->name);
+    scanf(""%s"",&c->model);
+    scanf(""%d"",&c->year);
+}
+    
+void printALL(struct Car c){
+    printf(""%d "",c.year);
+    printf(""%s "",c.model);
+    printf(""%s "",c.name);
+    printf(""\n"");
+}
+int main() {
+     
+    struct Car cars[20];
+     int n;
+    scanf(""%d"",&n);
+    for(int i =0; i<n; i++){
+        takeInput(&cars[i]);
+    }
+    for(int i =0; i<n; i++){
+        printALL(cars[n-i-1]);
+    }
+    
+    return 0;
+}
+"
+22716412,pes1ug22am128,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int n;
+    scanf(""%d"",&n);
+    int *nums = malloc(n*sizeof(int));
+    for(int i=0;i<n;i++){
+        scanf(""%d"", &nums[i]);
+   }
+    int value=0;
+     for(int i=0;i<n;i++){
+          value = value | nums[i]; 
+     }
+    printf(""%d"", value);
+    return 0;
+}
+"
+22716413,PES1UG22AM117,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int a[], int n)
+{
+    int max=a[0];
+    for(int i=1;i<n;i++)
+    {
+        if(a[i]>max)
+        {
+            max=a[i];
+        }
+    }
+    return max;
+}
+int main() {
+
+    int n,b;
+    scanf(""%d"",&n);
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&a[i]);
+    }
+    b=findMax(a,n);
+    printf(""%d"",b);
+    return 0;
+}
+"
+22716413,PES1UG22AM117,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+typedef struct car{
+    char name[20];
+    char model[20];
+    int year;
+}car;
+void takeInput(car ca[],int n)
+{
+    
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%s"",ca[i].name);
+        scanf("" %s"",ca[i].model);
+        scanf(""%d"",&ca[i].year );
+        
+    }
+}
+void printAll(car ca[],int n)
+{
+    for(int i=n-1;i>=0;i--)
+    {
+        printf(""%d %s %s\n"",ca[i].year ,ca[i].model ,ca[i].name);
+    }
+}
+int main() {
+
+    int n;
+    scanf(""%d"",&n);    
+    car a[n];
+    takeInput(a, n);
+    printAll(a,n);
+}
+"
+22716413,PES1UG22AM117,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int BOR(int arr[],int n){
+    int br = arr[0];
+    for(int i = 1; i < n; i++){
+        br |= arr[i];
+    }
+    return br;
+}
+int main() {
+
+    int n;
+    scanf(""%d"",&n);
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&a[i]);
+    }
+    
+    printf(""%d"",BOR(a,n));
+    return 0;
+}
+"
+22716424,PES1UG22AM077,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int FindMax(int *arr,int size);
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d "",&arr[i]);
+    }  
+    int Max=FindMax(arr,n);
+    printf(""%d"",Max);
+    return 0;
+}
+    
+int FindMax(int *arr, int n)
+{
+    int *ptr=arr;
+    int max=*ptr;
+    for(int i=0;i<n;i++)
+    {
+        if(max<*(ptr+i))
+            max=*(ptr+i);
+    }
+    return max;
+}
+
+
+"
+22716424,PES1UG22AM077,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car 
+{
+    char name[50];
+    char model[50];
+    int year;
+};
+
+void takeInput(struct Car*ca) 
+{
+    scanf(""%s"", ca->name);
+    scanf(""%s"", ca->model);
+    scanf(""%d"", &ca->year);
+}
+
+void printAll(struct Car ca) 
+{
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+    
+    struct Car cars[n]; 
+    
+    for (int i = 0; i < n; i++) 
+    {
+        takeInput(&cars[i]);
+    }
+    for (int i = n - 1; i >= 0; i--) 
+    {
+        printAll(cars[i]);
+    }
+    return 0;
+}
+
+"
+22716424,PES1UG22AM077,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    int *arr = (int *)calloc(n, sizeof(int));
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    int or_res=arr[0];
+    for(int j=1;j<n;j++)
+    {
+        or_res=or_res|arr[j];
+    }
+    printf(""%d"",or_res);
+    
+    return 0;
+
+}
+"
+22716431,PES1UG22AM084,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int *arr, int n)
+{
+    int max=*arr;
+    int *el=arr+1;
+
+    for (int i=1;i<n;i++)
+    {
+        if (max<*el)
+        {
+            max=*el;
+        }
+        el++;
+    }
+    return max;
+}
+
+int main()
+{
+    int n,max;
+    scanf(""%d "",&n);
+    int arr[n];
+    
+    for (int i=0;i<n;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+
+    max=findMax(arr,n);
+    printf(""%d"",max);
+}
+"
+22716431,PES1UG22AM084,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct cars
+{
+    char name[100];
+    char model[50];
+    int year;
+}Car;
+
+void takeInput(Car* ca)
+{
+    scanf(""%s %s %d"",&ca->name,&ca->model,&ca->year);
+}
+
+void printCars(Car ca,int n)
+{
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+
+int main() 
+{
+    
+    int n;
+    scanf(""%d"",&n);
+    Car c[n];
+
+    for (int i=1;i<=n;i++)
+    {
+        takeInput(&c[i]);
+    }
+
+    for (int i=n;i>0;i--)
+    {
+        printCars(c[i],n);
+    }
+
+    return 0;
+}
+"
+22716431,PES1UG22AM084,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+int main()
+{
+    int n;
+    scanf(""%d"",&n);
+
+    int* arr=(int*)malloc(n*sizeof(int));
+    if (arr==NULL)
+        return 1; 
+    
+    for (int i=0;i<n;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    
+    int a=0;
+    for (int i=0;i<n;i++)
+    {
+        a=a|arr[i];
+    }
+    printf(""%d"",a);
+    free(arr);
+    return 0;
+}"
+22716432,PES1UG22AM082,maximum element,10,"#include <stdio.h>
+
+int findMax(int* arr, int size) {
+    if (size <= 0) {
+        return -1; 
+    }
+
+    int* maxPtr = arr; 
+    for (int i = 1; i < size; i++) {
+        if (*(arr + i) > *maxPtr) {
+            maxPtr = arr + i; 
+        }
+    }
+
+    return *maxPtr; 
+}
+
+int main() {
+    int size;
+    scanf(""%d"", &size);
+
+    int arr[size];
+    for (int i = 0; i < size; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int maxElement = findMax(arr, size);
+    if (maxElement != -1) {
+        printf(""%d\n"", maxElement);
+    }
+
+    return 0;
+}
+"
+22716432,PES1UG22AM082,Cars Database,10,"#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include<stdio.h>
+typedef struct cars{
+    char name[100];
+    int year;
+    char no[30];
+}CAR;
+void takeInput(CAR* c,int n){
+        for(int i = 0;i<n;i++){
+        scanf(""%s%s%d"",&c[i].name,&c[i].no,&c[i].year);
+    }
+}
+void printCar(CAR c[],int n){
+    for(int j=n-1;j>=0;j--){
+        printf(""%d %s %s\n"",c[j].year,c[j].no,c[j].name);
+    }
+}
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    CAR c[n];
+    takeInput(c,n);
+    printCar(c,n);
+    
+    return 0;
+}
+
+"
+22716432,PES1UG22AM082,Dynamic Array OR,10,"#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int numElements;
+
+    scanf(""%d"", &numElements);
+
+    int* array = (int*)malloc(numElements * sizeof(int));
+
+    if (array == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1; 
+    }
+
+    for (int i = 0; i < numElements; i++) {
+        scanf(""%d"", &array[i]);
+    }
+
+    
+    int result = 0;
+    for (int i = 0; i < numElements; i++) {
+        result |= array[i];
+    }
+
+    printf(""%d\n"", result);
+
+    free(array);
+
+    return 0;
+}"
+22716433,PES1UG22AM085,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int find_max(int *arr,int size)
+{
+    int max=*arr;
+    for(int i = 0; i<size;i++){
+        if(*(arr+i)>max){
+            max = *(arr+i);
+        }
+    }
+    printf(""%d"",max);
+    return 0;
+}
+int main() {
+    int  n;
+    scanf(""%d"",&n);
+    int a[n];
+    
+    for(int i = 0 ; i<n ; i++){
+        scanf(""%d"",&a[i]);
+    }
+    
+    find_max(a,n);
+     return 0;
+}
+"
+22716433,PES1UG22AM085,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct car {
+    char car_name[100];
+    char model[100];
+    int year;
+};
+
+void TakeInput(struct car *ca, int n) {
+    for (int i = 0; i < n; i++) {
+        scanf(""%s"", ca[i].car_name);
+        scanf(""%s"", ca[i].model);
+        scanf(""%d"", &ca[i].year);
+    }
+}
+
+void printall(struct car *ca, int n) {
+    for (int i = n-1; i >=0; i--) {
+        printf(""%d\t"", ca[i].year);
+        printf(""%s\t"", ca[i].model);
+        printf(""%s\t"", ca[i].car_name);
+        printf(""\n"");
+    }
+    
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct car ca[n];
+
+    TakeInput(ca, n);
+
+    printall(ca, n);
+
+    return 0;
+}
+"
+22716433,PES1UG22AM085,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n,c=0;
+    scanf(""%d"",&n);
+    
+    int *p=malloc(n*sizeof(int));
+    for(int i = 0; i<n ; i++){
+        scanf(""%d"",(p+i));
+    }
+    for(int i = 1; i<(n-1);i++)
+    {
+        c=c|*(p+i);
+    }
+    
+    printf(""%d"",c);
+    return 0;
+}
+"
+22716439,PES1UG22AM131,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr,int size)
+{
+   int num = *arr;
+   for(int i = 0; i < size;i++)
+   {
+       if(*(arr+i) > num)
+       {num = *(arr+i);}
+   }
+   return num;
+}
+
+int main() {
+
+    int arr[2000],n;
+    scanf(""%d"",&n);
+    for(int i = 0; i < n;i++)
+    {scanf(""%d"",&arr[i]);}
+    printf(""%d"",findMax(&arr,n));
+    return 0;
+}
+"
+22716439,PES1UG22AM131,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car
+{
+    char name[20];
+    char model[20];
+    int year;
+};
+
+int takeInput(struct Car* ca)
+{
+    int n;
+    scanf(""%d"",&n);
+    for(int i = 0; i < n;i++)
+    {
+        scanf(""%s"",((ca+i)->name));
+        scanf(""%s"",((ca+i)->model));
+        scanf(""%d"",&((ca+i)->year));
+    }
+    return n;
+}
+
+void printAll(struct Car ca[],int n)
+{
+    for(int i = n-1; i >= 0;i--)
+    {
+        printf(""%d "",ca[i].year);
+        printf(""%s "",ca[i].model);
+        printf(""%s "",ca[i].name);
+        printf(""\n"");
+    }
+}
+
+int main() {
+    struct Car ca[1000];
+    int n = takeInput(&ca);
+    printAll(ca,n);
+    return 0;
+}
+"
+22716439,PES1UG22AM131,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int oring(int* a,int n)
+{
+    int s = 0;
+    for(int i = 0; i < n;i++)
+    {s = s | *(a+i);}
+    return s;
+}
+
+int main() {
+
+    int n;
+    scanf(""%d"",&n);
+    int* a = (int*)malloc(n*sizeof(int));
+    for(int i = 0; i < n;i++)
+    {scanf(""%d"",(a+i));}
+    printf(""%d"",oring(a,n));
+    free(a);
+    return 0;
+}
+"
+22716440,PES1UG22AM111,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int *array,int size)
+{
+    if(size<=0)
+    {
+        return -1;
+    }
+    int max=*array;
+    for(int i=1;i<size;i++)
+    {
+        if(*(array+i)>max)
+        {
+            max=*(array+i);
+        }
+    }
+    return max;
+}
+int main(){
+    int n;
+    scanf(""%d"",&n);
+    if(n<-1000||n>1000)
+    {
+        printf(""the input entered is not in ranfe.\n"");
+            return 1;
+    }
+    int array[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&array[i]);
+    }
+    int max=findMax(array,n);
+    if(max==-1)
+    {
+        printf(""The array size is invalid.\n"");
+        return 1;
+    }
+    printf(""%d\n"",max);
+    return 0;
+}
+
+    "
+22716440,PES1UG22AM111,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct car{
+    char name[100];
+    char model[100];
+    int year;
+};
+
+void takenInput(struct car* ca){
+    
+    scanf(""%s"", ca->name);
+    
+    
+    scanf(""%s"", ca->model);
+    
+    
+    scanf(""%d"", &(ca->year));
+}
+void printALL(struct car ca){
+    printf(""%d %s %s\n"", ca.year,ca.model,ca.name);
+}
+
+int main(){
+    int n;
+    
+    scanf(""%d"", &n);
+    struct car cars[n];
+    for(int i=0;i<n;i++){
+        
+        takenInput(&cars[i]);
+    }
+    for (int i=n-1;i>=0;i--){
+        printALL(cars[i]);
+    }
+    return 0;
+}"
+22716440,PES1UG22AM111,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+    int *array = (int *)calloc(n, sizeof(int));
+    if (array == NULL)
+    {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&array[i]);
+        
+    }
+    int result = 0;
+    for (int i=0;i<n; i++)
+    {
+        result |= array[i];
+    }
+    printf(""%d\n"",result);
+    free(array);
+    return 0;
+}"
+22716442,PES1UG22AM115,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr,int size)
+{
+    int num = *arr;
+    for(int i=0;i<size;i++)
+    {
+        if(*(arr+i)>num)
+        {
+            num=*(arr+i);
+        }
+    }
+    return num;
+}
+
+
+int main() 
+{
+    int arr[2000],n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    printf(""%d"",findMax(&arr,n));   
+    return 0;
+}
+"
+22716442,PES1UG22AM115,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct Car
+{
+    char name[20];
+    char model[20];
+    int year;
+}Car;
+
+
+int takeInput(Car* ca) 
+{
+    int n;
+    scanf(""%d"",&n);
+    
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%s %s %d"",(ca+i)->name,(ca+i)->model,&(ca+i)->year);
+        
+        
+    }
+    return n;
+       
+    
+}
+
+void printAll(Car* ca)
+{
+    int n = takeInput(ca);
+    for(int i=n-1;i>=0;i--)
+    {
+        printf(""%d %s %s\n"",(ca+i)->year,(ca+i)->model,(ca+i)->name);
+        
+    }
+    
+}
+
+int main()
+{
+    Car ca[100];
+    
+    printAll(ca);
+    return 0;
+}
+
+"
+22716442,PES1UG22AM115,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int or(int* a,int n)
+{
+    int m=0;
+    for(int i=0;i<n;i++)
+    {
+        m=m|*(a+i);
+        
+    }
+    return m;
+}
+
+
+int main() 
+{
+    int n;
+    scanf(""%d"",&n);
+    int* a=calloc(sizeof(int),n);
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",(a+i));
+    }
+    printf(""%d"",or(a,n));
+        
+    return 0;
+}
+"
+22716444,PES1UG22AM129,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size) {
+    if (size <= 0) {
+        return 0; // Return 0 if the array is empty or invalid size
+    }
+
+    int max = *arr; // Initialize max with the first element
+
+    for (int i = 1; i < size; i++) {
+        if (*(arr + i) > max) {
+            max = *(arr + i); // Update max if a larger element is found
+        }
+    }
+
+    return max;
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int max = findMax(arr, n);
+    printf(""%d\n"", max);
+
+    return 0;
+}
+
+"
+22716444,PES1UG22AM129,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car {
+    char name[50];
+    char model[50];
+    int year;
+};
+
+void takeInput(struct Car* ca) {
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(struct Car ca) {
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Car cars[n];
+
+    for (int i = 0; i < n; i++) {
+        takeInput(&cars[i]);
+    }
+    
+    for (int i = n - 1; i >= 0; i--) {
+        printAll(cars[i]);
+    }
+
+    return 0;
+}
+"
+22716444,PES1UG22AM129,Dynamic Array OR,10,"#include <string.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+    
+    int* arr = (int*)malloc(n * sizeof(int));
+    
+    if (arr == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1; 
+    }
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0]; 
+
+    for (int i = 1; i < n; i++) {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+    free(arr);
+
+    return 0;
+}
+"
+22716449,PES1UG22AM087,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+int maxval(int* arr, int size) {
+    int maxval = *arr;
+    for (int i = 0; i < size; i ++){
+        if (*(arr+i) > maxval) {
+            maxval = *(arr+i);
+        }
+    }
+    return maxval;
+}
+
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int n;
+    scanf(""%d\n"", &n);
+    int a[n];
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &a[i]);
+    }
+    printf(""%d"", maxval(a, n));
+    return 0;
+}
+"
+22716449,PES1UG22AM087,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct cars{
+    char name [10];
+    char model [10];
+    int year;
+}Car;
+
+void takeInput (Car* ca, int nn) {
+    for (int i = 0 ; i<nn;i++){
+        scanf (""%s %s %d"" ,ca[i].name , ca[i].model , &ca[i].year);
+    }
+}
+
+
+void printAll(Car ca[] , int nn)
+{
+    for (int i = nn-1 ; i>=0;i--) {
+        printf (""%d %s %s\n"", ca [i].year, ca [i].model, ca[i].name );
+    }
+}
+int main() {
+    int n;
+    scanf (""%d"" , &n);
+    Car c[n];
+    takeInput (c,n);
+    printAll (c,n);
+    return 0;
+    }"
+22716449,PES1UG22AM087,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int size;
+    scanf(""%d"", &size);
+    int *myarr;
+    myarr =  (int*)malloc(size*sizeof(int));
+    
+    for (int i = 0; i < size; i++) {
+        scanf(""%d"", &myarr[i]);
+    }
+    int orval = myarr[0];
+    
+    for (int j = 0; j < size-1; j++) {
+        orval = orval | myarr[j+1];
+    }
+    printf(""%d"", orval);
+    return 0;
+}
+"
+22716450,PES1UG22AM130,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size)
+{
+    int max=-1000;
+    for (int i=0; i<size; i++) {
+        if (*(arr+i)>max) max = *(arr+i);
+    }
+    return max;
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"", &n);
+    int arr[n];
+    for (int i=0; i<n; i++) {
+        scanf(""%d "", &arr[i]);
+    }
+    int m = findMax(arr, n);
+    printf(""%d"", m);
+    return 0;
+}
+"
+22716450,PES1UG22AM130,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct car {
+    char name[20];
+    char model[20];
+    int year;
+} Car;
+
+int takeInput(Car* ca)
+{
+    int n;
+    scanf(""%d"", &n);
+    for (int i=0; i<n; i++) {
+        scanf(""%s %s %d"", (ca+i)->name, (ca+i)->model, &(ca+i)->year);
+    }
+    return n;
+}
+
+void printAll(Car* ca)
+{
+    int n = takeInput(ca);
+    for (int i=n-1; i>=0; i--) {
+        printf(""%d %s %s\n"", (ca+i)->year, (ca+i)->model, (ca+i)->name);
+    }
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    Car ca[1000];
+    printAll(ca);
+    return 0;
+}
+"
+22716450,PES1UG22AM130,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int* createArray(int n)
+{
+    int* arr = calloc(sizeof(int), n);
+    for (int i=0; i<n; i++) {
+        scanf(""%d"", arr+i);
+    }
+    return arr;
+}
+
+int bitwiseOR(int* arr, int n)
+{
+    int or=0;
+    for (int i=0; i<n; i++) {
+        or = or|*(arr+i);
+    }
+    return or;
+}
+
+int main() {
+    
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int n;
+    scanf(""%d"", &n);
+    int* arr = createArray(n);
+    printf(""%d"", bitwiseOR(arr, n));
+    return 0;
+}
+"
+22716460,PES1UG22AM068,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct car{
+    char carname[100];
+    char model[100];
+    int year;
+}Car;
+
+void Input(Car* ca);
+void print(Car ca);
+
+int main() {
+    
+    int n;
+    scanf(""%d"",&n);
+    fflush(stdin);
+    
+    Car ca[n];
+    
+    for (int i=0; i<n; i++){
+        Input(&ca[n-i-1]);
+    }
+    
+    for (int i=0; i<n; i++){
+        print(ca[i]);
+    }
+    
+    return 0;
+}
+
+void Input(Car* ca){
+    scanf(""%s %s %d\n"",ca->carname,ca->model,&ca->year);
+}
+
+void print(Car ca){
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.carname);
+}
+"
+22716460,PES1UG22AM068,maximum element,10,"#include <stdio.h>
+int findMax(int* arr, int size)
+ {
+    if (size <= 0) 
+    {
+        return -1;
+    }
+    int max = arr[0];
+    for (int i = 1; i < size; i++)
+    {
+        if (*(arr + i) > max)
+        {
+            max = *(arr + i);
+        }
+    }
+*arr = max;
+return max;
+}
+
+int main() {
+    int size;
+    
+    scanf(""%d"", &size);
+
+    int arr[size];
+    
+    for (int i = 0; i < size; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int maxvalue = findMax(arr, size);
+    printf(""%d"",maxvalue);
+    return 0;
+}
+"
+22716460,PES1UG22AM068,Dynamic Array OR,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+int main(){
+int n,c=0;
+    scanf(""%i"",&n);
+    int* p=malloc(n*sizeof(int));
+    for(int i=0;i<n;i++){
+scanf(""%i"",(p+i));}
+for(int i=1;i<(n-1);i++){
+    c=c|*(p+i);
+    
+}
+    printf(""%i"",c);
+    
+    return 0;
+}
+
+"
+22716468,PES1UG22AM088,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr,int size){
+    int max=*(arr);
+    for(int i=0;i<size;i++){
+     if(*(arr+i)>max){
+         max= *(arr+i);
+     }
+    
+    }
+    return max;
+    
+    
+}
+
+int main(){
+    int n;
+       
+    
+    scanf(""%d"",&n);
+          int arr[n];  
+    fflush(stdin);
+    
+    for(int i=0;i<n;i++){
+    scanf(""%i"",&arr[i]);}
+    
+    int ans=findMax(arr,n);
+    printf(""%i"",ans);
+    return 0;
+    
+    
+}"
+22716468,PES1UG22AM088,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+#define MAX_CARS 1000
+
+
+struct Car {
+    char name[50];
+    char model[50];
+    int year;
+};
+
+
+void takeInput(struct Car *ca) {
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+
+void printAll(struct Car ca) {
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() {
+    int n;
+    struct Car cars[MAX_CARS];
+
+
+    scanf(""%d"", &n);
+
+   
+    for (int i = 0; i < n; i++) {
+        takeInput(&cars[i]);
+    }
+
+   
+    for (int i = n - 1; i >= 0; i--) {
+        printAll(cars[i]);
+    }
+
+    return 0;
+}
+
+
+
+
+"
+22716468,PES1UG22AM088,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct arr{
+   int ele;
+};
+int main(){
+   int n=0;
+    int ans=0;
+   
+   scanf(""%i"",&n);
+
+   struct arr *arr=(struct arr*)calloc(n,sizeof(struct arr));
+
+   for(int i=0;i<n;i++){
+      scanf(""%i"",&((arr+i)->ele));
+   }
+   fflush(stdin);
+
+   for(int i=0;i<n;i++){
+       ans=ans | ((arr+i)->ele);
+   }
+   printf(""%i"",ans);
+   return 0;
+
+
+
+
+
+
+
+}"
+22716469,PES1UG22AM074,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int *array,int size)
+{
+    if(size<=0)
+    {
+        return -1;
+    }
+    int max=*array;
+    for(int i=1;i<size;i++)
+    {
+        if(*(array+i)>max)
+        {
+            max=*(array+i);
+        }
+    }
+    return max;
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    if(n<-100||n>1000)
+    {
+        printf(""The input enter is not in range\n"");
+        return 1;
+    }
+    int array[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&array[i]);
+    }
+    int max=findMax(array,n);
+    if(max==-1)
+    {
+        printf(""The Array size is invalid \n"");
+        return 1;
+    }
+    printf(""%d\n"",max);
+    return 0;
+}
+"
+22716469,PES1UG22AM074,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car
+{
+    char name[10];
+    char model[10];
+    int year;
+};
+
+void takeInput(struct Car* ca)
+{
+  
+    scanf(""%s"",ca->name);
+    
+ 
+    scanf(""%s"",ca->model);
+    
+  
+    scanf(""%d"",&ca->year);
+}
+
+void printAll(struct Car ca)
+{
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+
+int main() {
+
+    /* Enter your code hhere. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    
+    struct Car cars[n];
+    for(int i=0;i<n;i++)
+    {
+        takeInput(&cars[i]);
+    }
+        for(int i=n-1;i>=0;i--)
+                  {
+                      printAll(cars[i]);
+                  }
+    return 0;
+}
+"
+22716469,PES1UG22AM074,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+   /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    int *array=(int*)calloc(n,sizeof(int));
+    if(array==0)
+    {
+        return 1;
+    }
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&array[i]);
+    }
+    int result=0;
+    for(int i=0;i<n;i++)
+    {
+        result |=array[i];
+    }
+    printf(""%d"",result);
+    free(array);
+    return 0;
+}
+"
+22716475,PES1UG22AM089,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int*arr,int size)
+{int max=*arr;
+ for (int i=1;i<size;i++)
+ {
+     if(max<arr[i])
+         max=arr[i];
+ }
+ return(max);
+    
+}
+int main() 
+{
+
+    int a[100];
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&a[i]);
+    int max_num=findMax(a,n);
+    printf(""%d"",max_num);
+    
+    return 0;
+}"
+22716475,PES1UG22AM089,Cars Database,10,undefined
+22716475,PES1UG22AM089,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int n;
+    scanf(""%d"",&n);
+    int *array =calloc(n,sizeof(int));
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&array[i]);
+    int ans=0;
+    int a=array[0];
+    int b=array[1];
+    ans=a|b;
+    for(int i=2;i<n-1;i++)
+    {
+        ans=ans|array[i];
+    }
+    printf(""%d"",ans);
+    return 0;
+}"
+22716479,PES1UG22AM073,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int *arr,int n)
+{   int max=*arr;
+    for(int i=1;i<n;i++)
+    {
+        if(max<*(arr+i))
+            max= *(arr+i);
+    }
+    return max;
+}
+int main() {
+    int arr[20];
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&arr[i]);
+    int max= findMax(arr,n);
+    printf(""%d"",max);
+    return 0;
+}
+"
+22716479,PES1UG22AM073,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+typedef struct cars{
+    char name[100];
+    int year;
+    char no[20];
+}CAR;
+void takeInput(CAR* c,int n){
+        for(int i = 0;i<n;i++){
+        scanf(""%s%s%d"",&c[i].name,&c[i].no,&c[i].year);
+    }
+}
+void printCar(CAR c[],int n){
+    for(int j=n-1;j>=0;j--){
+        printf(""%d %s %s\n"",c[j].year,c[j].no,c[j].name);
+    }
+}
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    CAR c[n];
+    takeInput(c,n);
+    printCar(c,n);
+    
+    return 0;
+}"
+22716479,PES1UG22AM073,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int size;
+    scanf(""%d"", &size);
+    int *myarr;
+    myarr =  (int*)malloc(size*sizeof(int));
+    
+    for (int i = 0; i < size; i++) {
+        scanf(""%d"", &myarr[i]);
+    }
+    int orval = myarr[0];
+    
+    for (int j = 0; j < size-1; j++) {
+        orval = orval | myarr[j+1];
+    }
+    printf(""%d"", orval);
+    return 0;
+}"
+22716483,PES1UG22AM083,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size) 
+{
+    if (size <= 0) 
+    {
+        return -1;
+    }
+    
+    int max = *arr;
+    
+    for (int i = 1; i < size; i++) 
+    {
+        if (*(arr + i) > max) 
+        {
+            max = *(arr + i);
+        }
+    }
+    
+    return max;
+}
+
+int main() 
+{
+    int n;
+    
+    scanf(""%d"", &n);
+    
+    if (n < -1000 || n > 1000) 
+    {
+        printf(""Invalid input range.\n"");
+        return 1;
+    }
+    
+    int arr[n];
+    
+    for (int i = 0; i < n; i++) 
+    {
+        scanf(""%d"", &arr[i]);
+    }
+    
+    int max = findMax(arr, n);
+    
+    if (max == -1) 
+    {
+        printf(""Invalid array size.\n"");
+        return 1;
+    }
+    
+    printf(""%d\n"", max);
+    
+    return 0;
+}
+ "
+22716483,PES1UG22AM083,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+    struct Car {
+            char name[50];
+            char model[50];
+             int year;
+        };
+
+void takeInput(struct Car* ca) {
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(struct Car ca) {
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n); 
+    struct Car cars[n]; 
+
+    for (int i = 0; i < n; i++) {
+        takeInput(&cars[i]); 
+    }
+
+    for (int i = n - 1; i >= 0; i--) {
+        printAll(cars[i]); 
+        
+    }
+
+    return 0;
+}
+
+ 
+"
+22716483,PES1UG22AM083,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    
+    
+    //printf(""Enter the number of elements: "");
+    scanf(""%d"", &n);
+    
+    
+    int *array = (int *)calloc(n, sizeof(int));
+    
+    if (array == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+    
+    
+   // printf(""Enter elements"");
+    for (int i = 0; i < n; i++) {        
+        scanf(""%d"", &array[i]);
+    }
+    
+    
+    int result = 0;
+    for (int i = 0; i < n; i++) {
+        result |= array[i];
+    }
+    
+    
+    printf(""%d\n"", result);
+    
+    
+    free(array);
+    
+    return 0;
+}
+
+"
+22716485,PES1UG22AM098,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size) ;
+
+int main() {
+    int n,ans;
+    scanf(""%d"",&n);
+    int arr[n];
+    for(int i=0;i<n;i++){
+        scanf(""%d"",&arr[i]);
+    }
+    fflush(stdin);
+    ans = findMax(arr,n);
+    printf(""%d"",ans);
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+
+int findMax(int* arr, int size){
+    int max = *(arr);
+    for(int i=0;i<size;i++){
+        if(*(arr+i)>max){
+            max = *(arr+i);
+        }
+    }
+    return max;
+}"
+22716485,PES1UG22AM098,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct car{
+    char name[25];
+    char model[25];
+    int year;
+}Car;
+
+void takeInput(Car* ca);
+void printAll(Car ca);
+
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    fflush(stdin);
+    Car ca[n];
+    for(int i=0;i<n;i++){
+        takeInput(&ca[i]);
+    }
+    for(int i=0;i<n;i++){
+        printAll(ca[n-i-1]);
+    }
+    
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+
+void takeInput(Car* ca){
+    scanf(""%s %s %d"",ca->name,ca->model,&(ca->year));
+    fflush(stdin);
+}
+void printAll(Car ca){
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+
+"
+22716485,PES1UG22AM098,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct arr{
+    int ele;
+};
+
+int main() {
+    int n,ans=0;
+    scanf(""%d"",&n);
+    fflush(stdin);
+    struct arr *ar= (struct arr*)malloc(n*sizeof(struct arr));
+    
+    
+    for(int i=0;i<n;i++){
+        scanf(""%d"",&((ar+i)->ele));
+    }
+    fflush(stdin);
+
+    for(int i=0;i<n;i++){
+        ans = ans | ((ar+i)->ele);
+    }
+    printf(""%d"",ans);
+    
+    
+    
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+"
+22716486,PES1UG22AM075,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int *arr,int n)
+{   int max=*arr;
+    for(int i=1;i<n;i++)
+    {
+        if(max<*(arr+i))
+            max= *(arr+i);
+    }
+    return max;
+}
+int main() {
+    int arr[20];
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&arr[i]);
+    int max= findMax(arr,n);
+    printf(""%d"",max);
+    return 0;
+}"
+22716486,PES1UG22AM075,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct cars{
+    char name[500];
+    int year;
+    char no[200];
+}CAR;
+void takeInput(CAR* c,int n){
+        for(int i = 0;i<n;i++){
+        scanf(""%s%s%d"",&c[i].name,&c[i].no,&c[i].year);
+    }
+}
+void printCar(CAR c[],int n){
+    for(int j=n-1;j>=0;j--){
+        printf(""%d %s %s\n"",c[j].year,c[j].no,c[j].name);
+    }
+}
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    CAR c[n];
+    takeInput(c,n);
+    printCar(c,n);
+   
+    return 0;
+}
+
+"
+22716486,PES1UG22AM075,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int size;
+    scanf(""%d"", &size);
+    int *myarr;
+    myarr =  (int*)malloc(size*sizeof(int));
+   
+    for (int i = 0; i < size; i++) {
+        scanf(""%d"", &myarr[i]);
+    }
+    int orval = myarr[0];
+   
+    for (int j = 0; j < size-1; j++) {
+        orval = orval | myarr[j+1];
+    }
+    printf(""%d"", orval);
+    return 0;
+}    
+"
+22716487,PES1UG22AM090,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size);
+
+int main() {
+    int n,ans;
+    scanf(""%d"",&n);
+    int arr[n];
+    for (int i=0; i<n; i++){
+        scanf(""%d"",&arr[i]);
+    }
+    fflush(stdin);
+    
+    ans = findMax(arr,n);
+    printf(""%d"",ans);
+    
+    return 0;
+}
+
+int findMax(int* arr, int size){
+    int max = *(arr);       
+    for (int i=0; i<size; i++){
+        if (*(arr+i)>max){
+            max = *(arr+i);
+        }
+    }
+    return max;
+}"
+22716487,PES1UG22AM090,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct car{
+    char name[100];
+    char model[100];
+    int year;
+}Car;
+
+void takeInput(Car* ca);
+void printAll(Car ca);
+
+int main() {
+    
+    int n;
+    scanf(""%d"",&n);
+    fflush(stdin);
+    
+    Car ca[n];
+    
+    for (int i=0; i<n; i++){
+        takeInput(&ca[i]);
+    }
+    
+    for (int i=0; i<n; i++){
+        printAll(ca[n-i-1]);
+    }
+    
+    return 0;
+}
+
+void takeInput(Car* ca){
+    scanf(""%s %s %d\n"",ca->name,ca->model,&ca->year);
+}
+
+void printAll(Car ca){
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+
+"
+22716487,PES1UG22AM090,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct arr{
+    int ele;
+};
+
+int main() {
+    int n,ans=0;
+    scanf(""%d"",&n);
+    fflush(stdin);
+    struct arr *ar = (struct arr*)malloc(n*sizeof(struct arr));
+    
+    for (int i=0; i<n; i++){
+        scanf(""%d"",&((ar+i)->ele));
+    }
+    
+    fflush(stdin);
+    
+    for (int i=0; i<n; i++){
+        ans = ans | ((ar+i)->ele);
+    }
+    printf(""%d"",ans);
+    
+    return 0;
+}
+"
+22716489,PES1UG22AM121,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+int findMax(int *arr,int n)
+{   int max=*arr;
+    for(int i=1;i<n;i++)
+    {
+        if(max<*(arr+i))
+            max= *(arr+i);
+    }
+    return max;
+}
+int main() {
+    int arr[20];
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&arr[i]);
+    int max= findMax(arr,n);
+    printf(""%d"",max);
+    return 0;
+}"
+22716489,PES1UG22AM121,Cars Database,10,"#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include<stdio.h>
+typedef struct cars{
+    char name[100];
+    int year;
+    char no[30];
+}CAR;
+void takeInput(CAR* c,int n){
+        for(int i = 0;i<n;i++){
+        scanf(""%s%s%d"",&c[i].name,&c[i].no,&c[i].year);
+    }
+}
+void printCar(CAR c[],int n){
+    for(int j=n-1;j>=0;j--){
+        printf(""%d %s %s\n"",c[j].year,c[j].no,c[j].name);
+    }
+}
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    CAR c[n];
+    takeInput(c,n);
+    printCar(c,n);
+    
+    return 0;
+}"
+22716489,PES1UG22AM121,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int size;
+    scanf(""%d"", &size);
+    int *myarr;
+    myarr =  (int*)malloc(size*sizeof(int));
+    
+    for (int i = 0; i < size; i++) {
+        scanf(""%d"", &myarr[i]);
+    }
+    int orval = myarr[0];
+    
+    for (int j = 0; j < size-1; j++) {
+        orval = orval | myarr[j+1];
+    }
+    printf(""%d"", orval);
+    return 0;
+}"
+22716500,PES1UG22AM092,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size)
+{
+   int max = *arr;
+    for(int i=0; i<size; i++)
+        if(*(arr+i)>max)
+            max = *(arr+i);
+    printf(""%d"", max);
+    return 0;
+}
+
+int main() 
+{
+    int n;
+    int arr[20];
+    scanf(""%d"", &n);
+    for(int i=0;i<n;i++)
+        scanf(""%d"", &arr[i]);
+    findMax(arr, n);
+}
+"
+22716500,PES1UG22AM092,Cars Database,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+typedef struct Car
+{
+    char name[20];
+    char model[20];
+    int year;
+}Car;
+
+void takeInput(Car* ca)
+{
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(Car ca)
+{
+    printf(""%d %s %s"", ca.year, ca.model, ca.name);
+}
+
+int main()
+{
+    int n;
+    Car ca[100];
+    scanf(""%d"", &n);
+    for(int i=0;i<n;i++)
+    {
+        takeInput(&ca[i]);
+    }
+    for(int i=n-1;i>=0;i--)
+    {
+        printAll(ca[i]);
+        printf(""\n"");
+    }
+}"
+22716500,PES1UG22AM092,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main()
+{
+    int n;
+    scanf(""%d"", &n);
+    int* arr = (int*)malloc(n*sizeof(int));
+    
+    for(int i=0;i<n;i++)
+        scanf(""%d"", &arr[i]);
+    
+    int res = arr[0];
+    for(int i=1;i<n;i++)
+        res = res|arr[i];
+    
+    printf(""%d"", res);
+    free(arr);
+    
+    return 0;
+}
+"
+22716505,PES1UG22AM123,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int FindMax(int *arr,int size);
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d "",&arr[i]);
+    }  
+    int Max=FindMax(arr,n);
+    printf(""%d"",Max);
+    return 0;
+}
+    
+int FindMax(int *arr, int n)
+{
+    int *ptr=arr;
+    int max=*ptr;
+    for(int i=0;i<n;i++)
+    {
+        if(max<*(ptr+i))
+            max=*(ptr+i);
+    }
+    return max;
+}
+"
+22716505,PES1UG22AM123,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car{
+    char name[20];
+    char model[20];
+    int year;
+};
+
+
+
+void takeInput(struct Car ca[],int n){
+    for(int i=0;i<n;i++){
+        scanf(""%s"",ca[i].name);
+        scanf(""%s"",ca[i].model);
+        scanf(""%d"",&(ca[i].year));
+    }
+};
+
+void printAll(struct Car ca[],int n){
+    for(int i=n-1;i>=0;i--){
+        printf(""%d %s %s"",ca[i].year,ca[i].model,ca[i].name);
+        printf(""\n"");
+    }
+    
+};
+
+int main(){
+    int s;
+    scanf(""%d"",&s);
+    struct Car ca[s];
+    takeInput(ca,s);
+    printAll(ca,s);
+}
+"
+22716505,PES1UG22AM123,Dynamic Array OR,10,undefined
+22716506,PES1UG22AM093,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int *arr, int size)
+{
+    int max=*arr;
+    for(int i=1; i< size;i++)
+    {
+        if(*(arr+i)>max)
+        {
+            max=*(arr+i);
+        }
+    }
+    return max;
+}     
+int main()
+{
+    int size;
+    scanf(""%d"",&size);
+    int arr[size];
+    for(int i=0; i<size; i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    int max = findMax(arr,size);
+    printf(""%d\n"",max);
+    return 0;
+}
+   "
+22716506,PES1UG22AM093,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct cars
+{
+    char name[100];
+    int year;
+    char no[30];
+}CAR;
+
+void takeInput(CAR* c,int n){
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%s %s %d"",c[i].name,c[i].no,&c[i].year);
+    }
+}
+void printCar(CAR c[],int n){
+    for(int j=n-1;j>=0;j--)
+    {
+        printf(""%d %s %s\n"",c[j].year,c[j].no,c[j].name);
+    }
+}
+int main(){
+    int n;
+    scanf(""%d"",&n);
+    CAR c[n];
+    takeInput(c,n);
+    printCar(c,n);
+    return 0;
+}
+
+"
+22716506,PES1UG22AM093,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    int *array = calloc(n,sizeof(int));
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&array[i]);
+    int ans=0;
+    int a=array[0];
+    int b=array[1];
+    ans = a|b;
+    for(int i=2;i<n-1;i++)
+    {
+        ans=ans|array[i];
+    }
+    printf(""%d"",ans);
+    return 0;
+}
+"
+22716508,PES1UG22AM107,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int*arr, int size)
+{
+    int max=*arr;
+    for(int i=0;i<size;i++)
+    {
+        if(*(arr+i)>max)
+            max = *(arr+i);
+        
+    }
+    return max;
+}
+
+int main() {
+
+    int size;
+    scanf(""%d"",&size); 
+    int arr[size];
+    for(int i=0;i<size;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    printf(""%d"",findMax(arr,size));
+    
+    
+    return 0;
+}
+"
+22716508,PES1UG22AM107,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Car
+{
+        char carname[50];
+        char model[50];
+        int year;
+};
+void takeInput( struct Car* ca,int n)
+    {
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%s %s %d\n"",ca[i].carname,ca[i].model,&ca[i].year);
+        
+    }
+    }
+void printAll(struct Car *ca,int n)
+{
+    for(int i=n-1;i>=0;i--)
+    {
+        printf(""%d %s %s\n"", ca[i].year, ca[i].model, ca[i].carname);
+    }
+}
+
+
+int main()
+{
+    int n;
+    scanf(""%d"",&n);
+    struct Car ca[n];
+    takeInput(ca,n);
+    printAll(ca,n);
+    
+    return 0;
+}
+    
+
+"
+22716508,PES1UG22AM107,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int n,c=0;
+    scanf(""%d"",&n);
+    int* p= malloc(n*sizeof(int));
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",(p+i));
+    }
+    for(int i=1;i<(n-1);i++)
+    {
+        c=c|*(p+i);
+    }
+    printf(""%d"",c);
+    
+    
+    
+    return 0;
+}
+"
+22716520,PES1UG22AM094,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size) 
+{
+    if (size<=0)
+    {
+        return -1;
+    }
+
+    int max = *arr;
+
+    for (int i = 1; i < size; ++i) 
+    {
+        if (*(arr + i) > max) 
+        {
+            max = *(arr + i);
+        }
+    }
+    return max;
+}
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+
+    int arr[n];
+    for (int i = 0; i < n; ++i) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int max = findMax(arr, n);
+    printf(""%d\n"", max);
+
+    return 0;
+}"
+22716520,PES1UG22AM094,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct Car
+{
+    char name[100];
+    char model[100];
+    int year;
+};
+
+void  takeInput(struct Car* ca)
+{
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(struct Car ca)
+{
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main()
+{
+    int n;
+    scanf(""%d"", &n);
+    struct Car cars[n];
+
+    for (int i = 0; i < n; ++i)
+        takeInput(&cars[i]);
+
+    for (int i = n - 1; i >= 0; --i)
+        printAll(cars[i]);
+
+    return 0;
+}"
+22716520,PES1UG22AM094,Dynamic Array OR,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+    int* arr= (int*)malloc(n*sizeof(int));
+
+    if(arr == NULL) 
+    {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    for(int i=0;i<n;++i) 
+    {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0];
+
+    for(int i=1;i<n;++i) 
+    {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+    free(arr);
+    return 0;
+}"
+22716544,PES1UG22AM070,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+
+int FindMax(int *arr,int size);
+int main(){
+    int n;
+    scanf(""%d"",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d "",&arr[i]);
+    }  
+    int Max=FindMax(arr,n);
+    printf(""%d"",Max);
+    return 0;
+}
+    
+int FindMax(int *arr, int n)
+{
+    int *ptr=arr;
+    int max=*ptr;
+    for(int i=0;i<n;i++)
+    {
+        if(max<*(ptr+i))
+            max=*(ptr+i);
+    }
+    return max;
+
+}
+"
+22716544,PES1UG22AM070,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+    struct Car {
+    char name[50];
+    char model[50];
+    int year;
+};
+
+void takeInput(struct Car*ca) {
+    scanf(""%s"", ca->name);
+    
+    scanf(""%s"", ca->model);
+    
+    scanf(""%d"", &ca->year);
+}
+
+void printAll(struct Car ca) {
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+    
+    struct Car cars[n];
+    
+    for (int i = 0; i < n; i++) {
+        takeInput(&cars[i]);
+    }
+    
+    for (int i = n - 1; i >= 0; i--) {
+        printAll(cars[i]);
+    }
+    
+    
+ /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+"
+22716544,PES1UG22AM070,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    if (n < 1 || n > 1000) {
+        printf(""Invalid input for number of elements.\n"");
+        return 1; 
+    }
+
+    
+    int *arr = (int *)calloc(n, sizeof(int));
+    if (arr == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0];
+    for (int i = 1; i < n; i++) {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+
+    
+    free(arr);
+
+       
+    return 0;
+}
+
+
+"
+22716559,PES1UG22AM091,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int FindMax(int *arr,int size);
+int main() {
+    int a;
+    scanf(""%d"",&a);
+    int arr[a];
+    for(int i=0;i<a;i++)
+    {
+        scanf(""%d "",&arr[i]);
+    }  
+    int Max=FindMax(arr,a);
+    printf(""%d"",Max);
+    return 0;
+}
+    
+int FindMax(int *arr, int n)
+{
+    int *ptr=arr;
+    int max=*ptr;
+    for(int i=0;i<n;i++)
+    {
+        if(max<*(ptr+i))
+            max=*(ptr+i);
+    }
+    return max;
+}"
+22716559,PES1UG22AM091,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+
+struct Car {
+    char name[100];
+    char model[100];
+    int year;
+};
+
+void takeInput(struct Car*ca) {
+    scanf(""%s"", ca->name);
+    
+    scanf(""%s"", ca->model);
+    
+    scanf(""%d"", &ca->year);
+}
+
+void printAll(struct Car ca) {
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+    
+    struct Car cars[n]; 
+    
+    for (int i=0;i<n; i++) {
+        takeInput(&cars[i]);
+    }
+    
+    for (int i = n-1; i>= 0; i--) {
+        printAll(cars[i]);
+    }
+    
+    return 0;
+}
+
+"
+22716559,PES1UG22AM091,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+
+    if (n < 1 || n > 1000) {
+        printf(""Invalid input for number of elements.\n"");
+        return 1; 
+    }
+
+    int *arr = (int *)calloc(n, sizeof(int));
+    if (arr == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0];
+    for (int i = 1; i < n; i++) {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+    free(arr);
+    return 0;
+}
+"
+22716562,PES1UG22AM086,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int *arr,int n)
+{   int max=*arr;
+    for(int i=1;i<n;i++)
+    {
+        if(max<*(arr+i))
+            max= *(arr+i);
+    }
+    return max;
+}
+int main() {
+    int arr[20];
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&arr[i]);
+    int max= findMax(arr,n);
+    printf(""%d"",max);
+    return 0;
+} 
+"
+22716562,PES1UG22AM086,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+typedef struct cars{
+    char name[100];
+    int year;
+    char no[20];
+}CAR;
+void takeInput(CAR* c,int n){
+        for(int i = 0;i<n;i++){
+        scanf(""%s%s%d"",&c[i].name,&c[i].no,&c[i].year);
+    }
+}
+void printCar(CAR c[],int n){
+    for(int j=n-1;j>=0;j--){
+        printf(""%d %s %s\n"",c[j].year,c[j].no,c[j].name);
+    }
+}
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    CAR c[n];
+    takeInput(c,n);
+    printCar(c,n);
+
+    return 0;
+}
+"
+22716562,PES1UG22AM086,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int size;
+    scanf(""%d"", &size);
+    int *myarr;
+    myarr =  (int*)malloc(size*sizeof(int));
+
+    for (int i = 0; i < size; i++) {
+        scanf(""%d"", &myarr[i]);
+    }
+    int orval = myarr[0];
+
+    for (int j = 0; j < size-1; j++) {
+        orval = orval | myarr[j+1];
+    }
+    printf(""%d"", orval);
+    return 0;
+}"
+22716569,PES1UG22AM106,maximum element,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+int findMax(int* arr, int size) 
+{
+    if(size<=0)
+    {
+        return -1;
+    }
+
+    int max = *arr;
+
+    for(int i = 1; i < size; ++i) 
+    {
+        if(*(arr + i) > max) 
+        {
+            max = *(arr + i);
+        }
+    }
+    return max;
+}
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+
+    int arr[n];
+    for(int i = 0; i < n; ++i) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int max = findMax(arr, n);
+    printf(""%d\n"", max);
+
+    return 0;
+}
+"
+22716569,PES1UG22AM106,Cars Database,10,undefined
+22716569,PES1UG22AM106,Dynamic Array OR,10,"#include <stdio.h>
+#include <stdlib.h>
+int main() {
+  int n;
+  scanf("" %d "", &n);
+  int *arr = (int *)malloc(n * sizeof(int));
+  for (int i = 0; i < n; i++) {
+    scanf("" %d "", &arr[i]);
+  }
+  int or = 0;
+  for (int i = 0; i < n; i++) {
+    or |= arr[i];
+  }
+  printf(""%d"",or);
+  free(arr);
+  return 0;
+}"
+22716660,PES1UG22AM120,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size)
+{
+    int max=*arr;
+    for(int i = 1;i<size;i++)
+    {
+        if(max<*(arr+i))
+        {
+            max = *(arr+i);
+        }
+        
+    }
+    return max;
+}
+
+int main() {
+
+    int n;
+    scanf(""%d"",&n);
+    int a[n];
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&a[i]);
+    int* p = a;
+    printf(""%d"",findMax(p,n));
+    return 0;
+}
+"
+22716660,PES1UG22AM120,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct Car {
+            char name[50];
+            char model[50];
+             int year;
+        };
+
+void takeInput(struct Car* ca) {
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(struct Car ca) {
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n); 
+    struct Car cars[n]; 
+
+    for (int i = 0; i < n; i++) {
+        takeInput(&cars[i]); 
+    }
+
+    for (int i = n - 1; i >= 0; i--) {
+        printAll(cars[i]); 
+        
+    }
+
+    return 0;
+}"
+22716660,PES1UG22AM120,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int n, c=0;
+    scanf(""%d"",&n);
+    int* p = malloc(n*sizeof(int));
+    for(int i=0; i<n; i++)
+    {
+        scanf(""%d"",(p+i));
+    }
+    for(int i = 1; i<(n-1);i++)
+    {
+         c=c|*(p+i);
+        
+    }
+    printf(""%d"",c);
+    return 0;
+}
+"
+22716916,PES1UG22AM125,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int* arr,int size);
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    
+    int a[n];
+    
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&a[i]);
+    }
+    
+    int max=findMax(a,n);
+    if(max==-1)
+    {
+        printf(""invalid input or empty array"");
+    }
+    else
+    {
+        printf(""%d"",max);
+    }
+    return 0;
+    
+}
+
+int findMax(int* arr,int size)
+{
+    if(size<=0 || arr==NULL)
+        return -1;
+    
+    int max=*arr;
+    for(int i=1;i<size;i++)
+    {
+        if(*(arr+i)>max)
+        {
+            max=*(arr+i);
+        }
+    }
+    
+    return max;
+}
+"
+22716916,PES1UG22AM125,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+typedef struct Car
+{
+    char name[30];
+    char model[20];
+    int year;
+}Car;
+void takeInput(Car* ca);
+void printAll(Car ca);
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    struct Car ca[n];
+    for(int i=0;i<n;i++)
+    {
+        takeInput(&ca[i]);
+    }
+    for(int i=n-1;i>=0;i--)
+    {
+        printAll(ca[i]);
+    }
+    return 0;
+}
+void takeInput(Car* ca)
+{
+   scanf(""%s"",ca->name);
+   scanf(""%s"",ca->model);
+   scanf(""%d"",&(ca->year));
+}
+
+void printAll(Car ca)
+{
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+"
+22716916,PES1UG22AM125,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    int res=0;
+    scanf(""%d\n"",&n);
+    int *a=(int*)malloc(n*sizeof(int));
+    if(a==NULL)
+    {
+        printf(""memory allocation failed"");
+        return 1;
+    }
+    for(int i=0;i<n;i++)
+    {
+       scanf(""%d"",&a[i]); 
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        res|=a[i];
+    }
+    
+    printf(""%d"",res);
+    free(a);
+    return 0;
+}
+"
+22717676,PES1UG22AM096,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+int findMax(int *arr,int n)
+{   int max=*arr;
+    for(int i=1;i<n;i++)
+    {
+        if(max<*(arr+i))
+            max= *(arr+i);
+    }
+    return max;
+}
+int main() {
+    int arr[20];
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&arr[i]);
+    int max= findMax(arr,n);
+    printf(""%d"",max);
+    return 0;
+}"
+22717676,PES1UG22AM096,Cars Database,10,"#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include<stdio.h>
+typedef struct cars{
+    char name[100];
+    int year;
+    char no[30];
+}CAR;
+void takeInput(CAR* c,int n){
+        for(int i = 0;i<n;i++){
+        scanf(""%s%s%d"",&c[i].name,&c[i].no,&c[i].year);
+    }
+}
+void printCar(CAR c[],int n){
+    for(int j=n-1;j>=0;j--){
+        printf(""%d %s %s\n"",c[j].year,c[j].no,c[j].name);
+    }
+}
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    CAR c[n];
+    takeInput(c,n);
+    printCar(c,n);
+    
+    return 0;
+}"
+22717676,PES1UG22AM096,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    int *a=(int*)malloc(sizeof(int)*n);
+    int sum=0;
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",(a+i));
+        sum=sum|(*(a+i));
+    }
+    printf(""%d"",sum);
+    return 0;
+}
+
+"
+22720353,PES1UG22AM095,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size)
+{
+    int max = *arr;
+    for(int i=0;i<size;i++)
+    {
+        if(*(arr+i)>max)
+        {
+            max = *(arr+i);
+        }
+    }
+    return max;
+}
+int main() {
+
+    int size;
+    scanf(""%d"",&size);
+    int arr[size];
+    for(int i=0;i<size;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    printf(""%d"",findMax(arr, size));
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+
+"
+22720353,PES1UG22AM095,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct car
+{
+    char carname[50];
+    char version[10];
+    int year;
+}Car;
+void takeInput(Car *ca)
+{
+    
+    scanf(""%s "",ca->carname);
+     
+    
+    scanf(""%s "",ca->version);
+    
+    
+    scanf(""%d "",&ca->year);
+}
+void printAll(Car ca)
+{
+    printf(""%d "",ca.year);
+    printf(""%s "",ca.version);
+    printf(""%s "",ca.carname);
+}
+int main() {
+    
+    int n;
+    scanf(""%d"",&n);
+    Car ca[n];
+    for(int i=0;i<n;i++)
+    {
+        takeInput(&ca[i]);
+    }
+    for(int i=n-1;i>=0;i--)
+    {
+        printAll(ca[i]);
+        printf(""\n"");
+    }
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+
+"
+22720353,PES1UG22AM095,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int n;
+    scanf(""%d"",&n);
+    int *p= malloc(sizeof(int)*n);
+    int c= 0;
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",(p+i));
+    }
+    for(int i=1;i<n-1;i++)
+    {
+        c=c | (*(p+i));
+    }
+    printf(""%d"",c);
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+"
+22721072,PES1UG22AM081,maximum element,10,"#include <stdio.h>
+int findMax(int* arr, int size)
+ {
+    if (size <= 0) 
+    {
+        return -1;
+    }
+    int max = arr[0];
+    for (int i = 1; i < size; i++)
+    {
+        if (*(arr + i) > max)
+        {
+            max = *(arr + i);
+        }
+    }
+*arr = max;
+return max;
+}
+
+int main() {
+    int size;
+    
+    scanf(""%d"", &size);
+
+    int arr[size];
+    
+    for (int i = 0; i < size; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int maxvalue = findMax(arr, size);
+    printf(""%d"",maxvalue);
+    return 0;
+}
+"
+22721072,PES1UG22AM081,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct car{
+    char name[100];
+    char model[100];
+    int year;
+}Car;
+
+void takeInput(Car* ca);
+void printAll(Car ca);
+
+int main() {
+    
+    int n;
+    scanf(""%d"",&n);
+    fflush(stdin);
+    
+    Car ca[n];
+    
+    for (int i=0; i<n; i++){
+        takeInput(&ca[n-i-1]);
+    }
+    
+    for (int i=0; i<n; i++){
+        printAll(ca[i]);
+    }
+    
+    return 0;
+}
+
+void takeInput(Car* ca){
+    scanf(""%s %s %d\n"",ca->name,ca->model,&ca->year);
+}
+
+void printAll(Car ca){
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}"
+22721072,PES1UG22AM081,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct arr{
+    int ele;
+};
+int main()
+{
+    int n,c=0;
+    scanf(""%d"",&n);
+    int *p=malloc(n*sizeof(int));
+    for (int i=0;i<=n;i++){
+        scanf(""%d"",(p+i));
+        
+    }
+    for(int i=1;i<(n-1);i++){
+        c=c|*(p+i);
+        
+    }
+    printf(""%d"",c);
+    return 0;
+}"
+22721485,PES1UG22AM101,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int*arr,int size)
+{
+    if(size<=0)
+    {
+        return-1;
+    }
+    int max=*arr;
+    for(int i=1;i<size;i++)
+    {
+        if(*(arr+i)>max)
+            
+        {
+            max=*(arr+i);
+        }
+    }
+    return max;
+}
+
+int main()
+{
+    int n;
+    scanf(""%d"",&n);
+    if(n<-1000||n>1000)
+    {
+        printf(""invalid input range.\n"");
+        return 1;
+    }
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    int max=findMax(arr,n);
+    if(max==-1)
+    {
+      
+         printf(""invalid array size.\n"");
+        return 1;  
+    }
+    printf(""%d\n"",max);
+    return 0;
+}
+"
+22721485,PES1UG22AM101,Cars Database,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+struct Car
+{
+    char name[10];
+    char model[10];
+    int year;
+};
+
+void takeInput(struct Car*ca)
+{
+    scanf(""%s"",ca->name);
+    scanf(""%s"",ca->model);
+    scanf(""%d"",&ca->year);
+}
+void printfAll(struct Car ca)
+{
+   printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+    
+}
+int main()
+{
+    /*Enter your code here.Read input form STDIN.Print output to STDOUT*/
+    int n;
+    scanf(""%d"",&n);
+    struct Car cars[n];
+    for(int i=0;i<n;i++)
+    {
+        takeInput(&cars[i]);
+    }
+    for(int i=n-1;i>=0;i--)
+    {
+        printfAll(cars[i]);
+    }
+    return 0;
+}"
+22721485,PES1UG22AM101,Dynamic Array OR,10,"#include<stdio.h>
+#include<stdlib.h>
+
+int main()
+{
+    int n;
+    //printf(""Enter the number of elements:"");
+    scanf(""%d"",&n);
+    int*array=(int*)calloc(n,sizeof(int));
+    if(array==NULL)
+    {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+    //printf(""Enter elements"");
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"", &array[i]);
+    }
+    int result=0;
+    for(int i=0;i<n;i++)
+    {
+        result |=array[i];
+    }
+       
+    printf(""%d\n"",result);
+    
+    free(array);
+    return 0;
+}
+"
+22722467,pes1ug22am103,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+   
+int FindMax(int *arr,int size);
+int main()
+{
+    int n;
+    scanf(""%d"",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d "",&arr[i]);
+    }  
+    int Max=FindMax(arr,n);
+    printf(""%d"",Max);
+    return 0;
+}
+    
+int FindMax(int *arr, int n)
+{
+    int *ptr=arr;
+    int max=*ptr;
+    for(int i=0;i<n;i++)
+    {
+        if(max<*(ptr+i))
+            max=*(ptr+i);
+    }
+    return max;
+}    
+    
+
+"
+22722467,pes1ug22am103,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#define MAX_CARS 100
+struct Car 
+{
+    char name[50];
+    char model[50];
+    int year;
+};
+
+int main()
+{
+    struct Car cars[MAX_CARS];
+    int numCars;
+    scanf(""%d"", &numCars);
+    if (numCars <= 0 || numCars > MAX_CARS) {
+        printf(""Invalid number of cars.\n"");
+        return 1;
+ }
+    // Input car information
+    for (int i = 0; i < numCars; i++) {
+        scanf(""%s"", cars[i].name);
+        scanf(""%s"", cars[i].model);
+        scanf(""%d"", &cars[i].year);
+    }
+    // Print car information in reverse order
+    for (int i = numCars - 1; i >= 0;i--) 
+    {
+        printf(""%d "", cars[i].year);
+        printf(""%s "", cars[i].model);
+        printf(""%s "", cars[i].name);
+        printf(""\n"");
+    }
+    return 0;
+}
+
+
+
+"
+22722467,pes1ug22am103,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int main()
+{
+int n;
+    scanf(""%d"", &n);
+
+    if (n < 1 || n > 1000)
+    {
+        printf(""Invalid input for number of elements.\n"");
+        return 1; 
+    }
+    
+    int *arr = (int *)calloc(n, sizeof(int));
+    if (arr == NULL) 
+    {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0];
+    for (int i = 1; i < n; i++) 
+    {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+
+    
+    free(arr);
+   
+    return 0;
+
+}"
+22722599,PES1UG22AM078,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int* arr, int size);
+
+int main() {
+    
+    int n,res;
+    scanf(""%d\n"",&n);
+    int a[n];
+    for(int i =0;i<n;i++)
+    {
+        scanf(""%d"",&a[i]);
+    }
+    res = findMax(a,n);
+    printf(""%d"",res);
+    
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+
+int findMax(int* arr, int size)
+{
+    int max = *(arr);
+    for(int i=0;i<size;i++)
+    {
+        if (*(arr+i) > max)
+            max = *(arr+i);
+    }
+    return max;
+}
+"
+22722599,PES1UG22AM078,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+
+typedef struct cars
+{
+        char name[20];
+        char model[20];
+        int year;
+}Car;
+
+
+void takeInput(Car* ca,int n)
+{
+    for(int i = 0;i<n;i++)
+    {
+        scanf(""%s %s %d"",ca[i].name, ca[i].model, &ca[i].year);
+    }
+}
+
+void printAll(Car ca[],int n)
+{
+    for(int i = n-1;i>=0;i--)
+    {
+        printf(""%d %s %s\n"",ca[i].year , ca[i].model, ca[i].name);
+    }
+}
+
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int n;
+    scanf(""%d"",&n);
+    Car c[n];
+    
+    takeInput(c,n);
+    
+    printAll(c,n);
+    
+    return 0;
+}
+"
+22722599,PES1UG22AM078,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int n;
+    scanf(""%d"",&n);
+    int *arr = calloc(n,sizeof(int));
+    
+    for (int i =0;i<n;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    
+    int x = arr[0];
+    int y = arr[1];
+    int res = x|y;
+    
+    for(int j=2;j<n-1;j++)
+    {
+        res = (res | arr[j]);
+    }
+    
+    printf(""%d"",res);
+    return 0;
+}
+"
+22723332,PES1UG22AM109,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int *arr,int size)
+{
+    int temp = *arr;
+    for(int i =1; i<size;i++)
+    {
+        if(temp<*(arr+i))
+            temp = *(arr+i); 
+    }
+    return temp;
+}
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    int arr[n];
+    for(int i =0;i<n;i++)
+        scanf(""%d"",&arr[i]);
+    int d = findMax(arr,n);
+    printf(""%d"",d);
+    return 0;
+}
+"
+22723332,PES1UG22AM109,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car
+{
+    char name[20];
+    char model[30];
+    int year;
+};
+void takeInput(struct Car *ca)
+{
+    scanf(""%s"",ca->name);
+    scanf(""%s"",ca->model);
+    scanf(""%d"",&ca->year);
+}
+void printAll(struct Car ca)
+{
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    
+    int n;
+    scanf(""%d"",&n);
+    struct Car ca[n];
+    for(int i = 0;i<n;i++)
+        takeInput(&ca[i]);
+    for(int i = n-1;i>=0;i--)
+         printAll(ca[i]);
+    return 0;
+}
+"
+22723332,PES1UG22AM109,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n,d=0;
+    scanf(""%d"",&n);
+    int *p = calloc(n,sizeof(int));
+    for(int i =0;i<n;i++)
+        scanf(""%d"",(p+i));
+    for(int i =0;i<n;i++)
+    {
+        d|=*(p+i);
+    }
+    printf(""%d"",d);
+    return 0;
+}
+"
+22724106,PES1UG22AM099,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int FindMax(int *arr,int size);
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    int arr[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d "",&arr[i]);
+    }  
+    int Max=FindMax(arr,n);
+    printf(""%d"",Max);
+    return 0;
+}
+    
+int FindMax(int *arr, int n)
+{
+    int *ptr=arr;
+    int max=*ptr;
+    for(int i=0;i<n;i++)
+    {
+        if(max<*(ptr+i))
+            max=*(ptr+i);
+    }
+    return max;
+}"
+22724106,PES1UG22AM099,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car{
+    char name[20];
+    char model[20];
+    int year;
+};
+
+
+
+void takeInput(struct Car ca[],int n){
+    for(int i=0;i<n;i++){
+        scanf(""%s"",ca[i].name);
+        scanf(""%s"",ca[i].model);
+        scanf(""%d"",&(ca[i].year));
+    }
+};
+
+void printAll(struct Car ca[],int n){
+    for(int i=n-1;i>=0;i--){
+        printf(""%d %s %s"",ca[i].year,ca[i].model,ca[i].name);
+        printf(""\n"");
+    }
+    
+};
+
+int main(){
+    int s;
+    scanf(""%d"",&s);
+    struct Car ca[s];
+    takeInput(ca,s);
+    printAll(ca,s);
+}"
+22724106,PES1UG22AM099,Dynamic Array OR,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+int main(){
+int n;
+    scanf(""%d"", &n);
+
+    if (n < 1 || n > 1000) {
+        printf(""Invalid input for number of elements.\n"");
+        return 1; 
+    }
+
+    
+    int *arr = (int *)calloc(n, sizeof(int));
+    if (arr == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0];
+    for (int i = 1; i < n; i++) {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+
+    
+    free(arr);
+    return 0;
+}"
+22724347,PES1UG22AM069,maximum element,0,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+#include <stdio.h>
+int findMax(int* arr, int size) {
+    if (size <= 0 || arr == NULL) {
+        printf(""Invalid input\n"");
+        return -1; // Return a sentinel value indicating an error
+    }
+
+    int max = *arr; // Initialize the maximum value with the first element
+
+    for (int i = 1; i < size; i++) {
+        if (*(arr + i) > max) {
+            max = *(arr + i); // Update the maximum value
+        }
+    }
+
+    return max; // Return the maximum value found
+}
+
+int main() {
+    int arr[] = {3}; // Example input array
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    int max = findMax(arr, size);
+    if (max != -1) {
+        printf(""%d"", max);
+    }
+
+    return 0;
+}"
+22724347,PES1UG22AM069,Cars Database,0,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct Car {
+    char name[50];
+    char model[50];
+    int year;
+};
+
+// Function to take input for a Car
+void takeInput(struct Car* ca) {
+    printf(""Enter car name\n: "");
+    scanf(""%s"", ca->name);
+    
+    printf(""Enter car model\n: "");
+    scanf(""%s"", ca->model);
+    
+    printf(""Enter car year\n: "");
+    scanf(""%d"", &ca->year);
+}
+
+// Function to print all information in reverse order
+void printAll(struct Car ca) {
+    printf(""%d"", ca.year);
+    printf(""%s"", ca.model);
+    printf(""%s"", ca.name);
+}
+
+int main() {
+    struct Car car1; // Declare a Car structure
+    
+    // Take input for car1
+   
+    takeInput(&car1);
+    
+    // Print all information in reverse order
+   
+    printAll(car1);
+    
+    return 0;
+}"
+22724347,PES1UG22AM069,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int numElements=5;
+    
+    scanf(""%d"",&numElements);
+
+    if (numElements <= 0) {
+        printf(""Invalid number of elements.\n"");
+        return 1;
+    }
+
+    // Allocate memory for the array
+    int* arr = (int*)malloc(numElements * sizeof(int));
+    if (arr == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    // Input elements from the user
+   
+    for (int i = 0; i < numElements; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    // Calculate the bitwise OR of all elements
+    int bitwiseOR = arr[0];
+    for (int i = 1; i < numElements; i++) {
+        bitwiseOR |= arr[i];
+    }
+
+    // Display the result
+    printf(""%d"", bitwiseOR);
+
+    // Free the allocated memory
+    free(arr);
+
+    return 0;
+}"
+22724688,PES1UG22AM105,maximum element,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+int findMax(int* arr, int size) 
+{
+    if(size<=0)
+    {
+        return -1;
+    }
+
+    int max = *arr;
+
+    for(int i = 1; i < size; ++i) 
+    {
+        if(*(arr + i) > max) 
+        {
+            max = *(arr + i);
+        }
+    }
+    return max;
+}
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+
+    int arr[n];
+    for(int i = 0; i < n; ++i) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int max = findMax(arr, n);
+    printf(""%d\n"", max);
+
+    return 0;
+}"
+22724688,PES1UG22AM105,Cars Database,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+struct Car
+{
+    char name[100];
+    char model[100];
+    int year;
+};
+
+void takeInput(struct Car* ca)
+{
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(struct Car ca)
+{
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main()
+{
+    int n;
+    scanf(""%d"", &n);
+    struct Car cars[n];
+
+    for (int i = 0; i < n; ++i)
+        takeInput(&cars[i]);
+
+    for (int i = n - 1; i >= 0; --i)
+        printAll(cars[i]);
+
+    return 0;
+}"
+22724688,PES1UG22AM105,Dynamic Array OR,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+    int* arr= (int*)malloc(n*sizeof(int));
+
+    if(arr == NULL) 
+    {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    for(int i=0;i<n;++i) 
+    {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0];
+
+    for(int i=1;i<n;++i) 
+    {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+    free(arr);
+    return 0;
+}"
+22724935,PES1UG22AM104,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size)
+{
+    int max = *arr;
+    for(int i = 1; i<size; i++)
+    {
+        if(max<(*(arr+i)))
+        {
+            max = *(arr+i);
+        }
+    }
+    return max ;
+}
+
+int main() {
+    
+    int n;
+    scanf(""%d"",&n);
+    int a[n];
+    for(int i = 0; i<n; i++)
+        scanf(""%d"",&a[i]);
+    int *p =a;
+    printf(""%d"",findMax(p,n));
+    
+    return 0;
+}
+
+"
+22724935,PES1UG22AM104,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct car
+{
+    char name[100];
+    char model[100];
+    int year;
+}Car;
+
+void takeInput(Car* ca) 
+{
+        scanf(""%s %s %d\n"", ca->name, ca->model, &ca->year);
+}
+
+void  printAll(Car ca)
+{
+        printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+int main() {
+    int n;
+    scanf(""%d"", &n);
+    Car ca[n];
+    for(int i =0; i<n; i++)
+        takeInput( &ca[i]);
+    for(int i =(n-1); i>=0; i--)
+        printAll(ca[i]);
+    
+    return 0;
+}
+"
+22724935,PES1UG22AM104,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int n , c=0;
+    scanf(""%d"",&n);
+    int* p = malloc(n*sizeof(int));
+    for(int i = 0; i<n; i++)
+    {
+        scanf(""%d"",(p+i));
+    }
+    for(int i =0; i<n;i++)
+    {
+            c = c|*(p+i);
+    }
+    printf(""%d"",c);
+    return 0;
+}
+"
+22725101,PES1UG22AM119,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size) ;
+int main() 
+{
+    int a[25],n;
+    scanf(""%d"",&n);
+    for (int i=0;i<n;i++)
+    {
+        scanf(""%d"",&a[i]);
+    }
+    printf(""%d"",findMax( a,  n));
+}
+int findMax(int *arr,int size)
+{
+    int max=arr[0];
+    for (int i=1;i<size;i++)
+    {
+        if(arr[i]>max)
+        {
+            max=arr[i];
+        }
+    }
+    return max;
+}
+"
+22725101,PES1UG22AM119,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+typedef struct car
+{
+    char name[20];
+    char model[20];
+    int year;
+}Car;
+void takeInput(Car* ca);
+void printAll(Car ca);
+
+int main()
+{
+    int n;
+    //printf(""enter the number of cars:"");
+    scanf(""%d"",&n);
+    Car c[n];
+    for (int i=0;i<n;i++)
+    {
+        takeInput(&c[i]);
+        
+    }
+    for (int i=n-1;i>=0;i--)
+    {
+        printAll(c[i]);
+    }
+    
+    
+}
+void takeInput(Car* ca)
+{
+    //printf(""enter the car name:"");
+    scanf(""%s"",ca->name);
+    //printf(""enter the car model:"");
+    scanf(""%s"",ca->model);
+    //printf(""enter the year:"");
+    scanf(""%d"",&ca->year);
+}
+
+void printAll(Car ca)
+{
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+
+"
+22725101,PES1UG22AM119,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int bitOr(int *p,int n);
+int main() 
+{
+    int n;
+    scanf(""%d"",&n);
+    int* ptr=(int*)malloc(n*sizeof(int));
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&ptr[i]);
+    }
+    printf(""%d"",bitOr(ptr,n));
+}
+int bitOr(int *p,int n)
+{
+    int c=p[0];
+    for(int i=1;i<(n);i++)
+    {
+        c=c|p[i];
+    }
+    return c;
+}
+
+"
+22728096,PES1UG22AM07,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int findMax(int* arr, int size)
+{
+    int max = arr[0];
+    for(int i = 1;i<size ; i++)
+    {
+        if (arr[i] >= max)
+            max= arr[i];
+    }
+    return max ; 
+}
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    
+    int n;
+    scanf(""%d"", &n);
+    int arr[n];
+    for(int i =0;i<n;i++)
+        scanf(""%d"" , &arr[i]);
+    
+    printf(""%d"" , findMax(arr,n));
+    return 0;
+}
+"
+22728096,PES1UG22AM07,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct cars
+{
+    char name[10];
+    char model[10];
+    int year;
+}Car ;
+
+void takeInput(Car* ca , int nn)
+{
+    for(int i = 0  ; i<nn;i++)
+        scanf(""%s %s %d"",ca[i].name , ca[i].model , &ca[i].year);
+}
+
+void printAll(Car ca[] , int nn)
+{
+    for(int i = nn-1 ; i>=0;i--)
+        printf(""%d %s %s\n"" , ca[i].year ,  ca[i].model,ca[i].name );
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int n;
+    scanf(""%d"" , &n);
+    Car c[n];
+    takeInput(c,n);
+    printAll(c,n);
+    return 0;
+}
+"
+22728096,PES1UG22AM07,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"", &n);
+    
+    int *arr = calloc(n , sizeof(int));
+    
+    for(int i =0;i<n;i++)
+        scanf(""%d"" , &arr[i]);
+    
+    int ans = 0;
+    int a = arr[0];
+    int b = arr[1] ;
+    ans = a|b ; 
+    for (int i =2;i<n-1 ; i++)
+    {
+        ans = ans|arr[i];
+    }
+    printf(""%d"" , ans);
+    
+    return 0;
+}
+"
+22728313,PES1UG22AM122,maximum element,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+int findMax(int*arr,int size)
+{
+    if(size<=0)
+    {
+        return -1;
+    }
+    int max=*arr;
+    
+    for(int i=1;i<size;i++)
+    {
+        if(*(arr+i)>max)
+        {
+            max=*(arr+i);
+        }
+    }
+    return max;
+}
+int main()
+{
+    int n;
+    
+    scanf(""%d"",&n);
+    
+    if(n<-1000||n>1000)
+    {
+        printf(""Invalid input range.\n"");
+        return 1;
+    }
+    int arr[n];
+    
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    int max=findMax(arr,n);
+    
+    if(max==-1)
+    {
+        printf(""Invalid array size.\n"");
+        return 1;
+    }
+    printf(""%d\n"",max);
+    
+    return 0;
+}"
+22728313,PES1UG22AM122,Cars Database,0,"#include<stdio.h>
+#include<string.h>
+
+#define MAX_STUDENTS 5
+
+//Define the student structure
+struct Student{
+    char name[50];
+    int rollNumber;
+    float marks[3];
+};
+
+//Function to input information for each student
+void inputStudentInfo(struct Student*student){
+    //printf(""Enter student's name:"");
+    scanf(""%s"",student->name);
+    
+    //printf(""Enter roll number:"");
+    scanf(""%d"",&student->rollNumber);
+    
+    //printf(""Enter marks for three subjects:\n"");
+    for(int i=0;i<3;i++){
+        //printf(""Subject%d:"",i+1);
+        scanf(""%f"",&student->marks[i]);
+    }
+}
+//Function to caiculate total and average marks
+void calculateMarks(struct student*student){
+    student->totalMarks=0;
+    for(int i=0;i<3;i++){
+        student->totalMarks+=student->marks/3;
+    }
+    
+    //Function to display student information
+    void displayStudentInfo(struct Student*student){
+        printf(""%s"",student.name);
+        printf(""%d"",student.rollNumber);
+        printf(""%d\n"",student.totalMarks);
+        //printf(""Average Marks:%2f\n"",student.averageMarks);
+        //printf(""\n"");
+    }
+    int main(){
+        int numStudents;
+        //printf(""Enter the number of students:"");
+        scanf(""%d"",&numStudents);
+        
+        if(numStudents>MAX_STUDENTS){
+            printf(""Maximum number of students allowed is %d.\n"",MAX_STUDENTS);
+            return 1;
+        }
+        
+        struct student
+            students[MAX_STUDENTs];
+        
+        for(int i=0;i<numStudents;i++){
+            //printf(""\nEnter information for student%D:\n"",i+1);
+            inputStudentInfo(&students[i]);
+            calculateMarks(&students[i]);
+        }
+        //printf(""\nStudent INformation :\n"");
+        for(int i=0;i<numStudents;i++){
+            //print(""\nStudent%d:\n"",i+1);
+        }
+        return 0;
+    }
+}"
+22728313,PES1UG22AM122,Dynamic Array OR,10,"#include<stdio.h>
+#include<stdlib.h>
+
+int main(){
+    int n;
+    
+    //printf(""Enter the number of elements:"");
+    scanf(""%d"",&n);
+    
+    int*array=(int*)calloc(n,sizeof(int));
+    
+    if(array==NULL){
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+    
+    //printf(""Enter elements"");
+    for(int i=0;i<n;i++){
+        scanf(""%d"",&array[i]);
+    }
+    int result=0;
+      for(int i=0;i<n;i++){
+          result |=array[i];
+      }
+    
+    
+    printf(""%d\n"",result);
+    
+    
+    free(array);
+    
+    return 0;
+}
+"
+22729627,PES1UG22AM132,maximum element,10,"
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int* arr, int size) ;
+void read_array(int a[],int n);
+int main() 
+{
+    int arr[1000];
+    int size;
+    scanf(""%d"",&size);
+    read_array(arr,size);
+    int res=findMax(arr,size);
+    printf(""%d"",res);
+    return 0;
+}
+void read_array(int a[],int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&a[i]);
+    }
+}
+int findMax(int* arr, int size) 
+{
+    int res=*arr;
+    for(int i=0;i<size;i++)
+    {
+        int ele=*(arr+i);
+        if(ele>res)
+        res=ele;
+           
+    }
+    return res;
+}"
+22729627,PES1UG22AM132,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+typedef struct car
+{
+  char name[50];
+  char model[20];
+  int year;  
+}Car;
+ void takeInput(Car*,int);
+ void printAll(Car*,int);
+int main() 
+{
+
+    Car ca;
+    int n;
+    scanf(""%d"",&n);
+    takeInput(&ca,n);
+    printAll(&ca,n);
+    return 0;
+}
+ void takeInput(Car* ca,int n)
+ {
+     for(int i=0;i<n;i++)
+     {    
+        //printf(""Enter details of car name,model and year in order: "");
+        scanf(""%s%s%d"",(ca+i)->name,(ca+i)->model,&(ca+i)->year);
+     }    
+ }
+void printAll(Car* ca,int n)
+{
+    //reverse order
+    for(int i=0;i<n;i++)
+    {
+       printf(""%d %s %s\n"",(ca+n-i-1)->year,(ca+n-i-1)->model,(ca+n-i-1)->name);
+       //printf(""%d %s %s\n"",ca[n-i-1].year,ca[n-i-1].model,ca[n-i-1].name); 
+    }    
+}"
+22729627,PES1UG22AM132,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+
+    int n;
+    scanf(""%d"",&n);
+    int *p=malloc(n*sizeof(int));
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",(p+i));
+    }
+    int res=0;
+    for(int i=0;i<n;i++)
+    {
+        int ele=*(p+i);
+        res=res|ele;
+    }
+    printf(""%d"",res);
+    return 0;
+}
+"
+22729705,PES1UG22AM118,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int* arr,int size)
+{
+    int maxm=arr[0];
+    for(int i=1;i<size;i++)
+    {
+        if(arr[i]>maxm)
+        {
+            maxm=arr[i];
+        }
+    }
+    return maxm;
+}
+int main() {
+    int size;
+    int arr[30];
+    scanf(""%d"",&size);
+    for(int i=0;i<size;i++)
+    {
+        scanf(""%d"",&arr[i]);
+    }
+    printf(""%d"",findMax(arr,size));
+
+    
+}
+"
+22729705,PES1UG22AM118,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+
+typedef struct Car
+{
+    char name[30];
+    char model[30];
+    int year;
+} Car;
+
+void takeInput(Car *ca, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        scanf(""%s %s %d"", ca[i].name, ca[i].model, &ca[i].year);
+    }
+}
+
+void printAll(Car *ca, int n)
+{
+    for (int i = n - 1; i >= 0; i--)
+    {
+        printf(""%d %s %s\n"", ca[i].year, ca[i].model, ca[i].name);
+    }
+}
+
+int main()
+{
+    int n;
+    scanf(""%d"", &n);
+
+    Car cars[n];
+
+    takeInput(cars, n);
+    printAll(cars, n);
+
+    return 0;
+}
+
+"
+22729705,PES1UG22AM118,Dynamic Array OR,7.5,undefined
+22730698,PES1UG22AM112,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+int findMax(int* arr, int size) 
+{
+    if(size<=0)
+    {
+        return -1;
+    }
+
+    int max=*arr;
+
+    for (int i=1;i<size;++i) 
+    {
+        if (*(arr+i)>max) 
+        {
+            max=*(arr+i);
+        }
+    }
+    return max;
+}
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+
+    int arr[n];
+    for (int i=0;i<n;++i) 
+    {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int max=findMax(arr, n);
+    printf(""%d\n"", max);
+
+    return 0;
+}
+"
+22730698,PES1UG22AM112,Cars Database,10,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+
+struct Car
+{
+    char name[100];
+    char model[100];
+    int year;
+};
+
+void takeInput(struct Car* ca)
+{
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(struct Car ca)
+{
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main()
+{
+    int n;
+    scanf(""%d"", &n);
+    struct Car cars[n];
+
+    for (int i=0;i<n;++i)
+        takeInput(&cars[i]);
+
+    for (int i=n-1;i>=0;--i)
+        printAll(cars[i]);
+
+    return 0;
+}"
+22730698,PES1UG22AM112,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+
+    int* arr= (int*)malloc(n*sizeof(int));
+    if (arr == NULL) 
+    {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    for (int i=0;i<n;++i) 
+    {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0];
+    for (int i=1;i<n;++i) 
+    {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+
+    free(arr);
+
+    return 0;
+}
+"
+22730845,PES1UG22AM108,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+#include <stdio.h>
+
+int findMax(int *arr, int size) {
+    if (size <= -1000 || size > 1000) {
+        return -1;
+    }
+
+    int max = *arr;
+
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+
+    return max;
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    if (n < -1000 || n > 1000) {
+        return 1;
+    }
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int max = findMax(arr, n);
+    printf(""%d\n"", max);
+
+    return 0;
+}
+
+"
+22730845,PES1UG22AM108,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Car {
+    char name[100];
+    char model[100];
+    int year;
+};
+
+void takeInput(struct Car *ca) {
+
+    scanf(""%s"", ca->name);
+    scanf(""%s"", ca->model);
+    scanf(""%d"", &ca->year);
+}
+
+void printAll(struct Car ca) {
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() {
+    int n;
+    
+    scanf(""%d"", &n);
+
+    if (n < 0 || n > 1000) {
+        printf(""Invalid number of cars\n"");
+        
+    }
+
+    struct Car cars[n];
+
+    for (int i = 0; i < n; i++) {
+        takeInput(&cars[i]);
+    }
+
+
+    for (int i = n - 1; i >= 0; i--) {
+        printAll(cars[i]);
+    }
+
+    return 0;
+}
+"
+22730845,PES1UG22AM108,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    if (n < 1 || n > 1000) {
+        return 1;
+    }
+
+    int *arr = (int *)calloc(n, sizeof(int));
+
+    if (arr == NULL) {
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0];
+    for (int i = 1; i < n; i++) {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+
+    free(arr);
+
+    return 0;
+}
+"
+22730999,PES1UG22AM124,maximum element,10,"
+// Maximun 
+#include <stdio.h>
+int findMax(int *arr,int n)
+{   int max=*arr;
+    for(int i=1;i<n;i++)
+    {
+        if(max<*(arr+i))
+            max= *(arr+i);
+    }
+    return max;
+}
+int main() {
+    int arr[20];
+    int n;
+    
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&arr[i]);
+    int max= findMax(arr,n);
+    printf(""%d "",max);
+    return 0;
+}   
+"
+22730999,PES1UG22AM124,Cars Database,10,"#include <stdio.h>
+
+// Define the Car structure
+struct Car {
+    char name[50];
+    char model[50];
+    int year;
+};
+
+void CarInfo(struct Car *ca) {
+    scanf(""%s"", ca->name);
+    scanf(""%s"", ca->model);
+    scanf(""%d"", &ca->year);
+}
+
+void printAll(struct Car ca) {
+    printf(""%d "", ca.year);
+    printf(""%s "", ca.model);
+    printf(""%s"", ca.name);
+}
+
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    struct Car ca[n]; // Use indices 0 and 1 for a total of 2 elements
+    for (int i = 0; i < n; i++) {
+        CarInfo(&ca[i]);
+    }
+    for(int i=n-1;i>=0;i--){
+        printAll(ca[i]);
+        printf(""\n"");
+    }
+    
+    return 0;
+}
+"
+22730999,PES1UG22AM124,Dynamic Array OR,10,"#include<stdio.h>
+#include<stdlib.h>
+
+int findbitor(int *x,int n){
+    int value=0;
+    for(int i=0; i<n; i++)
+    {
+        value= (value | x[i]);
+    }
+    return value;
+}
+
+int main(){
+    int n;
+    int ele;
+     scanf(""%d"", &n);
+    int *x = malloc(n*sizeof(int));
+    for(int i=0;i<n;i++){
+      scanf(""%d"", &ele);
+      x[i]=ele;  
+    }
+    int res = findbitor(x,n);
+    printf(""%d"", res);
+}"
+22732064,PES1UG22AM072,maximum element,10,"#include <stdio.h>
+int findMax(int *arr,int n)
+{   int max=*arr;
+    for(int i=1;i<n;i++)
+    {
+        if(max<*(arr+i))
+            max= *(arr+i);
+    }
+    return max;
+}
+int main() {
+    int arr[20];
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++)
+        scanf(""%d"",&arr[i]);
+    int max= findMax(arr,n);
+    printf(""%d"",max);
+    return 0;
+}"
+22732064,PES1UG22AM072,Cars Database,10,"#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include<stdio.h>
+typedef struct cars{
+    char name[100];
+    int year;
+    char no[40];
+}CAR;
+void takeInput(CAR* c,int n){
+        for(int i = 0;i<n;i++){
+        scanf(""%s%s%d"",&c[i].name,&c[i].no,&c[i].year);
+    }
+}
+void printCar(CAR c[],int n){
+    for(int j=n-1;j>=0;j--){
+        printf(""%d %s %s\n"",c[j].year,c[j].no,c[j].name);
+    }
+}
+int main() {
+    int n;
+    scanf(""%d"",&n);
+    CAR c[n];
+    takeInput(c,n);
+    printCar(c,n);
+    
+    return 0;
+}"
+22732064,PES1UG22AM072,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+int main() {
+    int size;
+    scanf(""%d"", &size);
+    int *myarr;
+    myarr =  (int*)malloc(size*sizeof(int));
+    
+    for (int i = 0; i < size; i++) {
+        scanf(""%d"", &myarr[i]);
+    }
+    int orval = myarr[0];
+    
+    for (int j = 0; j < size-1; j++) {
+        orval = orval | myarr[j+1];
+    }
+    printf(""%d"", orval);
+    return 0;
+}"
+22732108,PES1UG22AM071,maximum element,10,"#include <stdio.h>
+
+int FindMax(int* arr, int size){
+    int j, max=*arr;
+    for(j=0; j<size; j++){
+        if (*(arr+j)>max){
+            max=*(arr+j);
+        }
+    }
+    return max;
+}
+
+int main() {
+    int i, max, size;
+    scanf(""%d"", &size);
+    int a[size];
+    for(i=0; i<size; i++){
+        scanf(""%d"", &a[i]);
+    }
+    max = FindMax(a, size);
+    printf(""%d"", max);
+    return 0;
+}
+"
+22732108,PES1UG22AM071,Cars Database,10,"#include <stdio.h>
+
+typedef struct car{
+    char name[100];
+    char model[100];
+    int year;
+}Car;
+
+void takeInput(Car* ca){
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(Car ca){
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() {
+    int i, n;
+    scanf(""%d"", &n);
+    Car A[n];
+    for(i=0; i<n; i++){
+        takeInput(&A[i]);
+    }
+    for(i=n-1; i>=0; i--){
+        printAll(A[i]);   
+    }
+    return 0;
+}
+"
+22732108,PES1UG22AM071,Dynamic Array OR,10,"#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int i, n;
+    scanf(""%d"", &n);
+    int* arr = (int*)malloc(n*sizeof(int));
+    
+    for(i=0; i<n; i++){
+        scanf(""%d"", &arr[i]);
+    }
+    
+    int res=arr[0];
+    for(i=1; i<n; i++){
+        res |= arr[i];
+    }
+    
+    printf(""%d"", res);
+    free(arr);
+    return 0;
+}
+"
+22732173,PES1UG22AM127,maximum element,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int findMax(int *array,int size)
+{
+    if(size<=0)
+    {
+        return -1;
+    }
+    int max=*array;
+    for(int i=1;i<size;i++)
+    {
+        if(*(array+i)>max)
+        {
+            max=*(array+i);
+        }
+    }
+    return max;
+}
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    if(n<-1000||n>1000)
+    {
+        printf(""the input entered is not in range.\n"");
+        return 1;
+    }
+    int array[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"",&array[i]);
+    }
+    int max=findMax(array,n);
+    if(max==-1)
+    {
+        printf(""The array size is invalid.\n"");
+        return 1;
+    }
+    printf(""%d\n"",max);
+    return 0;
+}"
+22732173,PES1UG22AM127,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car
+{
+    char name[10];
+    char model[10];
+    int year;
+};
+
+void takeInput(struct Car* ca)
+{
+  
+    scanf(""%s"",ca->name);
+    
+ 
+    scanf(""%s"",ca->model);
+    
+  
+    scanf(""%d"",&ca->year);
+}
+
+void printAll(struct Car ca)
+{
+    printf(""%d %s %s\n"",ca.year,ca.model,ca.name);
+}
+
+int main() {
+
+    /* Enter your code hhere. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"",&n);
+    
+    struct Car cars[n];
+    for(int i=0;i<n;i++)
+    {
+        takeInput(&cars[i]);
+    }
+        for(int i=n-1;i>=0;i--)
+                  {
+                      printAll(cars[i]);
+                  }
+    return 0;
+}"
+22732173,PES1UG22AM127,Dynamic Array OR,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+int main() {
+    int n;
+    //printf(""Enter the number of elements: "");
+    scanf(""%d"", &n);
+
+    if (n < 1) {
+        printf(""Invalid number of elements.\n"");
+        return 1;
+    }
+
+    int *array = (int *)malloc(n * sizeof(int));
+    if (array == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1;
+    }
+
+    //printf(""Enter %d elements:\n"", n);
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &array[i]);
+    }
+
+    int result = array[0];
+    for (int i = 1; i < n; i++) {
+        result |= array[i];
+    }
+
+    printf(""%d\n"", result);
+
+    free(array);
+
+    return 0;
+}"
+22732361,PES1UG22AM113,maximum element,10,"#include <stdio.h>
+
+int findMax(int* arr, int size) {
+    if (size <= 0) {
+        return 0; // Return 0 if the array is empty or invalid size
+    }
+
+    int max = *arr; // Initialize max with the first element
+
+    for (int i = 1; i < size; i++) {
+        if (*(arr + i) > max) {
+            max = *(arr + i); // Update max if a larger element is found
+        }
+    }
+
+    return max;
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int max = findMax(arr, n);
+    printf(""%d\n"", max);
+
+    return 0;
+}"
+22732361,PES1UG22AM113,Cars Database,10,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Car {
+    char name[50];
+    char model[50];
+    int year;
+};
+
+void takeInput(struct Car* ca) {
+    scanf(""%s %s %d"", ca->name, ca->model, &ca->year);
+}
+
+void printAll(struct Car ca) {
+    printf(""%d %s %s\n"", ca.year, ca.model, ca.name);
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Car cars[n];
+
+    for (int i = 0; i < n; i++) {
+        takeInput(&cars[i]);
+    }
+   
+    for (int i = n - 1; i >= 0; i--) {
+        printAll(cars[i]);
+    }
+
+    return 0;
+}"
+22732361,PES1UG22AM113,Dynamic Array OR,10,"#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    
+    int* arr = (int*)malloc(n * sizeof(int));
+   
+    if (arr == NULL) {
+        printf(""Memory allocation failed.\n"");
+        return 1; 
+    }
+
+    
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &arr[i]);
+    }
+
+    int result = arr[0]; 
+
+    
+    for (int i = 1; i < n; i++) {
+        result |= arr[i];
+    }
+
+    printf(""%d\n"", result);
+
+    
+    free(arr);
+
+    return 0;
+}"

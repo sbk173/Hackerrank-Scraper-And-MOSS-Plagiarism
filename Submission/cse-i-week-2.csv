@@ -1,0 +1,2783 @@
+studentId,studentUserName,challenge,score,code
+12606197,PES1UG22CS541,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent a term in the polynomial
+struct Term {
+    int coefficient;
+    int exponent;
+    struct Term* next;
+};
+
+// Function to insert a new term into the polynomial
+void insertTerm(struct Term** poly, int coeff, int exp) {
+    struct Term* newTerm = (struct Term*)malloc(sizeof(struct Term));
+    newTerm->coefficient = coeff;
+    newTerm->exponent = exp;
+    newTerm->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } else {
+        struct Term* temp = *poly;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newTerm;
+    }
+}
+
+// Function to add two polynomials
+struct Term* addPolynomials(struct Term* poly1, struct Term* poly2) {
+    struct Term* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            insertTerm(&result, poly1->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+        } else if (poly1->exponent < poly2->exponent) {
+            insertTerm(&result, poly2->coefficient, poly2->exponent);
+            poly2 = poly2->next;
+        } else {
+            insertTerm(&result, poly1->coefficient + poly2->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+    // Add any remaining terms from poly1 or poly2
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coefficient, poly1->exponent);
+        poly1 = poly1->next;
+    }
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coefficient, poly2->exponent);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+// Function to print the polynomial
+void printPolynomial(struct Term* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Term* poly1 = NULL;
+    struct Term* poly2 = NULL;
+
+    for (int i = 0; i < n + m; ++i) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insertTerm(&poly1, coeff, exp);
+        } else {
+            insertTerm(&poly2, coeff, exp);
+        }
+    }
+
+    struct Term* result = addPolynomials(poly1, poly2);
+
+    printPolynomial(result);
+
+    return 0;
+}"
+19757962,PES1UG22CS534,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int coeff;
+    int power;
+    struct Node* next;
+};
+
+void insertTerm(struct Node** poly, int coeff, int power) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->coeff = coeff;
+    newNode->power = power;
+    newNode->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newNode;
+    } else {
+        struct Node* current = *poly;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+struct Node* addPolynomials(struct Node* poly1, struct Node* poly2) {
+    struct Node* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->power > poly2->power) {
+            insertTerm(&result, poly1->coeff, poly1->power);
+            poly1 = poly1->next;
+        } else if (poly1->power < poly2->power) {
+            insertTerm(&result, poly2->coeff, poly2->power);
+            poly2 = poly2->next;
+        } else {
+            insertTerm(&result, poly1->coeff + poly2->coeff, poly1->power);
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coeff, poly1->power);
+        poly1 = poly1->next;
+    }
+
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coeff, poly2->power);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+void printPolynomial(struct Node* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coeff);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Node* poly1 = NULL;
+    struct Node* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coeff, power;
+        scanf(""%d %d"", &coeff, &power);
+        if (i < n) {
+            insertTerm(&poly1, coeff, power);
+        } else {
+            insertTerm(&poly2, coeff, power);
+        }
+    }
+
+    struct Node* result = addPolynomials(poly1, poly2);
+    printPolynomial(result);
+
+    return 0;
+}
+"
+20074291,shashwat_madugu1,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent a term in the polynomial
+struct Term {
+    int coefficient;
+    int exponent;
+    struct Term* next;
+};
+
+// Function to insert a new term into the polynomial
+void insertTerm(struct Term** poly, int coeff, int exp) {
+    struct Term* newTerm = (struct Term*)malloc(sizeof(struct Term));
+    newTerm->coefficient = coeff;
+    newTerm->exponent = exp;
+    newTerm->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } else {
+        struct Term* temp = *poly;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newTerm;
+    }
+}
+
+// Function to add two polynomials
+struct Term* addPolynomials(struct Term* poly1, struct Term* poly2) {
+    struct Term* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            insertTerm(&result, poly1->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+        } else if (poly1->exponent < poly2->exponent) {
+            insertTerm(&result, poly2->coefficient, poly2->exponent);
+            poly2 = poly2->next;
+        } else {
+            insertTerm(&result, poly1->coefficient + poly2->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+    // Add any remaining terms from poly1 or poly2
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coefficient, poly1->exponent);
+        poly1 = poly1->next;
+    }
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coefficient, poly2->exponent);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+// Function to print the polynomial
+void printPolynomial(struct Term* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Term* poly1 = NULL;
+    struct Term* poly2 = NULL;
+
+    for (int i = 0; i < n + m; ++i) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insertTerm(&poly1, coeff, exp);
+        } else {
+            insertTerm(&poly2, coeff, exp);
+        }
+    }
+
+    struct Term* result = addPolynomials(poly1, poly2);
+
+    printPolynomial(result);
+
+    return 0;
+}"
+22678626,PES1UG22C525,Polynomial Addition,15,undefined
+22775184,PES1UG22CS528,Polynomial Addition,15,undefined
+22812485,PES1UG22CS529,Polynomial Addition,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+/*int main() {
+    #include <stdio.h>
+#include <stdlib.h>*/
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent a term in the polynomial
+struct Node {
+    int coeff;
+    int power;
+    struct Node* next;
+};
+
+// Function to insert a term into the polynomial linked list
+void insertTerm(struct Node** poly, int coeff, int power) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->coeff = coeff;
+    newNode->power = power;
+    newNode->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newNode;
+    } else {
+        struct Node* current = *poly;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+// Function to add two polynomials
+struct Node* addPolynomials(struct Node* poly1, struct Node* poly2) {
+    struct Node* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->power > poly2->power) {
+            insertTerm(&result, poly1->coeff, poly1->power);
+            poly1 = poly1->next;
+        } else if (poly1->power < poly2->power) {
+            insertTerm(&result, poly2->coeff, poly2->power);
+            poly2 = poly2->next;
+        } else {
+            insertTerm(&result, poly1->coeff + poly2->coeff, poly1->power);
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coeff, poly1->power);
+        poly1 = poly1->next;
+    }
+
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coeff, poly2->power);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+// Function to print the polynomial coefficients
+void printPolynomial(struct Node* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coeff);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Node* poly1 = NULL;
+    struct Node* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coeff, power;
+        scanf(""%d %d"", &coeff, &power);
+        if (i < n) {
+            insertTerm(&poly1, coeff, power);
+        } else {
+            insertTerm(&poly2, coeff, power);
+        }
+    }
+
+    struct Node* result = addPolynomials(poly1, poly2);
+    printPolynomial(result);
+
+    return 0;
+}
+
+           "
+22821387,PES1UG22CS494,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct term {
+    int coefficient;
+    int exponent;
+    struct term* next;
+}term;
+
+void addterm(term** p, int a, int b) {
+    term* new = (term*)malloc(sizeof(struct term));
+    new->coefficient = a;
+    new->exponent = b;
+    new->next = NULL;
+    
+    if (*p == NULL) {
+        *p = new;
+    } else {
+        term* cur = *p;
+        while (cur->next != NULL) {
+            cur = cur->next;
+        }
+        cur->next = new;
+    }
+}
+
+term* add(term* a1,term* a2) {
+    term* result = NULL;
+    term* c1 = a1;
+    term* c2 = a2;
+    
+    while (c1 != NULL && c2 != NULL) {
+        if (c1->exponent > c2->exponent) {
+            addterm(&result, c1->coefficient, c1->exponent);
+            c1 = c1->next;
+        } else if (c1->exponent < c2->exponent) {
+            addterm(&result, c2->coefficient, c2->exponent);
+            c2 = c2->next;
+        } else {
+            addterm(&result, c1->coefficient + c2->coefficient, c1->exponent);
+            c1 = c1->next;
+            c2 = c2->next;
+        }
+    }
+    
+    while (c1 != NULL) {
+        addterm(&result, c1->coefficient, c1->exponent);
+        c1 = c1->next;
+    }
+    
+    while (c2 != NULL) {
+        addterm(&result, c2->coefficient, c2->exponent);
+        c2 = c2->next;
+    }
+    
+    return result;
+}
+
+// Function to print the polynomial
+void display(term* polynomial) {
+    term* a = polynomial;
+    while (a != NULL) {
+        printf(""%d "", a->coefficient);
+        a = a->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    term* poly1 = NULL;
+    term* poly2 = NULL;
+    
+    int coef, exp;
+    for (int i = 0; i < n + m; i++) {
+        scanf(""%d %d"", &coef, &exp);
+        if (i < n) {
+            addterm(&poly1, coef, exp);
+        } else {
+            addterm(&poly2, coef, exp);
+        }
+    }
+    
+    term* result = add(poly1, poly2);
+    display(result);
+    
+    return 0;
+}"
+22821473,PES1UG22CS508,Polynomial Addition,15,undefined
+22822051,PES1UG22CS499,Polynomial Addition,15,undefined
+22823309,PES1UG22CS496,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+struct polynomial {
+    int coeff;
+    int exp;
+    struct polynomial* link;
+};
+void insert(struct polynomial** poly, int coeff, int exp) {
+    struct polynomial* newpolynomial = (struct polynomial*)malloc(sizeof(struct polynomial));
+    newpolynomial->coeff = coeff;
+    newpolynomial->exp = exp;
+    newpolynomial->link = NULL;
+
+    if (*poly == NULL) {
+        *poly = newpolynomial;
+    } else {
+        struct polynomial* temp = *poly;
+        while (temp->link != NULL) {
+            temp = temp->link;
+        }
+        temp->link = newpolynomial;
+    }
+}
+struct polynomial* addPolynomials(struct polynomial* p1, struct polynomial* poly2) {
+    struct polynomial* result = NULL;
+
+    while (p1 != NULL && poly2 != NULL) {
+        if (p1->exp > poly2->exp) {
+            insert(&result, p1->coeff, p1->exp);
+            p1 = p1->link;
+        } else if (p1->exp < poly2->exp) {
+            insert(&result, poly2->coeff, poly2->exp);
+            poly2 = poly2->link;
+        } else {
+            insert(&result, p1->coeff + poly2->coeff, p1->exp);
+            p1 = p1->link;
+            poly2 = poly2->link;
+        }
+    }
+    while (p1 != NULL) {
+        insert(&result, p1->coeff, p1->exp);
+        p1 = p1->link;
+    }
+    while (poly2 != NULL) {
+        insert(&result, poly2->coeff, poly2->exp);
+        poly2 = poly2->link;
+    }
+
+    return result;
+}
+void printPolynomial(struct polynomial* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coeff);
+        poly = poly->link;
+    }
+    printf(""\n"");
+}
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct polynomial* p1 = NULL;
+    struct polynomial* poly2 = NULL;
+
+    for (int i = 0; i < n + m; ++i) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insert(&p1, coeff, exp);
+        } else {
+            insert(&poly2, coeff, exp);
+        }
+    }
+
+    struct polynomial* result = addPolynomials(p1, poly2);
+
+    printPolynomial(result);
+
+    return 0;
+}"
+22827220,PES1UG22CS502,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int coefficient;
+    int exponent;
+    struct Node* next;
+};
+
+struct Node* createNode(int coeff, int exp) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->coefficient = coeff;
+    newNode->exponent = exp;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void insertTerm(struct Node** poly, int coeff, int exp) {
+    struct Node* newNode = createNode(coeff, exp);
+    
+    if (*poly == NULL || exp > (*poly)->exponent) {
+        newNode->next = *poly;
+        *poly = newNode;
+    } else {
+        struct Node* current = *poly;
+        while (current->next != NULL && current->next->exponent >= exp) {
+            current = current->next;
+        }
+        newNode->next = current->next;
+        current->next = newNode;
+    }
+}
+
+struct Node* addPolynomials(struct Node* poly1, struct Node* poly2) {
+    struct Node* result = NULL;
+    
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            insertTerm(&result, poly1->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+        } else if (poly1->exponent < poly2->exponent) {
+            insertTerm(&result, poly2->coefficient, poly2->exponent);
+            poly2 = poly2->next;
+        } else {
+            int coeffSum = poly1->coefficient + poly2->coefficient;
+            if (coeffSum != 0) {
+                insertTerm(&result, coeffSum, poly1->exponent);
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+    
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coefficient, poly1->exponent);
+        poly1 = poly1->next;
+    }
+    
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coefficient, poly2->exponent);
+        poly2 = poly2->next;
+    }
+    
+    return result;
+}
+
+void printPolynomial(struct Node* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    struct Node* poly1 = NULL;
+    struct Node* poly2 = NULL;
+    
+    for (int i = 0; i < n + m; i++) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insertTerm(&poly1, coeff, exp);
+        } else {
+            insertTerm(&poly2, coeff, exp);
+        }
+    }
+    
+    struct Node* result = addPolynomials(poly1, poly2);
+    printPolynomial(result);
+    
+    return 0;
+}
+"
+22827387,PES1UG22CS505,Polynomial Addition,15,undefined
+22828699,PES1UG22CS514,Polynomial Addition,15,undefined
+22829090,PES1UG22CS500,Polynomial Addition,15,undefined
+22829424,PES1UG22CS540,Polynomial Addition,15,undefined
+22829496,PES1UG22CS519,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int coeff;
+    int power;
+    struct node* next;
+};
+
+void insertnode(struct node** head, int coeff, int power) {
+    struct node* newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->coeff = coeff;
+    newnode->power = power;
+    newnode->next = NULL;
+    
+    if (*head == NULL) {
+        *head = newnode;
+    } else {
+        struct node* current = *head;
+        while (current->next!= NULL) {
+            current = current->next;
+        }
+        current->next = newnode;
+    }
+}
+
+struct node* add_polynomials(struct node* p1, struct node* p2) {
+    struct node* result = NULL;
+    struct node* current1 = p1;
+    struct node* current2 = p2;
+    
+    while (current1 != NULL && current2 != NULL) {
+        if (current1->power > current2->power) {
+            insertnode(&result, current1->coeff, current1->power);
+            current1 = current1->next;
+        } else if (current1->power < current2->power) {
+            insertnode(&result, current2->coeff, current2->power);
+            current2 = current2->next;
+        } else {
+            insertnode(&result, current1->coeff + current2->coeff, current1->power);
+            current1 = current1->next;
+            current2 = current2->next;
+        }
+    }
+    
+    while (current1 != NULL) {
+        insertnode(&result, current1->coeff, current1->power);
+        current1 = current1->next;
+    }
+    
+    while (current2 != NULL) {
+        insertnode(&result, current2->coeff, current2->power);
+        current2 = current2->next;
+    }
+    
+    return result;
+}
+
+
+void print_polynomial(struct node* poly) {
+    struct node* current = poly;
+    while (current != NULL) {
+        printf(""%d "", current->coeff);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    struct node* poly1 = NULL;
+    struct node* poly2 = NULL;
+    
+    int coef, power;
+    for (int i = 0; i < n + m; i++) {
+        scanf(""%d %d"", &coef, &power);
+        if (i < n) {
+            insertnode(&poly1, coef, power);
+        } else {
+            insertnode(&poly2, coef, power);
+        }
+    }
+    
+    struct node* result = add_polynomials(poly1, poly2);
+    print_polynomial(result);
+    
+    return 0;
+}
+"
+22829537,PES1UG22CS518,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+struct Term {
+    int coeff;
+    int exp;
+    struct Term* link;
+};
+void insert(struct Term** poly, int coeff, int exp) {
+    struct Term* newTerm = (struct Term*)malloc(sizeof(struct Term));
+    newTerm->coeff = coeff;
+    newTerm->exp = exp;
+    newTerm->link = NULL;
+
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } else {
+        struct Term* temp = *poly;
+        while (temp->link != NULL) {
+            temp = temp->link;
+        }
+        temp->link = newTerm;
+    }
+}
+struct Term* addPolynomials(struct Term* p1, struct Term* poly2) {
+    struct Term* result = NULL;
+
+    while (p1 != NULL && poly2 != NULL) {
+        if (p1->exp > poly2->exp) {
+            insert(&result, p1->coeff, p1->exp);
+            p1 = p1->link;
+        } else if (p1->exp < poly2->exp) {
+            insert(&result, poly2->coeff, poly2->exp);
+            poly2 = poly2->link;
+        } else {
+            insert(&result, p1->coeff + poly2->coeff, p1->exp);
+            p1 = p1->link;
+            poly2 = poly2->link;
+        }
+    }
+    while (p1 != NULL) {
+        insert(&result, p1->coeff, p1->exp);
+        p1 = p1->link;
+    }
+    while (poly2 != NULL) {
+        insert(&result, poly2->coeff, poly2->exp);
+        poly2 = poly2->link;
+    }
+
+    return result;
+}
+void printPolynomial(struct Term* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coeff);
+        poly = poly->link;
+    }
+    printf(""\n"");
+}
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Term* p1 = NULL;
+    struct Term* poly2 = NULL;
+
+    for (int i = 0; i < n + m; ++i) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insert(&p1, coeff, exp);
+        } else {
+            insert(&poly2, coeff, exp);
+        }
+    }
+
+    struct Term* result = addPolynomials(p1, poly2);
+
+    printPolynomial(result);
+
+    return 0;
+}"
+22829574,PES1UG22CS511,Polynomial Addition,12,undefined
+22829868,PES1UG22CS533,Polynomial Addition,15,undefined
+22830162,PES1UG22CS526,Polynomial Addition,15,undefined
+22830169,PES1UG22CS535_SP,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct Term {
+    int coefficient;
+    int exponent;
+    struct Term* next;
+};
+
+typedef struct Term Polynomial;
+
+
+void insertTerm(Polynomial** poly, int coefficient, int exponent) {
+    Polynomial* newTerm = (Polynomial*)malloc(sizeof(Polynomial));
+    newTerm->coefficient = coefficient;
+    newTerm->exponent = exponent;
+    newTerm->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } else {
+        Polynomial* current = *poly;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newTerm;
+    }
+}
+
+
+Polynomial* addPolynomials(Polynomial* poly1, Polynomial* poly2) {
+    Polynomial* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            insertTerm(&result, poly1->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+        } else if (poly1->exponent < poly2->exponent) {
+            insertTerm(&result, poly2->coefficient, poly2->exponent);
+            poly2 = poly2->next;
+        } else {
+            int sumCoeff = poly1->coefficient + poly2->coefficient;
+            if (sumCoeff != 0) {
+                insertTerm(&result, sumCoeff, poly1->exponent);
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+   
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coefficient, poly1->exponent);
+        poly1 = poly1->next;
+    }
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coefficient, poly2->exponent);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+
+void displayCoefficients(Polynomial* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    Polynomial* poly1 = NULL;
+    Polynomial* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coefficient, exponent;
+        scanf(""%d %d"", &coefficient, &exponent);
+        if (i < n) {
+            insertTerm(&poly1, coefficient, exponent);
+        } else {
+            insertTerm(&poly2, coefficient, exponent);
+        }
+    }
+
+    Polynomial* result = addPolynomials(poly1, poly2);
+
+    displayCoefficients(result);
+
+    return 0;
+}"
+22830458,PES1UG22CS512,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct term {
+    int coef;
+    int exp;
+    struct term* next;
+};
+
+struct term* add_Polynomials(struct term* p1, struct term* p2) {
+    struct term* result = NULL;
+    struct term* tail = NULL;
+    
+    while (p1 != NULL || p2 != NULL) {
+        struct term* newterm = (struct term*)malloc(sizeof(struct term));
+        newterm->next = NULL;
+        
+        if (p1 == NULL || (p2 != NULL && p1->exp < p2->exp)) {
+            newterm->coef = p2->coef;
+            newterm->exp = p2->exp;
+            p2 = p2->next;
+        } else if (p2 == NULL || p1->exp > p2->exp) {
+            newterm->coef = p1->coef;
+            newterm->exp = p1->exp;
+            p1 = p1->next;
+        } else {
+            newterm->coef = p1->coef + p2->coef;
+            newterm->exp = p1->exp;
+            p1 = p1->next;
+            p2 = p2->next;
+        }
+        
+        if (result == NULL) {
+            result = newterm;
+            tail = newterm;
+        } else {
+            tail->next = newterm;
+            tail = newterm;
+        }
+    }
+    
+    return result;
+}
+
+void print_Polynomial(struct term* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coef);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    struct term* poly1 = NULL;
+    struct term* poly2 = NULL;
+    
+    for (int i = 0; i < n + m; i++) {
+        int coef, exp;
+        scanf(""%d %d"", &coef, &exp);
+        struct term* newterm = (struct term*)malloc(sizeof(struct term));
+        newterm->coef = coef;
+        newterm->exp = exp;
+        newterm->next = NULL;
+        
+        if (i < n) {
+            if (poly1 == NULL) {
+                poly1 = newterm;
+            } else {
+                struct term* current = poly1;
+                while (current->next != NULL) {
+                    current = current->next;
+                }
+                current->next = newterm;
+            }
+        } else {
+            if (poly2 == NULL) {
+                poly2 = newterm;
+            } else {
+                struct term* current = poly2;
+                while (current->next != NULL) {
+                    current = current->next;
+                }
+                current->next = newterm;
+            }
+        }
+    }
+    
+    struct term* result = add_Polynomials(poly1, poly2);
+    print_Polynomial(result);
+    
+    return 0;
+}"
+22830644,PES1UG22CS530,Polynomial Addition,15,undefined
+22830861,PES1UG22CS501,Polynomial Addition,15,undefined
+22830870,PES1UG22CS513,Polynomial Addition,15,undefined
+22831224,PES1UG22CS531,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node {
+    int coeff;
+    int pow;
+    struct node* next;
+};
+
+typedef struct node Polynomial;
+
+
+void insertnode(Polynomial** poly, int coeff, int pow) {
+    Polynomial* newnode = (Polynomial*)malloc(sizeof(Polynomial));
+    newnode->coeff = coeff;
+    newnode->pow = pow;
+    newnode->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newnode;
+    } else {
+        Polynomial* current = *poly;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newnode;
+    }
+}
+
+
+Polynomial* addPolynomials(Polynomial* poly1, Polynomial* poly2) {
+    Polynomial* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->pow > poly2->pow) {
+            insertnode(&result, poly1->coeff, poly1->pow);
+            poly1 = poly1->next;
+        } else if (poly1->pow < poly2->pow) {
+            insertnode(&result, poly2->coeff, poly2->pow);
+            poly2 = poly2->next;
+        } else {
+            int sumCoeff = poly1->coeff + poly2->coeff;
+            if (sumCoeff != 0) {
+                insertnode(&result, sumCoeff, poly1->pow);
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+   
+    while (poly1 != NULL) {
+        insertnode(&result, poly1->coeff, poly1->pow);
+        poly1 = poly1->next;
+    }
+    while (poly2 != NULL) {
+        insertnode(&result, poly2->coeff, poly2->pow);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+
+void displaycoeffs(Polynomial* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coeff);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    Polynomial* poly1 = NULL;
+    Polynomial* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coeff, pow;
+        scanf(""%d %d"", &coeff, &pow);
+        if (i < n) {
+            insertnode(&poly1, coeff, pow);
+        } else {
+            insertnode(&poly2, coeff, pow);
+        }
+    }
+
+    Polynomial* result = addPolynomials(poly1, poly2);
+
+    displaycoeffs(result);
+
+    return 0;
+}"
+22831245,PES1UG22CS547,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+
+struct Node {
+    int coeff;
+    int exp;
+    struct Node* next;
+};
+
+void insertno(struct Node** poly, int coeff1, int exp1) {
+    struct Node* newTerm = (struct Node*)malloc(sizeof(struct Node));
+    newTerm->coeff = coeff1;
+    newTerm->exp = exp1;
+    newTerm->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } else {
+        struct Node* temp = *poly;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newTerm;
+    }
+}
+
+struct Node* addno(struct Node* poly1, struct Node* poly2) {
+    struct Node* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exp > poly2->exp) {
+            insertno(&result, poly1->coeff, poly1->exp);
+            poly1 = poly1->next;
+        } else if (poly1->exp < poly2->exp) {
+            insertno(&result, poly2->coeff, poly2->exp);
+            poly2 = poly2->next;
+        } else {
+            int sumCoeff = poly1->coeff + poly2->coeff;
+            if (sumCoeff != 0) {
+                insertno(&result, sumCoeff, poly1->exp);
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+    while (poly1 != NULL) {
+        insertno(&result, poly1->coeff, poly1->exp);
+        poly1 = poly1->next;
+    }
+    while (poly2 != NULL) {
+        insertno(&result, poly2->coeff, poly2->exp);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+void printno(struct Node* poly) {
+    int firstTerm = 1;
+
+    while (poly != NULL) {
+        if (firstTerm) {
+            printf(""%d"", poly->coeff);
+            firstTerm = 0;
+        } else {
+            printf("" %d"", poly->coeff);
+        }
+
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Node* poly1 = NULL;
+    struct Node* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insertno(&poly1, coeff, exp);
+        } else {
+            insertno(&poly2, coeff, exp);
+        }
+    }
+
+    struct Node* result = addno(poly1, poly2);
+    printno(result);
+
+    return 0;
+}
+"
+22831340,PES1UG22CS504,Polynomial Addition,15,undefined
+22831458,PES1UG22CS524,Polynomial Addition,15,undefined
+22831833,PES1UG22CS548,Polynomial Addition,15,undefined
+22831898,PES1UG22CS543,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int c;
+    int p;
+    struct node* link;
+};
+
+
+void AddNode(struct node** poly, int coef, int pow) {
+    struct node* newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->c = coef;
+    newnode->p = pow;
+    newnode->link = NULL;
+
+    if (*poly == NULL) {
+        *poly = newnode;
+    } else {
+        struct node* temp = *poly;
+        while (temp->link != NULL) {
+            temp = temp->link;
+        }
+        temp->link = newnode;
+    }
+}
+
+
+struct node* AddFn(struct node* head1, struct node* head2) {
+    struct node* head3 = NULL;
+    while (head1 != NULL || head2 != NULL) {
+        int coef = 0, pow = 0;
+
+        if (head1 != NULL && head2 != NULL) {
+            if (head1->p > head2->p) {
+                coef = head1->c;
+                pow = head1->p;
+                head1 = head1->link;
+            } else if (head1->p < head2->p) {
+                coef = head2->c;
+                pow = head2->p;
+                head2 = head2->link;
+            } else {
+                coef = head1->c + head2->c;
+                pow = head1->p;
+                head1 = head1->link;
+                head2 = head2->link;
+            }
+        } else if (head1 != NULL) {
+            coef = head1->c;
+            pow = head1->p;
+            head1 = head1->link;
+        } else if (head2 != NULL) {
+            coef = head2->c;
+            pow = head2->p;
+            head2 = head2->link;
+        }
+
+        AddNode(&head3, coef, pow);
+    }
+    return head3;
+}
+
+void displayfn(struct node* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->c);
+        poly = poly->link;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct node* head1 = NULL;
+    struct node* head2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coef, pow;
+        scanf(""%d %d"", &coef, &pow);
+        if (i < n) {
+            AddNode(&head1, coef, pow);
+        } else {
+            AddNode(&head2, coef, pow);
+        }
+    }
+
+    struct node* head3 = AddFn(head1, head2);
+    displayfn(head3);
+
+    return 0;
+}"
+22832209,PES1UG22CS546,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int coefficient;
+    int exponent;
+    struct Node* next;
+};
+
+struct Node* createNode(int coeff, int exp) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->coefficient = coeff;
+    newNode->exponent = exp;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void insertTerm(struct Node** poly, int coeff, int exp) {
+    struct Node* newNode = createNode(coeff, exp);
+    
+    if (*poly == NULL || exp > (*poly)->exponent) {
+        newNode->next = *poly;
+        *poly = newNode;
+    } else {
+        struct Node* current = *poly;
+        while (current->next != NULL && current->next->exponent >= exp) {
+            current = current->next;
+        }
+        newNode->next = current->next;
+        current->next = newNode;
+    }
+}
+
+struct Node* addPolynomials(struct Node* poly1, struct Node* poly2) {
+    struct Node* result = NULL;
+    
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            insertTerm(&result, poly1->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+        } else if (poly1->exponent < poly2->exponent) {
+            insertTerm(&result, poly2->coefficient, poly2->exponent);
+            poly2 = poly2->next;
+        } else {
+            int coeffSum = poly1->coefficient + poly2->coefficient;
+            if (coeffSum != 0) {
+                insertTerm(&result, coeffSum, poly1->exponent);
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+    
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coefficient, poly1->exponent);
+        poly1 = poly1->next;
+    }
+    
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coefficient, poly2->exponent);
+        poly2 = poly2->next;
+    }
+    
+    return result;
+}
+
+void printPolynomial(struct Node* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    struct Node* poly1 = NULL;
+    struct Node* poly2 = NULL;
+    
+    for (int i = 0; i < n + m; i++) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insertTerm(&poly1, coeff, exp);
+        } else {
+            insertTerm(&poly2, coeff, exp);
+        }
+    }
+    
+    struct Node* result = addPolynomials(poly1, poly2);
+    printPolynomial(result);
+    
+    return 0;
+}"
+22832446,PES1UG22CS507,Polynomial Addition,15,undefined
+22832460,PES1UG22CS517,Polynomial Addition,15,undefined
+22832621,PES1UG22CS527,Polynomial Addition,15,undefined
+22832696,PES1UG22CS495,Polynomial Addition,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct node{
+    int coeff;
+    int power;
+    struct node* next;
+};
+
+typedef struct node node;
+
+node* createnode();
+node* createpolynomial(int);
+void add_term(node*,int coeff, int power);
+void read(node*);
+node* add(node*,node*,int,int);
+void display(node*);
+int main() {
+    node* p1;node*p2;int terms1,terms2;       
+    scanf(""%d %d"",&terms1,&terms2);
+    p1 = createpolynomial(terms1);
+    p2 = createpolynomial(terms2);
+    read(p1);
+    //display(p1);printf(""\n"");
+    read(p2);
+    //display(p2);printf(""\n"");
+    node* output=NULL;
+    output = add(p1,p2,terms1,terms2);
+    node* output_temp=output;
+    if(output_temp==NULL)printf(""didn't work bro"");
+    display(output);
+    return 0;
+}
+
+node* createnode(){
+    node* newnode = malloc(sizeof(node));
+    newnode->coeff = 0;
+    newnode->power = 0;
+    newnode->next = NULL;
+    return newnode;
+}
+
+node* createpolynomial(int terms){
+    node* head=NULL;node*temp;node* newnode;
+    while(terms){
+        newnode = createnode();
+        if(head==NULL)
+            head = newnode;
+        else{
+            temp=head;
+            while(temp->next!=NULL){
+                temp=temp->next;
+            }
+            temp->next = newnode;
+        }
+        terms--;
+    }
+    return head;
+}
+
+void add_term(node* pointer,int coeff, int power){
+    pointer->coeff = coeff;
+    pointer->power = power;
+    return;    
+}
+
+void read(node* head){
+    int coeff, power;
+    while(head!=NULL){
+        scanf(""%d %d"",&coeff,&power);
+        add_term(head,coeff,power);
+        head=head->next;
+    }
+}
+
+node* add(node* p1,node* p2,int n,int m){
+    int nodes=n+m;node* head=NULL;node*newnode;node* temp = NULL;
+    while(nodes){
+        newnode = createnode();
+            if(p1==NULL){
+                newnode->coeff = p2->coeff;
+                newnode->power = p2->power;
+                p2=p2->next;
+                nodes--;
+            }
+            else if(p2==NULL){
+                newnode->coeff = p1->coeff;
+                newnode->power = p1->power;
+                nodes--;
+                p1=p1->next;
+            }
+        else if((p1->power) > (p2->power)){
+            newnode->coeff = p1->coeff;
+            newnode->power = p1->power;
+            p1=p1->next;
+            nodes--;
+        }
+        else if((p1->power) < (p2->power)){
+            newnode->coeff = p2->coeff;
+            newnode->power = p2->power;
+            p2 = p2->next;
+            nodes--;
+        }
+        else if((p1->power) == (p2->power)){
+            newnode->coeff = (p1->coeff) + (p2->coeff);
+            newnode->power = p2->power;
+            p1=p1->next;p2=p2->next;
+            nodes=nodes-2;
+        }
+        if(head==NULL){
+            head = newnode;
+            temp = head;
+        }
+        else{
+            temp->next = newnode;
+            temp = temp->next;
+        }
+    }
+    return head;
+}
+
+void display(node* output_temp){
+    while(output_temp!=NULL){
+        printf(""%d "",output_temp->coeff);
+        output_temp = output_temp->next;
+    }
+}"
+22832729,PES1UG22CS510,Polynomial Addition,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct node
+{
+    int co;
+    int power;
+    struct node* next;
+};
+
+struct node* create_add(int c, int p);
+struct node* add(int n);
+void display(struct node*);
+void final(struct node* head,int c[]);
+
+int main() {
+    int n,m;
+    scanf(""%d %d"",&n,&m);
+    struct node* head = add(m+n);
+    int c[100] = {0};
+    final(head,c);
+    for(int i=99;i>=0;i--)
+    {
+        if(c[i]!=0)
+            printf(""%d "",c[i]);
+    }
+    return 0;
+}
+
+struct node* create_add(int c, int p)
+{
+    struct node* temp = malloc(sizeof(struct node));
+    temp->co = c;
+    temp->power = p;
+    temp->next = NULL;
+    return temp;    
+}
+
+struct node* add(int n)
+{
+    int c,p;
+    struct node* head = NULL;
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d %d"",&c,&p);   
+        struct node* newnode = create_add(c,p);
+        struct node* temp;
+        if(head == NULL)
+        {
+            head = newnode;
+            temp = newnode;            
+        }
+        else
+        {
+            temp->next = newnode;
+            temp = temp->next;
+        }
+    }
+    return head;
+}
+
+
+void final(struct node* head,int *c)
+{
+    struct node* temp = head;
+    while(temp!=NULL)
+    {
+        c[temp->power] += temp->co;
+        temp=temp->next;
+    }
+}
+"
+22832762,PES1202202507,Polynomial Addition,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct Term {
+    int coefficient;
+    int exponent;
+    struct Term* next;
+};
+
+typedef struct Term Polynomial;
+
+
+void insertTerm(Polynomial** poly, int coefficient, int exponent) {
+    Polynomial* newTerm = (Polynomial*)malloc(sizeof(Polynomial));
+    newTerm->coefficient = coefficient;
+    newTerm->exponent = exponent;
+    newTerm->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } else {
+        Polynomial* current = *poly;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newTerm;
+    }
+}
+
+
+Polynomial* addPolynomials(Polynomial* poly1, Polynomial* poly2) {
+    Polynomial* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            insertTerm(&result, poly1->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+        } else if (poly1->exponent < poly2->exponent) {
+            insertTerm(&result, poly2->coefficient, poly2->exponent);
+            poly2 = poly2->next;
+        } else {
+            int sumCoeff = poly1->coefficient + poly2->coefficient;
+            if (sumCoeff != 0) {
+                insertTerm(&result, sumCoeff, poly1->exponent);
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+   
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coefficient, poly1->exponent);
+        poly1 = poly1->next;
+    }
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coefficient, poly2->exponent);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+
+void displayCoefficients(Polynomial* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    Polynomial* poly1 = NULL;
+    Polynomial* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coefficient, exponent;
+        scanf(""%d %d"", &coefficient, &exponent);
+        if (i < n) {
+            insertTerm(&poly1, coefficient, exponent);
+        } else {
+            insertTerm(&poly2, coefficient, exponent);
+        }
+    }
+
+    Polynomial* result = addPolynomials(poly1, poly2);
+
+    displayCoefficients(result);
+
+    return 0;
+}
+
+"
+22832777,PES1202201689,Polynomial Addition,15,undefined
+22832778,PES1202201914,Polynomial Addition,15,undefined
+22832820,PES1UG22CS551,Polynomial Addition,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+typedef struct node
+{
+    int value;
+    int power;
+    struct node*link;
+}node;
+void insertTerm(node **poly, int coeff, int exp) {
+    node *newTerm = (node *)malloc(sizeof(node));
+    newTerm->value = coeff;
+    newTerm->power = exp;
+    newTerm->link = NULL;
+    
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } else {
+        node *temp = *poly;
+        while (temp->link != NULL) {
+            temp = temp->link;
+        }
+        temp->link = newTerm;
+    }
+}
+node *add_node(node *poly1,node *poly2) {
+    node *result = NULL;
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->power > poly2->power) {
+            insertTerm(&result, poly1->value, poly1->power);
+            poly1 = poly1->link;
+        } else if (poly1->power < poly2->power) {
+            insertTerm(&result, poly2->value, poly2->power);
+            poly2 = poly2->link;
+        } else {
+            insertTerm(&result, poly1->value + poly2->value, poly1->power);
+            poly1 = poly1->link;
+            poly2 = poly2->link;
+        }
+    }
+    
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->value, poly1->power);
+        poly1 = poly1->link;
+    }
+    
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->value, poly2->power);
+        poly2 = poly2->link;
+    }
+    
+    return result;
+}
+void display(node *poly) {
+    node *temp = poly;
+    while (temp != NULL) {
+        printf(""%d "", temp->value);
+        
+        temp = temp->link;
+    }
+    printf(""\n"");
+}
+int main() {
+    int n,m;
+    scanf(""%d%d"",&n,&m);
+    node *poly1 = NULL;
+    node *poly2 = NULL;
+    
+    for (int i = 0; i < n + m; ++i) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insertTerm(&poly1, coeff, exp);
+        } else {
+            insertTerm(&poly2, coeff, exp);
+        }
+    }
+    
+    node *result=add_node(poly1,poly2);
+    display(result);
+    
+       
+    return 0;
+}
+"
+22833246,PES1UG22CS538,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct Term {
+    int coeff;
+    int expo;
+    struct Term* next;
+};
+
+typedef struct Term Polynomial;
+
+
+void insertTerm(Polynomial** poly, int coeff, int expo) {
+    Polynomial* newTerm = (Polynomial*)malloc(sizeof(Polynomial));
+    newTerm->coeff = coeff;
+    newTerm->expo = expo;
+    newTerm->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } else {
+        Polynomial* current = *poly;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newTerm;
+    }
+}
+
+
+Polynomial* addPolynomials(Polynomial* poly1, Polynomial* poly2) {
+    Polynomial* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->expo > poly2->expo) {
+            insertTerm(&result, poly1->coeff, poly1->expo);
+            poly1 = poly1->next;
+        } else if (poly1->expo < poly2->expo) {
+            insertTerm(&result, poly2->coeff, poly2->expo);
+            poly2 = poly2->next;
+        } else {
+            int sumCoeff = poly1->coeff + poly2->coeff;
+            if (sumCoeff != 0) {
+                insertTerm(&result, sumCoeff, poly1->expo);
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+   
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coeff, poly1->expo);
+        poly1 = poly1->next;
+    }
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coeff, poly2->expo);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+
+void displaycoeffs(Polynomial* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coeff);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    Polynomial* poly1 = NULL;
+    Polynomial* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coeff, expo;
+        scanf(""%d %d"", &coeff, &expo);
+        if (i < n) {
+            insertTerm(&poly1, coeff, expo);
+        } else {
+            insertTerm(&poly2, coeff, expo);
+        }
+    }
+
+    Polynomial* result = addPolynomials(poly1, poly2);
+
+    displaycoeffs(result);
+
+    return 0;
+}"
+22835294,PES1UG22CS520,Polynomial Addition,15,undefined
+22835628,PES1UG22CS516,Polynomial Addition,15,undefined
+22835656,PES1UG22CS498,Polynomial Addition,15,undefined
+22836335,PES1202201126,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <string.h>
+
+struct Node {
+    int coeff;
+    int exp;
+    struct Node* next;
+};
+
+void appendNode(struct Node** head, int coeff1, int exp1) {
+    struct Node* newTerm = (struct Node*)malloc(sizeof(struct Node));
+    newTerm->coeff = coeff1;
+    newTerm->exp = exp1;
+    newTerm->next = NULL;
+
+    if (*head == NULL) {
+        *head = newTerm;
+    } else {
+        struct Node* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newTerm;
+    }
+}
+
+struct Node* addno(struct Node* head1, struct Node* head2) {
+    struct Node* result = NULL;
+
+    while (head1 != NULL && head2 != NULL) {
+        if (head1->exp > head2->exp) {
+            appendNode(&result, head1->coeff, head1->exp);
+            head1 = head1->next;
+        } else if (head1->exp < head2->exp) {
+            appendNode(&result, head2->coeff, head2->exp);
+            head2 = head2->next;
+        } else {
+            int sumCoeff = head1->coeff + head2->coeff;
+            if (sumCoeff != 0) {
+                appendNode(&result, sumCoeff, head1->exp);
+            }
+            head1 = head1->next;
+            head2 = head2->next;
+        }
+    }
+
+    while (head1 != NULL) {
+        appendNode(&result, head1->coeff, head1->exp);
+        head1 = head1->next;
+    }
+    while (head2 != NULL) {
+        appendNode(&result, head2->coeff, head2->exp);
+        head2 = head2->next;
+    }
+
+    return result;
+}
+
+void printno(struct Node* head) {
+    int firstTerm = 1;
+
+    while (head != NULL) {
+        if (firstTerm) {
+            printf(""%d"", head->coeff);
+            firstTerm = 0;
+        } else {
+            printf("" %d"", head->coeff);
+        }
+
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Node* head1 = NULL;
+    struct Node* head2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            appendNode(&head1, coeff, exp);
+        } else {
+            appendNode(&head2, coeff, exp);
+        }
+    }
+
+    struct Node* result = addno(head1, head2);
+    printno(result);
+
+    return 0;
+}"
+22836374,PES1UG22CS549,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Term {
+    int coefficient;
+    
+    int  pow;
+    
+    struct Term* next;
+};
+
+void insertTerm(struct Term** head, int coef, int pow) {
+    struct Term* newTerm = (struct Term*)malloc(sizeof(struct Term));
+    newTerm->coefficient = coef;
+    newTerm->pow = pow;
+    newTerm->next = NULL;
+
+    if (*head == NULL) {
+        *head = newTerm;
+    } else {
+        struct Term* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newTerm;
+    }
+}
+
+struct Term* addpolynomials(struct Term* poly1, struct Term* poly2) {
+    struct Term* result = NULL;
+    
+    struct Term* temp1 = poly1;
+    
+    struct Term* temp2 = poly2;
+
+    while (temp1 != NULL && temp2 != NULL) {
+        if (temp1->pow > temp2->pow) {
+            insertTerm(&result, temp1->coefficient, temp1->pow);
+            temp1 = temp1->next;
+        } else if (temp1->pow < temp2->pow) {
+            insertTerm(&result, temp2->coefficient, temp2->pow);
+            temp2 = temp2->next;
+        } else {
+            int sumCoeff = temp1->coefficient + temp2->coefficient;
+            if (sumCoeff != 0) {
+                insertTerm(&result, sumCoeff, temp1->pow);
+            }
+            temp1 = temp1->next;
+            temp2 = temp2->next;
+        }
+    }
+    while (temp1 != NULL) {
+        insertTerm(&result, temp1->coefficient, temp1->pow);
+        temp1 = temp1->next;
+    }
+    while (temp2 != NULL) {
+        insertTerm(&result, temp2->coefficient, temp2->pow);
+        temp2 = temp2->next;
+    }
+
+    return result;
+}
+
+void printCoefficients(struct Term* poly) {
+    struct Term* temp = poly;
+    while (temp != NULL) {
+        printf(""%d"", temp->coefficient);
+        temp = temp->next;
+        if (temp != NULL) {
+            printf("" "");
+        }
+    }
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Term* poly1 = NULL;
+    
+    struct Term* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coef, pow;
+        scanf(""%d %d"", &coef, &pow);
+        if (i < n) {
+            insertTerm(&poly1, coef, pow);
+        } else {
+            insertTerm(&poly2, coef, pow);
+        }
+    }
+
+    struct Term* result = addpolynomials(poly1, poly2);
+    printCoefficients(result);
+
+    struct Term* temp;
+    while (result != NULL) {
+        temp = result;
+        result = result->next;
+        free(temp);
+    }
+    
+    return 0;
+}
+"
+22836401,PES1UG22CS544,Polynomial Addition,15,undefined
+22836404,PES1UG22CS523,Polynomial Addition,15,undefined
+22836412,PES1UG22CS537,Polynomial Addition,15,undefined
+22836415,PES1UG22CS497,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct NODE {
+    int coeff;
+    int exp;
+    struct NODE* n;
+};
+
+void insertTerm(struct NODE** p, int coeff, int exp) {
+    struct NODE* newTerm = (struct NODE*)malloc(sizeof(struct NODE));
+    newTerm->coeff = coeff;
+    newTerm->exp = exp;
+    newTerm->n = NULL;
+    
+    if (*p == NULL) {
+        *p = newTerm;
+    } else {
+        struct NODE* current = *p;
+        while (current->n != NULL) {
+            current = current->n;
+        }
+        current->n = newTerm;
+    }
+}
+
+struct NODE* addPoly(struct NODE* p1, struct NODE* p2) {
+    struct NODE* result = NULL;
+    struct NODE* current1 = p1;
+    struct NODE* current2 = p2;
+    while (current1 != NULL && current2 != NULL) {
+        if (current1->exp > current2->exp) {
+            insertTerm(&result, current1->coeff, current1->exp);
+            current1 = current1->n;
+        } else if (current1->exp < current2->exp) {
+            insertTerm(&result, current2->coeff, current2->exp);
+            current2 = current2->n;
+        } else {
+            insertTerm(&result, current1->coeff + current2->coeff, current1->exp);
+            current1 = current1->n;
+            current2 = current2->n;
+        }
+    }
+    while (current1 != NULL) {
+        insertTerm(&result, current1->coeff, current1->exp);
+        current1 = current1->n;
+    }
+    while (current2 != NULL) {
+        insertTerm(&result, current2->coeff, current2->exp);
+        current2 = current2->n;
+    }
+    return result;
+}
+
+void print(struct NODE* poly) {
+    struct NODE* current = poly;
+    while (current != NULL) {
+        printf(""%d "", current->coeff);
+        current = current->n;
+    }
+    printf(""\n"");
+}
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    struct NODE* pol1 = NULL;
+    struct NODE* pol2 = NULL;
+    
+    int coeff, expo;
+    for (int i = 0; i < n + m; i++) {
+        scanf(""%d %d"", &coeff, &expo);
+        if (i < n) {
+            insertTerm(&pol1, coeff, expo);
+        } else {
+            insertTerm(&pol2, coeff, expo);
+        }
+    }
+    
+    struct NODE* result = addPoly(pol1, pol2);
+    print(result);
+    
+    return 0;
+}"
+22836420,PES1UG22CS506,Polynomial Addition,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
+int return_max_arr(int a[],int n)
+{   
+    int max = 0;
+    for (int loop = 0; loop < n; loop++)
+    {
+        if (a[loop] > max){ max = a[loop];}
+    }
+    return max;
+}
+
+int return_max(int n, int m)
+{
+    if (n>=m){return n;}
+    else{return m;}
+}
+
+typedef struct nodes{
+    int coefficient;
+    int power;
+    struct nodes* next;
+}NODE;
+
+NODE* createNode(int coefficient, int power)
+{
+    NODE* newNode = (NODE*)malloc(sizeof(NODE));
+    newNode -> coefficient = coefficient;
+    newNode -> power = power;
+    newNode -> next = NULL;
+    return newNode;
+}
+
+void appendNode(NODE* head, int coefficient, int power)
+{
+    while ( (head->next) != NULL) 
+    {
+        head = head->next;
+    }
+    
+    NODE* newNode = createNode(coefficient, power);
+    head -> next = newNode;
+}
+
+void displayList(NODE* head)
+{   
+    printf(""HAHAHA\n"");
+    printf(""%d %d\n"", head -> coefficient, head -> power);
+    while ( (head -> next) != NULL)
+    {
+        head = head -> next;
+        printf(""%d %d\n"", head -> coefficient, head -> power);
+    }
+}
+
+void displayListOut(NODE* head)
+{   
+    printf(""%d "", head -> coefficient);
+    while ( (head -> next) != NULL)
+    {
+        head = head -> next;
+        if ( (head -> coefficient != 0) && (head -> power != 0) )
+        {
+            printf(""%d "", head -> coefficient);
+        }
+        else if( (head -> coefficient != 0) && (head -> power == 0) )
+        {
+            printf(""%d "", head -> coefficient);
+        }
+    }
+}
+
+int sum_of_order_n(NODE* head1, NODE* head2, int order)
+{
+    int sum_of_co = 0;
+    while (true)
+    {
+        if (head1 -> power == order)
+        {
+            sum_of_co += head1 -> coefficient;
+            if ((head1 -> next) != NULL){head1 = head1 -> next;}
+            else{break;}
+        }
+        else
+        {
+            if ((head1 -> next) != NULL){head1 = head1 -> next;}
+            else{break;}
+        }
+    }
+    while(true)
+    {
+        if (head2 -> power == order)
+        {
+            sum_of_co += head2 -> coefficient;
+            if ((head2 -> next) != NULL){head2 = head2 -> next;}
+            else{break;}
+        }
+        else
+        {
+            if ((head2 -> next) != NULL){head2 = head2 -> next;}
+            else{break;}
+        }
+    }
+    return sum_of_co;
+}
+
+int main() {
+    
+    int n,m;
+    scanf(""%d %d"", &n, &m);
+    // int max = return_max(n, m);
+    int max_order_n;
+    int max_order_m;
+    int co_n, pow_n, co_m, pow_m;
+    int max_order;
+    
+    scanf(""%d %d"", &co_n, &pow_n);
+    max_order_n = pow_n;
+    NODE* n_list = createNode(co_n, pow_n);
+    for (int loop = 1; loop < n; loop++)
+    {
+        scanf(""%d %d"", &co_n, &pow_n);
+        appendNode(n_list, co_n, pow_n);
+    }
+    
+    scanf(""%d %d"", &co_m, &pow_m);
+    max_order_m = pow_m;
+    NODE *m_list = createNode(co_m, pow_m);
+    for (int loop = 1; loop < m; loop++)
+    {
+        scanf(""%d %d"", &co_m, &pow_m);
+        appendNode(m_list, co_m, pow_m);
+    }
+
+    max_order = return_max(max_order_n, max_order_m);
+    NODE* out_list = createNode(0, 0);
+    for (int loop=max_order; loop >= 0; loop--)
+    {
+        if (loop == max_order)
+        {
+            out_list -> coefficient = sum_of_order_n(n_list, m_list, max_order);
+            out_list -> power = max_order;
+        }
+        else
+        {
+            appendNode(out_list, sum_of_order_n(n_list, m_list, loop), loop);
+        }
+    }
+    // displayList(n_list);
+    // displayList(m_list);
+    displayListOut(out_list);
+    
+    return 0;
+}
+"
+22836446,PES1UG22CS553,Polynomial Addition,15,undefined
+22836511,PES1UG22CS536,Polynomial Addition,15,undefined
+22837343,PES1UG22CS522,Polynomial Addition,15,undefined
+22837908,PES1UG22CS509,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct TermNode {
+    int coefficient;
+    int exponent;
+    struct TermNode* next;
+};
+
+struct TermNode* createTerm(int coefficient, int exponent) {
+    struct TermNode* newTerm = (struct TermNode*)malloc(sizeof(struct TermNode));
+    newTerm->coefficient = coefficient;
+    newTerm->exponent = exponent;
+    newTerm->next = NULL;
+    return newTerm;
+}
+
+
+struct TermNode* addPolynomials(struct TermNode* poly1, struct TermNode* poly2) {
+    struct TermNode* result = NULL;
+    struct TermNode* tail = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            if (result == NULL) {
+                result = createTerm(poly1->coefficient, poly1->exponent);
+                tail = result;
+            } else {
+                tail->next = createTerm(poly1->coefficient, poly1->exponent);
+                tail = tail->next;
+            }
+            poly1 = poly1->next;
+        } else if (poly1->exponent < poly2->exponent) {
+            if (result == NULL) {
+                result = createTerm(poly2->coefficient, poly2->exponent);
+                tail = result;
+            } else {
+                tail->next = createTerm(poly2->coefficient, poly2->exponent);
+                tail = tail->next;
+            }
+            poly2 = poly2->next;
+        } else {
+            int sum_coeff = poly1->coefficient + poly2->coefficient;
+            if (sum_coeff != 0) {
+                if (result == NULL) {
+                    result = createTerm(sum_coeff, poly1->exponent);
+                    tail = result;
+                } else {
+                    tail->next = createTerm(sum_coeff, poly1->exponent);
+                    tail = tail->next;
+                }
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+            
+        }
+    }
+
+    while (poly1 != NULL) {
+        if (result == NULL) {
+            result = createTerm(poly1->coefficient, poly1->exponent);
+            tail = result;
+        } else {
+            tail->next = createTerm(poly1->coefficient, poly1->exponent);
+            tail = tail->next;
+        }
+        poly1 = poly1->next;
+    }
+
+    while (poly2 != NULL) {
+        if (result == NULL) {
+            result = createTerm(poly2->coefficient, poly2->exponent);
+            tail = result;
+        } else {
+            tail->next = createTerm(poly2->coefficient, poly2->exponent);
+            tail = tail->next;
+        }
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+void printPolynomial(struct TermNode* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct TermNode* poly1 = NULL;
+    struct TermNode* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coefficient, exponent;
+        scanf(""%d %d"", &coefficient, &exponent);
+
+        if (i < n) {
+            if (poly1 == NULL) {
+                poly1 = createTerm(coefficient, exponent);
+            } else {
+                struct TermNode* temp = poly1;
+                while (temp->next != NULL) {
+                    temp = temp->next;
+                }
+                temp->next = createTerm(coefficient, exponent);
+            }
+        } else {
+            if (poly2 == NULL) {
+                poly2 = createTerm(coefficient, exponent);
+            } else {
+                struct TermNode* temp = poly2;
+                while (temp->next != NULL) {
+                    temp = temp->next;
+                }
+                temp->next = createTerm(coefficient, exponent);
+            }
+        }
+    }
+
+    struct TermNode* result = addPolynomials(poly1, poly2);
+
+    printPolynomial(result);
+
+    // Free memory
+    while (result != NULL) {
+        struct TermNode* temp = result;
+        result = result->next;
+        free(temp);
+    }
+
+    return 0;
+}
+"
+22837946,PES1UG22CS550,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int coefficient;
+    int exponent;
+    struct Node* next;
+};
+
+struct Node* createNode(int coeff, int exp) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->coefficient = coeff;
+    newNode->exponent = exp;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void insertTerm(struct Node** poly, int coeff, int exp) {
+    struct Node* newNode = createNode(coeff, exp);
+    
+    if (*poly == NULL || exp > (*poly)->exponent) {
+        newNode->next = *poly;
+        *poly = newNode;
+    } else {
+        struct Node* current = *poly;
+        while (current->next != NULL && current->next->exponent >= exp) {
+            current = current->next;
+        }
+        newNode->next = current->next;
+        current->next = newNode;
+    }
+}
+
+struct Node* addPolynomials(struct Node* poly1, struct Node* poly2) {
+    struct Node* result = NULL;
+    
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            insertTerm(&result, poly1->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+        } else if (poly1->exponent < poly2->exponent) {
+            insertTerm(&result, poly2->coefficient, poly2->exponent);
+            poly2 = poly2->next;
+        } else {
+            int coeffSum = poly1->coefficient + poly2->coefficient;
+            if (coeffSum != 0) {
+                insertTerm(&result, coeffSum, poly1->exponent);
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+    
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coefficient, poly1->exponent);
+        poly1 = poly1->next;
+    }
+    
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coefficient, poly2->exponent);
+        poly2 = poly2->next;
+    }
+    
+    return result;
+}
+
+void printPolynomial(struct Node* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+    
+    struct Node* poly1 = NULL;
+    struct Node* poly2 = NULL;
+    
+    for (int i = 0; i < n + m; i++) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insertTerm(&poly1, coeff, exp);
+        } else {
+            insertTerm(&poly2, coeff, exp);
+        }
+    }
+    
+    struct Node* result = addPolynomials(poly1, poly2);
+    printPolynomial(result);
+    
+    return 0;
+}"
+22837966,PES1UG22CS532,Polynomial Addition,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Term {
+    int coefficient;
+    int exponent;
+    struct Term* next;
+};
+
+typedef struct Term Polynomial;
+
+
+void insertTerm(Polynomial** poly, int coefficient, int exponent) {
+    Polynomial* newTerm = (Polynomial*)malloc(sizeof(Polynomial));
+    newTerm->coefficient = coefficient;
+    newTerm->exponent = exponent;
+    newTerm->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } 
+    else {
+        Polynomial* current = *poly;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newTerm;
+    }
+}
+
+
+Polynomial* addPolynomials(Polynomial* poly1, Polynomial* poly2) {
+    Polynomial* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            insertTerm(&result, poly1->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+        } 
+        else if (poly1->exponent < poly2->exponent) {
+            insertTerm(&result, poly2->coefficient, poly2->exponent);
+            poly2 = poly2->next;
+        } 
+        else {
+            int sumCoeff = poly1->coefficient + poly2->coefficient;
+            if (sumCoeff != 0) {
+                insertTerm(&result, sumCoeff, poly1->exponent);
+            }
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coefficient, poly1->exponent);
+        poly1 = poly1->next;
+    }
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coefficient, poly2->exponent);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+
+void displayPolynomial(Polynomial* poly) {
+    if (poly == NULL) {
+        printf(""0\n"");
+        return;
+    }
+
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+       
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    Polynomial* poly1 = NULL;
+    Polynomial* poly2 = NULL;
+
+    for (int i = 0; i < n + m; i++) {
+        int coefficient, exponent;
+        scanf(""%d %d"", &coefficient, &exponent);
+        if (i < n) {
+            insertTerm(&poly1, coefficient, exponent);
+        } else {
+            insertTerm(&poly2, coefficient, exponent);
+        }
+    }
+
+    Polynomial* result = addPolynomials(poly1, poly2);
+
+    displayPolynomial(result);
+
+    return 0;
+}"
+22838014,PES1UG22CS903,Polynomial Addition,15,undefined
+22838042,shal756ln_shiva1,Polynomial Addition,15,undefined
+22839042,pes1202202173,Polynomial Addition,15,"#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent a term in the polynomial
+struct Term {
+    int coefficient;
+    int exponent;
+    struct Term* next;
+};
+
+// Function to insert a new term into the polynomial
+void insertTerm(struct Term** poly, int coeff, int exp) {
+    struct Term* newTerm = (struct Term*)malloc(sizeof(struct Term));
+    newTerm->coefficient = coeff;
+    newTerm->exponent = exp;
+    newTerm->next = NULL;
+
+    if (*poly == NULL) {
+        *poly = newTerm;
+    } else {
+        struct Term* temp = *poly;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newTerm;
+    }
+}
+
+// Function to add two polynomials
+struct Term* addPolynomials(struct Term* poly1, struct Term* poly2) {
+    struct Term* result = NULL;
+
+    while (poly1 != NULL && poly2 != NULL) {
+        if (poly1->exponent > poly2->exponent) {
+            insertTerm(&result, poly1->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+        } else if (poly1->exponent < poly2->exponent) {
+            insertTerm(&result, poly2->coefficient, poly2->exponent);
+            poly2 = poly2->next;
+        } else {
+            insertTerm(&result, poly1->coefficient + poly2->coefficient, poly1->exponent);
+            poly1 = poly1->next;
+            poly2 = poly2->next;
+        }
+    }
+
+    // Add any remaining terms from poly1 or poly2
+    while (poly1 != NULL) {
+        insertTerm(&result, poly1->coefficient, poly1->exponent);
+        poly1 = poly1->next;
+    }
+    while (poly2 != NULL) {
+        insertTerm(&result, poly2->coefficient, poly2->exponent);
+        poly2 = poly2->next;
+    }
+
+    return result;
+}
+
+// Function to print the polynomial
+void printPolynomial(struct Term* poly) {
+    while (poly != NULL) {
+        printf(""%d "", poly->coefficient);
+        poly = poly->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, m;
+    scanf(""%d %d"", &n, &m);
+
+    struct Term* poly1 = NULL;
+    struct Term* poly2 = NULL;
+
+    for (int i = 0; i < n + m; ++i) {
+        int coeff, exp;
+        scanf(""%d %d"", &coeff, &exp);
+        if (i < n) {
+            insertTerm(&poly1, coeff, exp);
+        } else {
+            insertTerm(&poly2, coeff, exp);
+        }
+    }
+
+    struct Term* result = addPolynomials(poly1, poly2);
+
+    printPolynomial(result);
+
+    return 0;
+}"

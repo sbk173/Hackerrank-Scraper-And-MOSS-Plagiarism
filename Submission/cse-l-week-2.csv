@@ -1,0 +1,9242 @@
+studentId,studentUserName,challenge,score,code
+12261546,sutejask,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct ListNode {
+    int val;
+    struct ListNode *next;
+};
+
+struct ListNode *findMidpoint(struct ListNode *head) {
+    if(head->next == NULL)
+        return head;
+    struct ListNode *slow = head;
+    struct ListNode *fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+void splitLinkedList(struct ListNode *head, struct ListNode *mid, struct ListNode **firstHalf, struct ListNode **secondHalf) {
+    *firstHalf = head;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+void printLinkedList(struct ListNode *head) {
+    struct ListNode *current = head;
+    while (current != NULL) {
+        printf(""%d "", current->val);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct ListNode *head = NULL;
+    struct ListNode *current = NULL;
+
+    // Input linked list nodes
+    for (int i = 0; i < n; i++) {
+        int val;
+        scanf(""%d"", &val);
+
+        struct ListNode *newNode = (struct ListNode *)malloc(sizeof(struct ListNode));
+        newNode->val = val;
+        newNode->next = NULL;
+
+        if (head == NULL) {
+            head = newNode;
+            current = head;
+        } else {
+            current->next = newNode;
+            current = current->next;
+        }
+    }
+
+    struct ListNode *mid = findMidpoint(head);
+    struct ListNode *firstHalf, *secondHalf;
+    splitLinkedList(head, mid, &firstHalf, &secondHalf);
+    //printf(""%d"",mid->val);
+    printLinkedList(firstHalf);
+    printLinkedList(secondHalf);
+
+    return 0;
+}
+"
+12261546,sutejask,ADD TWO NUMBERS 104,15,"
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct ListNode {
+    int val;
+    struct ListNode* next;
+};
+void insertEnd(struct ListNode** head, int value) {
+    struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+    newNode->val = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct ListNode* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+struct ListNode* addLists(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode dummy = {0};
+    struct ListNode* current = &dummy;
+    int carry = 0;
+
+    while (l1 != NULL || l2 != NULL || carry) {
+        int sum = carry;
+        if (l1 != NULL) {
+            sum += l1->val;
+            l1 = l1->next;
+        }
+        if (l2 != NULL) {
+            sum += l2->val;
+            l2 = l2->next;
+        }
+
+        carry = sum / 10;
+        sum %= 10;
+
+        insertEnd(&(current->next), sum);
+        current = current->next;
+    }
+
+    return dummy.next;
+}
+void printList(struct ListNode* head) {
+    struct ListNode* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->val);
+        current = current->next;
+    }
+}
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct ListNode* num1 = NULL;
+    struct ListNode* num2 = NULL;
+
+    for (int i = 0; i < n1; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertEnd(&num1, digit);
+    }
+
+    for (int i = 0; i < n2; i++) {
+        int digit;
+        scanf(""%d"", &digit);
+        insertEnd(&num2, digit);
+    }
+
+    struct ListNode* result = addLists(num1, num2);
+    printList(result);
+
+
+    return 0;
+}"
+19841757,vivekabhayachar,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int info;
+    struct node *next;
+} NODE;
+
+NODE* createnode(int element);
+NODE* insertfront(NODE* head, int ele);
+NODE* insertLast(NODE* head, int ele);
+void split(NODE **head,NODE **head2,int mid);
+void display(NODE* head);
+
+int main()
+{
+    NODE* head = NULL;
+    NODE* head2=NULL;
+    int element;
+    int n,i=0;
+    int mid;
+    
+    scanf(""%d"",&n);
+    do{
+
+        scanf(""%d "", &element);
+        head = insertLast(head, element);
+
+            
+        
+        i++;
+    }while(i<n);
+        
+    mid=n/2;
+    
+    if(n%2==1)
+        split(&head,&head2,mid);
+    else
+        split(&head,&head2,mid-1);
+    display(head);
+    printf(""\n"");
+    display(head2);
+    return 0;
+}
+
+
+NODE* createnode(int element)
+{
+    NODE *newnode;
+    newnode=(NODE*)malloc(sizeof(struct node));
+    newnode->info=element;
+    newnode->next=NULL;
+    return newnode;
+}
+
+NODE* insertfront(NODE* head,int element)
+{
+    NODE *newnode;
+    newnode=createnode(element);
+    newnode->next=head;
+    head=newnode;
+    return head;
+}
+
+NODE* insertLast(NODE* head, int element)
+{
+    NODE* newnode = createnode(element);
+
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        NODE* temp;
+        temp= head;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+
+        temp->next = newnode;
+    }
+
+    return head;
+}
+
+void split(NODE **head,NODE **head2,int mid)
+{
+    int count=0;
+    
+        NODE *temp;
+        temp=*head;
+        while(temp!=NULL && count<mid)
+        {
+            temp=temp->next;
+            count++;
+        }
+        
+        *head2=temp->next;
+        temp->next=NULL;
+    
+}
+
+void display(NODE *head)
+{ 
+    
+        NODE* temp;
+        temp=head;
+        while(temp!=NULL)
+        {
+            printf(""%d "",temp->info);
+            temp=temp->next;
+        }
+
+}
+"
+22729961,PES1UG22CS679,Divide Linked List 2,15,undefined
+22729961,PES1UG22CS679,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct NODE_{
+    int val;
+    struct NODE_* next;
+} NODE;
+
+NODE *head1 = NULL, *head2 = NULL, *head3 = NULL; // a + b = c
+NODE *tail3;
+
+void read(int n, NODE** head){
+    NODE* prev = NULL, *p;
+    for (int i = 0; i < n; i++){
+        p = (NODE*) malloc(sizeof(NODE));
+        scanf(""%d"", &p->val);
+        p->next = prev;
+        prev = p;
+    }
+    *head = p;
+}
+
+void sum(int n1, int n2){
+    int n = n1 < n2 ? n1 : n2;
+    NODE *p1 = head1, *p2 = head2, *p3;
+    NODE* prev = NULL;
+    int carry = 0, flag = 0;
+    for (int i = 0; i < n; i++){
+        p3 = (NODE*) malloc(sizeof(NODE));
+        p3->val = (p1->val + p2->val + carry) % 10;
+        carry = (p1->val + p2->val + carry) / 10;
+        p3-> next = head3;
+        head3 = p3;
+        p1 = p1->next;
+        p2 = p2->next;
+        if (!flag){
+            tail3 = p3;
+            flag = 1;
+        }
+    }
+    if (p1){
+        while (p1 != NULL){
+            p3 = (NODE*) malloc(sizeof(NODE));
+            p3->val = (p1->val + carry) % 10;
+            carry = (p1->val + carry) / 10;
+            p3->next = head3;
+            head3 = p3;
+            p1 = p1->next;
+        }
+    }
+    else {
+        while (p2 != NULL){
+            p3 = (NODE*) malloc(sizeof(NODE));
+            p3->val = (p2->val + carry) % 10;
+            carry = (p2->val + carry) / 10;
+            p3->next = head3;
+            head3 = p3;
+            p2 = p2->next;
+        }
+    }
+    if (carry){
+        p3 = (NODE*) malloc(sizeof(NODE));
+        p3->val = carry;
+        p3->next = head3;
+        head3 = p3;
+        
+    }
+    // head3 = p3;
+}
+
+void traverse_(NODE **phead){
+    NODE* p = *phead;
+    while (p != NULL){
+        printf(""%d "", p->val);
+        p = p->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+    
+    read(n1, &head1);
+    read(n2, &head2);
+    sum(n1, n2);
+    traverse_(&head3);
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}"
+22729963,PES1UG22CS681,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node {
+    int data;
+    struct node *next;
+}node;
+
+int count(node *head);
+void operation(node **head);
+
+int main() {
+    node *head=NULL;
+    int n;
+    scanf(""%d"",&n);
+    for(int i=0;i<n;i++) {
+        int ele;
+        scanf(""%d"",&ele);
+
+        node *newnode=(node*) malloc(sizeof(node));
+        newnode->data=ele;
+        newnode->next=NULL;
+    
+        if(head==NULL)
+            head=newnode;
+        else {
+            node *temp=head;
+            while(temp->next!=NULL) {
+                temp=temp->next;
+            }
+            temp->next=newnode;
+        }
+    }
+    operation(&head);
+    return 0;
+}
+
+int count(node *head) {
+    if(head==NULL)
+        return 0;
+    else {
+        int count=0;
+        while(head!=NULL) {
+            head=head->next;
+            count++;
+        }
+        return count;
+    }
+}
+
+void operation(node **head) {
+    int nodesize = count(*head); // 5
+    int mid;
+    if(nodesize%2==0)
+        mid=nodesize/2;
+    else
+        mid=nodesize/2+1; // mid=3
+    //printf(""%d\n"",nodesize);
+    //printf(""%d"",mid);
+    int count=0;
+    node *traverse=*head;
+    while(count<mid) {
+        printf(""%d "",traverse->data);
+        traverse=traverse->next;
+        count++;
+    }
+    printf(""\n"");
+    while(count<nodesize) {
+        printf(""%d "",traverse->data);
+        traverse=traverse->next;
+        count++;
+    }
+}
+
+"
+22729963,PES1UG22CS681,ADD TWO NUMBERS 104,7.5,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct NODE_{
+    int val;
+    struct NODE_* next;
+} NODE;
+
+NODE *head1 = NULL, *head2 = NULL, *head3 = NULL;
+NODE *tail3;
+
+void read(int n, NODE** head){
+    NODE* prev = NULL, *p;
+    for (int i = 0; i < n; i++){
+        p = (NODE*) malloc(sizeof(NODE));
+        scanf(""%d"", &p->val);
+        p->next = prev;
+        prev = p;
+    }
+    *head = p;
+}
+
+void sum(int n1, int n2){
+    int n = n1 < n2 ? n1 : n2;
+    NODE *p1 = head1, *p2 = head2, *p3;
+    NODE* prev = NULL;
+    int carry = 0, flag = 0;
+    for (int i = 0; i < n; i++){
+        p3 = (NODE*) malloc(sizeof(NODE));
+        p3->val = (p1->val + p2->val + carry) % 10;
+        carry = (p1->val + p2->val + carry) / 10;
+        p3-> next = head3;
+        head3 = p3;
+        p1 = p1->next;
+        p2 = p2->next;
+        if (!flag){
+            tail3 = p3;
+            flag = 1;
+        }
+    }
+    if (p1){
+        while (p1 != NULL){
+            p3 = (NODE*) malloc(sizeof(NODE));
+            p3->val = (p1->val + carry) % 10;
+            carry = (p1->val + carry) / 10;
+            p3->next = head3;
+            head3 = p3;
+            p1 = p1->next;
+        }
+    }
+    else {
+        while (p2 != NULL){
+            p3 = (NODE*) malloc(sizeof(NODE));
+            p3->val = (p2->val + carry) % 10;
+            carry = (p2->val + carry) / 10;
+            p3->next = head3;
+            head3 = p3;
+            p2 = p2->next;
+        }
+    }
+    if (carry){
+        p3 = (NODE*) malloc(sizeof(NODE));
+        p3->val = carry;
+        p3->next = head3;
+        head3 = p3;
+    }
+}
+
+void printReverse(NODE *head)
+{
+    if (head == NULL)
+       return;
+    printReverse(head->next);
+ 
+    // After everything else is printed, print head
+    printf(""%d "", head->val);
+}
+
+void traverse_(NODE **phead, int n1, int n2){
+    if(n1==n2) 
+        printReverse(*phead);
+    else {
+        NODE* p = *phead;
+        while (p != NULL){
+            printf(""%d "", p->val);
+            p = p->next;
+        }
+    printf(""\n"");
+    }
+    
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+    if (!n1 && !n2){
+        printf(""0\n"");
+        return 0;
+    }
+    read(n1, &head1);
+    read(n2, &head2);
+    sum(n1, n2);
+    traverse_(&head3,n1,n2);
+  
+    return 0;
+}"
+22729975,PES1UG22CS715,Divide Linked List 2,15,undefined
+22729975,PES1UG22CS715,ADD TWO NUMBERS 104,15,undefined
+22730025,PES1UG22CS680,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+typedef struct node{
+    int data;
+    struct node* next;
+}NODE;
+
+typedef struct link{
+    NODE* head;
+}LINK;
+
+NODE* create(int data){
+    NODE *temp=(NODE *)malloc(sizeof(NODE));
+    temp->data=data;
+    temp->next=NULL;
+    return temp;
+}
+
+NODE* splitlist(NODE* head,int start, int stop){
+    int index=1;
+    while(index<start){
+        head=head->next;
+        index++;
+    }
+    NODE* temphead=NULL;
+    NODE* head1;
+    while(index<=stop){
+        if(temphead){
+            temphead->next=create(head->data);
+            head=head->next;
+            temphead=temphead->next;
+        }
+        else{
+            
+            temphead=create(head->data);
+            head1=temphead;
+            head=head->next;
+        }
+        index++;
+    }
+    return head1;
+}
+
+void display(NODE* head){
+    while(head){
+        printf(""%d "",head->data);
+        head=head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    LINK* list=malloc(sizeof(LINK));
+    scanf(""%d"",&n);
+    int temp;
+    scanf(""%d"",&temp);
+    list->head=create(temp);
+    NODE* head=list->head;
+    for(int i=1;i<n;i++){
+        scanf(""%d"",&temp);
+        head->next=create(temp);
+        head=head->next;
+    }
+    int mid;
+    if(n%2==0)
+        mid=n/2;
+    else
+        mid=(n/2)+1;
+    NODE* list1=splitlist(list->head,1,mid);
+    NODE* list2=splitlist(list->head,mid+1,n);
+    display(list1);
+    display(list2);
+    return 0;
+}
+"
+22730025,PES1UG22CS680,ADD TWO NUMBERS 104,7.5,"#include<stdio.h>
+#include<stdlib.h>
+typedef struct node{
+    int data;
+    struct node* next;
+}NODE;
+
+typedef struct link{
+    NODE* head;
+}LINK;
+
+NODE* create(int data){
+    NODE *temp=(NODE *)malloc(sizeof(NODE));
+    temp->data=data;
+    temp->next=NULL;
+    return temp;
+}
+
+
+void display(NODE* head){
+    while(head){
+        printf(""%d "",head->data);
+        head=head->next;
+    }
+    printf(""\n"");
+}
+
+void inputlist(LINK* list,int n){
+    NODE* head;
+    list->head=NULL;
+    int temp;
+    for(int i=0;i<n;i++){
+        scanf(""%d"",&temp);
+        if(!(list->head)){
+            list->head=create(temp);
+            head=list->head;
+        }
+        else{
+            head->next=create(temp);
+            head=head->next;
+        }
+    }
+}
+void number(NODE* head, int num[]){
+    int i=0;
+    while(head){
+        num[i]=head->data;
+        head=head->next;
+        i++;
+    }
+}
+
+int addlist(int num1[],int num2[],int n,int m){
+    int i,j;
+    if(n==0){
+        i=n;
+    }else{
+        i=n-1;
+    }
+    if(m==0){
+        j=m;
+    }
+    else{
+        j=m-1;
+    }
+    int sum=0; int carry=0;
+    while(i>=0&&j>=0){
+        if(i==j){
+            sum*=10;
+            sum+=num1[i]+num2[j];
+            i--;j--;
+        }
+        else if(i>j){
+            sum*=10;
+            sum+=num1[i];
+            i--;
+        }
+        else if(i<j){
+            sum*=10;
+            sum+=num2[j];
+            j--;
+        }
+    }
+    return sum;
+}
+
+NODE* revlist(int num){
+    NODE* head=create(num%10);
+    NODE* temp=head;
+    num/=10;
+    while(num>0){
+        temp->next=create(num%10);
+        num/=10;
+        temp=temp->next;
+    }
+    return head;
+}
+
+void standard(int num){
+    int arr[100];
+    int i=0;
+    while(num>0){
+        arr[i]=num%10;
+        num/=10;
+        i++;
+    }
+    for(int j=(i-1);j>=0;j--){
+        printf(""%d "",arr[j]);
+    }
+}
+
+int main() {
+    int n,m;
+    LINK* list1=malloc(sizeof(LINK));
+    LINK* list2=malloc(sizeof(LINK));
+    scanf(""%d %d"",&n,&m);
+    inputlist(list1,n);
+    inputlist(list2,m);
+    int num1[n];
+    int num2[m];
+    number(list1->head,num1);
+    number(list2->head,num2);
+    int num3;
+    num3=addlist(num1,num2,n,m);
+    NODE* lis=revlist(num3);
+    display(lis);
+    return 0;
+}"
+22730066,PES1UG22CS710,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node{
+    int data;
+    struct Node* next;
+};
+void insertNode(struct Node** head,int data){
+    struct Node* Node1=(struct Node*)malloc(sizeof(struct Node));
+    Node1->data=data;
+    Node1->next=NULL;
+    if (*head==NULL)
+    {
+        *head = Node1;
+    }
+    else{
+        struct Node* current=*head;
+        while(current->next!=NULL){
+            current=current->next;
+        }
+        current->next=Node1;
+    }
+}
+struct Node* Mid(struct Node* head){
+    if (head==NULL || head->next==NULL){
+        return head;
+    }
+    struct Node* before=head;
+    struct Node* after=head;
+    while(after->next!=NULL&& after->next->next !=NULL){
+        before= before->next;
+        after=after->next->next;
+    }
+    return before;
+}
+struct Node* split(struct Node** head){
+    struct Node* midp= Mid(*head);
+    if (midp==NULL){
+        return NULL;
+    }
+    struct Node* SHalf= midp->next;
+    midp->next=NULL;
+    return SHalf;
+}
+void print(struct Node* head){
+    while(head!=NULL){
+        printf(""%d "", head->data);
+        head=head->next;
+    }
+    printf(""\n"");
+}
+int main() {
+    int x;
+    scanf(""%d"",&x);
+    struct Node* head=NULL;
+    for(int i=0;i<x;i++){
+        int value;
+        scanf(""%d"",&value);
+        insertNode(&head,value);
+    }
+    struct Node* Second= split(&head);
+    print(head);
+    print(Second);
+    return 0;
+}
+"
+22730066,PES1UG22CS710,ADD TWO NUMBERS 104,15,undefined
+22730094,PES1UG22CS695,Divide Linked List 2,15,undefined
+22730419,PES1UG22CS707,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int info;
+    struct node *next;
+} NODE;
+
+NODE* createnode(int element);
+NODE* insertfront(NODE* head, int ele);
+NODE* insertLast(NODE* head, int ele);
+void split(NODE **head,NODE **head2,int mid);
+void display(NODE* head);
+
+int main()
+{
+    NODE* head = NULL;
+    NODE* head2=NULL;
+    int element;
+    int n,i=0;
+    int mid;
+    
+    scanf(""%d"",&n);
+    do{
+
+        scanf(""%d "", &element);
+        head = insertLast(head, element);
+
+            
+        
+        i++;
+    }while(i<n);
+        
+    
+    mid=n/2;
+    if(n%2==1)
+        split(&head,&head2,mid);
+    else
+        split(&head,&head2,mid-1);
+    display(head);
+    printf(""\n"");
+    display(head2);
+    return 0;
+}
+
+
+NODE* createnode(int element)
+{
+    NODE *newnode;
+    newnode=(NODE*)malloc(sizeof(struct node));
+    newnode->info=element;
+    newnode->next=NULL;
+    return newnode;
+}
+
+NODE* insertfront(NODE* head,int element)
+{
+    NODE *newnode;
+    newnode=createnode(element);
+    newnode->next=head;
+    head=newnode;
+    return head;
+}
+
+NODE* insertLast(NODE* head, int element)
+{
+    NODE* newnode = createnode(element);
+
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        NODE* temp;
+        temp= head;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+
+        temp->next = newnode;
+    }
+
+    return head;
+}
+
+void split(NODE **head,NODE **head2,int mid)
+{
+    int count=0;
+    
+        NODE *temp;
+        temp=*head;
+        while(temp!=NULL && count<mid)
+        {
+            temp=temp->next;
+            count++;
+        }
+        
+        *head2=temp->next;
+        temp->next=NULL;
+    
+}
+
+void display(NODE *head)
+{ 
+    
+        NODE* temp;
+        temp=head;
+        while(temp!=NULL)
+        {
+            printf(""%d "",temp->info);
+            temp=temp->next;
+        }
+
+}
+"
+22730419,PES1UG22CS707,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int newData) {
+    struct Node* newNode = malloc(sizeof(struct Node));
+    newNode->data = newData;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Node* insertNode(struct Node* current, int newData) {
+    struct Node* newNode = createNode(newData);
+    if (current == NULL) {
+        current = newNode;
+    } else {
+        struct Node* temp = current;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+    return current;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* currentResult = NULL;
+    int carry = 0;
+
+    while (list1 != NULL || list2 != NULL) {
+        int sum = carry;
+        if (list1 != NULL) {
+            sum += list1->data;
+            list1 = list1->next;
+        }
+        if (list2 != NULL) {
+            sum += list2->data;
+            list2 = list2->next;
+        }
+
+        carry = sum / 10;
+        sum = sum % 10;
+
+        if (result == NULL) {
+            result = createNode(sum);
+            currentResult = result;
+        } else {
+            currentResult->next = createNode(sum);
+            currentResult = currentResult->next;
+        }
+    }
+
+    if (carry > 0) {
+        currentResult->next = createNode(carry);
+    }
+
+    return result;
+}
+
+void printLinkedList(struct Node* current) {
+    struct Node* temp = current;
+    while (temp != NULL) {
+        printf(""%d"", temp->data);
+        temp = temp->next;
+        if (temp != NULL) {
+            printf("" "");
+        }
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int size1, size2;
+    scanf(""%d %d"", &size1, &size2);
+    
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+    
+    for (int i = 0; i < size1; i++) {
+        int data;
+        scanf(""%d"", &data);
+        list1 = insertNode(list1, data);
+    }
+    
+    for (int i = 0; i < size2; i++) {
+        int data;
+        scanf(""%d"", &data);
+        list2 = insertNode(list2, data);
+    }
+    
+    struct Node* sum = addLists(list1, list2);
+    printLinkedList(sum);
+    
+    return 0;
+}
+"
+22730674,PES1UG22CS685,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void display(struct Node* p) {
+    struct Node* q = p;
+    while (q != NULL) {
+        printf(""%d "", q->data);
+        q=q->next;
+    }
+    printf(""\n"");
+}
+void insertEnd(struct Node** p, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*p == NULL) {
+        *p = newNode;
+    } else {
+        struct Node* current = *p;
+        while (current->next != NULL) {
+            current=current->next;
+        }
+        current->next=newNode;
+    }
+}
+
+struct Node* midi(struct Node* p) {
+    if (p == NULL || p->next == NULL) {
+        return p;
+    }
+
+    struct Node* slow=p;
+    struct Node* fast=p->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+
+    return slow;
+}
+
+void splitLinkedList(struct Node* p, struct Node** p1, struct Node** p2) {
+    struct Node* mid = midi(p);
+    *p1=p;
+    *p2=mid->next;
+    mid->next=NULL;
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* p = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&p, value);
+    }
+
+    struct Node* p1 = NULL;
+    struct Node* p2 = NULL;
+
+    splitLinkedList(p, &p1, &p2);
+
+    display(p1);
+    display(p2);
+
+    return 0;
+}"
+22730674,PES1UG22CS685,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730686,PES1UG22CS700,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+typedef struct node
+{
+    int info;
+    struct node *next;
+} NODE;
+
+NODE* createnode(int element);
+NODE* insertfront(NODE* head, int ele);
+NODE* insertLast(NODE* head, int ele);
+void split(NODE **head,NODE **head2,int mid);
+void display(NODE* head);
+
+int main()
+{
+    NODE* head = NULL;
+    NODE* head2=NULL;
+    int element;
+    int n,i=0;
+    int mid;
+    
+    scanf(""%d"",&n);
+    do{
+
+        scanf(""%d "", &element);
+        head = insertLast(head, element);
+
+            
+        
+        i++;
+    }while(i<n);
+    mid=n/2;
+    if(n%2==1){    
+    
+        split(&head,&head2,mid);
+    }
+    else{
+    split(&head,&head2,mid-1);
+    }
+    display(head);
+    printf(""\n"");
+    display(head2);
+    return 0;
+}
+
+
+NODE* createnode(int element)
+{
+    NODE *newnode;
+    newnode=(NODE*)malloc(sizeof(struct node));
+    newnode->info=element;
+    newnode->next=NULL;
+    return newnode;
+}
+
+NODE* insertfront(NODE* head,int element)
+{
+    NODE *newnode;
+    newnode=createnode(element);
+    newnode->next=head;
+    head=newnode;
+    return head;
+}
+
+NODE* insertLast(NODE* head, int element)
+{
+    NODE* newnode = createnode(element);
+
+    if (head == NULL)
+    {
+        head = newnode;
+    }
+    else
+    {
+        NODE* temp;
+        temp= head;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+
+        temp->next = newnode;
+    }
+
+    return head;
+}
+
+void split(NODE **head,NODE **head2,int mid)
+{
+    int count=0;
+    
+        NODE *temp;
+        temp=*head;
+        while(temp!=NULL && count<mid)
+        {
+            temp=temp->next;
+            count++;
+        }
+        
+        *head2=temp->next;
+        temp->next=NULL;
+    
+}
+
+void display(NODE *head)
+{ 
+    
+        NODE* temp;
+        temp=head;
+        while(temp!=NULL)
+        {
+            printf(""%d "",temp->info);
+            temp=temp->next;
+        }
+
+}"
+22730686,PES1UG22CS700,ADD TWO NUMBERS 104,15,"
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730687,PES2UG22CS588,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void splitLinkedList(struct Node* midNode, struct Node** firstHalf, struct Node** secondHalf) {
+    if (midNode == NULL) {
+        *firstHalf = NULL;
+        *secondHalf = NULL;
+        return;
+    }
+
+    *firstHalf = midNode->next;
+    midNode->next = NULL;
+    *secondHalf = *firstHalf;
+}
+
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insert(&head, value);
+    }
+
+    struct Node* midNode = findMidpoint(head);
+    struct Node* firstHalf = head;
+    struct Node* secondHalf = midNode->next;
+    midNode->next = NULL;
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}
+
+ "
+22730687,PES2UG22CS588,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730693,PES2UG22CS461,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+
+
+
+// Definition of a singly linked list node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+// Function to find the midpoint of the linked list using fast and slow pointers
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+// Function to split the linked list into two parts at the midpoint
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+// Function to print the elements of a linked list
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}"
+22730693,PES2UG22CS461,ADD TWO NUMBERS 104,7.5,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730699,PES1UG22CS674,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+
+void insert_end(struct node** head, int data) {
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct node* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+
+struct node*  get_mid_point(struct node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct node* slow = head;
+    struct node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void new_link_list(struct node* p, struct node** first_half, struct node** second_half) {
+    struct node* mid_point = get_mid_point(p);
+    *first_half = p;
+    *second_half = mid_point->next;
+    mid_point->next = NULL;
+}
+
+
+void print_list(struct node* head) {
+    struct node* temp = head;
+    while (temp != NULL) {
+        printf(""%d "", temp->data);
+        temp = temp->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, data;
+    struct node* head = NULL;
+
+    
+    scanf(""%d"", &n);
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &data);
+        insert_end(&head, data);
+    }
+
+    
+    struct node* first_half = NULL;
+    struct node* second_half = NULL;
+    new_link_list(head, &first_half, &second_half);
+
+    
+    print_list(first_half);
+    print_list(second_half);
+
+    return 0;
+}
+"
+22730699,PES1UG22CS674,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730704,PES1UG22CS719,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    struct node *next;
+    int data;
+}NODE;
+
+NODE *createnode(int ele)
+{
+    NODE *temp;
+    temp = (NODE *)malloc(sizeof(NODE));
+    temp->next = NULL;
+    temp->data = ele;
+    return temp;
+}
+
+void display(NODE *head)
+{
+    if(head == NULL)
+    {
+        printf(""Linked list is empty"");
+    }
+    else
+    {
+        while(head != NULL)
+        {
+            printf(""%d "",head ->data);
+            head = head ->next;
+        }
+        printf(""\n"");
+    }
+}
+
+void insert_end( NODE **head, int ele)
+{
+    NODE *temp;
+    temp = createnode(ele);
+    if(*head == NULL)
+    {
+        *head = temp;
+    }
+    else
+    {
+        NODE *q;
+        q = *head;
+        while(q->next != NULL)
+        {
+            q = q->next;
+        }
+        q->next = temp;
+        
+    }
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
+    int n,mid;
+    scanf(""%d"",&n);
+    if(n%2 ==0)
+    {
+        mid=(n/2);
+    }
+    else{
+        mid = (n/2)+1;
+    }
+    if (mid == 0) {
+        return NULL;
+    }
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+        scanf(""%d"", &a[i]);
+    }
+    NODE *head;
+    head = NULL;
+    for(int i=0;i<n;i++)
+    {
+        insert_end(&head,a[i]);
+    }
+    NODE *p;
+    p = head;
+    NODE *head1=NULL;
+    NODE *head2=NULL;
+    int j=0;
+    do
+    {
+        if(head == NULL ||head ->next ==NULL)
+        {
+            printf(""%d"",head->data);
+            printf("" "");
+            return 0;
+        }
+        insert_end(&head1,p->data);
+        p = p->next;
+        j++;
+        if(j>=mid)
+        {
+            for(int k=mid;k<n;k++)
+            {
+                insert_end(&head2,p->data);
+                p = p->next;
+            }
+        }
+    }while(j<mid);
+    display(head1);
+    display(head2);
+    
+    return 0;
+}"
+22730704,PES1UG22CS719,ADD TWO NUMBERS 104,7.5,"#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    struct node *next;
+    int data;
+} NODE;
+
+NODE *createNode(int ele)
+{
+    NODE *temp;
+    temp = (NODE *)malloc(sizeof(NODE));
+    temp->next = NULL;
+    temp->data = ele;
+    return temp;
+}
+
+void insertEnd(NODE **head, int ele)
+{
+    NODE *temp;
+    temp = createNode(ele);
+    if (*head == NULL)
+    {
+        *head = temp;
+    }
+    else
+    {
+        NODE *q;
+        q = *head;
+        while (q->next != NULL)
+        {
+            q = q->next;
+        }
+        q->next = temp;
+    }
+}
+
+void display(NODE *head)
+{
+    if (head == NULL)
+    {
+        printf(""Linked list is empty"");
+    }
+    else
+    {
+        while (head != NULL)
+        {
+            printf(""%d "", head->data);
+            head = head->next;
+        }
+    }
+}
+
+NODE *addLists(NODE *list1, NODE *list2)
+{
+    NODE *result = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry)
+    {
+        int sum = carry;
+
+        if (list1)
+        {
+            sum += list1->data;
+            list1 = list1->next;
+        }
+
+        if (list2)
+        {
+            sum += list2->data;
+            list2 = list2->next;
+        }
+
+        carry = sum / 10;
+        int value = sum % 10;
+        insertEnd(&result, value);
+    }
+
+    return result;
+}
+
+int main()
+{
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    NODE *head1 = NULL;
+    NODE *head2 = NULL;
+
+    for (int i = 0; i < n1; ++i)
+    {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head1, value);
+    }
+
+    for (int i = 0; i < n2; ++i)
+    {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head2, value);
+    }
+
+    NODE *sumList = addLists(head1, head2);
+    display(sumList);
+
+    return 0;
+}
+"
+22730708,PES1UG22CS698,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void insertEnd(struct Node** head, int data) {
+    struct Node* newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+void splitList(struct Node* source, struct Node** front, struct Node** back) {
+    struct Node* slow = source;
+    struct Node* fast = source->next;
+
+    while (fast != NULL) {
+        fast = fast->next;
+        if (fast != NULL) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+
+    *front = source;
+    *back = slow->next;
+    slow->next = NULL;
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* frontList = NULL;
+    struct Node* backList = NULL;
+
+    splitList(head, &frontList, &backList);
+
+    printList(frontList);
+    printList(backList);
+
+    return 0;
+}"
+22730708,PES1UG22CS698,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730712,PES1UG22CS713,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void insertEnd(struct Node** head, int data) {
+    struct Node* newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+void splitList(struct Node* source, struct Node** front, struct Node** back) {
+    struct Node* slow = source;
+    struct Node* fast = source->next;
+
+    while (fast != NULL) {
+        fast = fast->next;
+        if (fast != NULL) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+
+    *front = source;
+    *back = slow->next;
+    slow->next = NULL;
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* frontList = NULL;
+    struct Node* backList = NULL;
+
+    splitList(head, &frontList, &backList);
+
+    printList(frontList);
+    printList(backList);
+
+    return 0;
+}"
+22730712,PES1UG22CS713,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}
+"
+22730716,PES1UG22CS714,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct Node
+{
+    int data;
+    struct Node* next;
+};
+void insertNode(struct Node** head,int data)
+{
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode -> data = data;
+    newNode -> next = NULL;
+    
+    if(*head == NULL)
+    {
+        *head = newNode;
+    }
+    else
+    {
+        struct Node* current = *head;
+        while(current -> next != NULL)
+        {
+            current = current -> next;
+        }
+        current -> next = newNode;
+    }
+}
+struct Node*findMidpoint(struct Node* head)
+{
+    if(head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+    
+    struct Node* slow = head;
+    struct Node* fast = head;
+    
+    while(fast -> next != NULL && fast -> next -> next!= NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+struct Node* splitLinkedList(struct Node** head)
+{
+    struct Node*midpoint = findMidpoint(*head);
+    if(midpoint == NULL)
+    {
+        return NULL;
+    }
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+    return secondHalf;
+}
+void printLinkedList(struct Node* head)
+{
+    while(head != NULL)
+    {
+        printf(""%d "",head -> data);
+        head = head -> next;
+    }
+    printf(""\n"");
+}
+int main()
+{
+    int n;
+    scanf(""%d"",&n);
+    
+    struct Node* head = NULL;
+    for(int i=0;i<n;i++)
+    {
+        int value;
+        scanf(""%d"",&value);
+        insertNode(&head,value);
+    }
+    struct Node* secondHalf = splitLinkedList(&head);
+    
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+    
+    return 0;
+}
+"
+22730716,PES1UG22CS714,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}
+"
+22730721,PES1UG22CS688,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void insertEnd(struct Node** head, int data) {
+    struct Node* newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+void splitList(struct Node* source, struct Node** front, struct Node** back) {
+    struct Node* slow = source;
+    struct Node* fast = source->next;
+
+    while (fast != NULL) {
+        fast = fast->next;
+        if (fast != NULL) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+
+    *front = source;
+    *back = slow->next;
+    slow->next = NULL;
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* frontList = NULL;
+    struct Node* backList = NULL;
+
+    splitList(head, &frontList, &backList);
+
+    printList(frontList);
+    printList(backList);
+
+    return 0;
+}"
+22730721,PES1UG22CS688,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730722,PES1UG22CS682,Divide Linked List 2,15,"
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+#define NEXT_NODE(X) X = X->next
+
+typedef struct n {
+    int data;
+    struct n* next;
+} node;
+
+void print_list (node*);
+void insert_last (node**, int);
+node* split (node*);
+
+int main () {
+    int len; scanf (""%d"", &len);
+    node* list1 = NULL;
+
+    for (int i=0; i<len; i++) {
+        int n; scanf (""%d"", &n);
+        insert_last (&list1, n);
+    }
+
+    node* list2 = split (list1);
+
+    print_list (list1);
+    print_list (list2);
+
+    return 0;
+}
+
+void insert_last (node** list, int data) {
+    node* new = malloc (sizeof(node));
+    new->data = data;
+    new->next = NULL;
+
+    node* head = *list;
+    if (!head) {
+        *list = new;
+        return;
+    }
+
+    while (head->next) NEXT_NODE (head);
+    head->next = new;
+    return;
+}
+
+void print_list (node* list) {
+    while (list) {
+        printf (""%d "", list->data);
+        NEXT_NODE (list);
+    }
+    printf (""\n"");
+}
+
+node* split (node* list) {
+    node* fast = list;
+    node* slow = list;
+
+    while (fast->next && fast->next->next) {
+        fast = fast->next->next;
+        NEXT_NODE (slow);
+    }
+
+    node* list2 = slow->next;
+    slow->next = NULL;
+
+    return list2;
+}"
+22730722,PES1UG22CS682,ADD TWO NUMBERS 104,7.5,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+#define NEXT_NODE(X) X = X->next
+
+typedef struct n {
+    int data;
+    struct n* next;
+} node;
+
+void print_list (node*);
+void insert_last (node**, int);
+node* sum_lists (node*, node*);
+
+int main () {
+    node* lists [2] = {NULL, NULL};
+    int len[2]; scanf (""%d %d"", &len[0], &len[1]);
+
+    for (int l = 0; l < 2; l++)
+        for (int n = 0; n < len[l]; n++) {
+            int data; scanf (""%d"", &data);
+            insert_last (&(lists[l]), data);
+        }
+
+    node* sum = sum_lists (lists[0], lists[1]);
+    print_list (sum);
+
+    return 0;
+}
+
+void insert_last (node** list, int data) {
+    node* new = malloc (sizeof(node));
+    new->data = data;
+    new->next = NULL;
+
+    node* head = *list;
+    if (!head) {
+        *list = new;
+        return;
+    }
+
+    while (head->next) NEXT_NODE (head);
+    head->next = new;
+    return;
+}
+
+void print_list (node* list) {
+    while (list) {
+        printf (""%d "", list->data);
+        NEXT_NODE (list);
+    }
+    printf (""\n"");
+}
+
+node* sum_lists (node* list1, node* list2) {
+    node* sum = NULL;
+    int carry = 0;
+    
+    while (list1 || list2) {
+        if (list1) {
+            carry += list1->data;
+            NEXT_NODE (list1);
+        }
+        if (list2) {
+            carry += list2->data;
+            NEXT_NODE (list2);
+        }
+
+        insert_last (&sum, carry % 10);
+        carry /= 10;
+    }
+
+    if (carry) insert_last (&sum, carry);
+    
+    if (! sum) insert_last (&sum, 0);
+
+    return sum;
+}"
+22730724,PES1UG22CS691,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* a = head;
+    struct Node* b = head;
+
+    while (b->next != NULL && b->next->next != NULL) {
+        a = a->next;
+        b = b->next->next;
+    }
+
+    return a;
+}
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}"
+22730724,PES1UG22CS691,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730729,PES1UG22CS689,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    
+    return 0;
+}
+"
+22730729,PES1UG22CS689,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+
+    return 0;
+}
+"
+22730731,PES1UG22CS686,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct NODE_{
+    int val;
+    struct NODE_* next;
+} NODE;
+
+NODE *head = NULL, *head2 = NULL;
+
+void read(int n){    
+    for (int i = 0; i < n; i++){
+        NODE* p = (NODE*) malloc(sizeof(NODE));
+        scanf(""%d"", &p->val);
+        p->next = head;
+        head = p;
+    }
+}
+
+void split(int n){
+    NODE* p = head;
+    for (int i = 0; i < n/2-1; i++){
+        p = p->next;
+    }
+    head2 = p->next;
+    p->next = NULL;
+}
+
+void traverse(int n, NODE **phead){
+    NODE* p_ = *phead;
+    NODE* p = p_;
+    int arr[n], i = n-1;
+    while (p != NULL){
+        arr[i--] = p->val;
+        p = p->next;
+    }
+    for(int i = 0; i < n; i++){
+        printf(""%d "", arr[i]);
+    }
+    printf(""\n"");
+}
+
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+    if (n == 1){
+        scanf(""%d"", &n);
+        printf(""%d\n"", n);
+        return 0;
+    }
+    read(n);
+    split(n);
+    traverse(n-(n/2), &head2);
+    traverse((n/2), &head);
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+"
+22730731,PES1UG22CS686,ADD TWO NUMBERS 104,0,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct NODE_{
+    int val;
+    struct NODE_* next;
+} NODE;
+
+NODE *head1 = NULL, *head2 = NULL, *head3 = NULL; // a + b = c
+int ng;
+
+void read(int n, NODE** head){
+    NODE* prev = NULL, *p;
+    for (int i = 0; i < n; i++){
+        p = (NODE*) malloc(sizeof(NODE));
+        scanf(""%d"", &p->val);
+        p->next = prev;
+        prev = p;
+    }
+    *head = p;
+}
+
+void sum(int n1, int n2){
+    int n = n1 < n2 ? n1 : n2;
+    NODE *p1 = head1, *p2 = head2, *p3;
+    NODE* prev = NULL;
+    int carry = 0;
+    for (int i = 0; i < n; i++){
+        p3 = (NODE*) malloc(sizeof(NODE));
+        p3->val = (p1->val + p2->val + carry) % 10;
+        ng++;
+        carry = (p1->val + p2->val + carry) / 10;
+        p3-> next = head3;
+        head3 = p3;
+        p1 = p1->next;
+        p2 = p2->next;
+    }
+    if (p1){
+        while (p1 != NULL){
+            p3 = (NODE*) malloc(sizeof(NODE));
+            p3->val = (p1->val + carry) % 10;
+            ng++;
+            carry = (p1->val + carry) / 10;
+            p3->next = head3;
+            head3 = p3;
+            p1 = p1->next;
+        }
+    }
+    else {
+        while (p2 != NULL){
+            p3 = (NODE*) malloc(sizeof(NODE));
+            p3->val = (p2->val + carry) % 10;
+            ng++;
+            carry = (p2->val + carry) / 10;
+            p3->next = head3;
+            head3 = p3;
+            p2 = p2->next;
+        }
+    }
+    if (carry){
+        p3 = (NODE*) malloc(sizeof(NODE));
+        p3->val = carry;
+        p3->next = head3;
+        ng++;
+        head3 = p3;
+        
+    }
+}
+
+void traverse_(NODE **phead)
+{
+    NODE *head = *phead;
+    if (head == NULL)
+       return;
+    traverse_(&(head->next));
+ 
+    // After everything else is printed, print head
+    printf(""%d "", head->val);
+}
+
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+    if (!n1 && !n2){
+        printf(""0\n"");
+        return 0;
+    }
+    read(n1, &head1);
+    read(n2, &head2);
+    sum(n1, n2);
+    traverse_(&head3);
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}
+"
+22730738,PESS1UG22CS687,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertNode(struct Node **head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}
+"
+22730738,PESS1UG22CS687,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730742,PES1UG22CS706,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+#include<math.h>
+#include<string.h>
+
+// Define the structure for a linked list node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to insert a new node at the end of the linked list
+void insertEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+// Function to find the midpoint of the linked list
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+// Function to split the linked list into two parts at the midpoint
+void splitLinkedList(struct Node* source, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* mid = findMidpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+// Function to print the elements of a linked list
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+
+    splitLinkedList(head, &firstHalf, &secondHalf);
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}"
+22730742,PES1UG22CS706,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730743,PES1UG22CS709,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+
+struct Node* findMid(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void splitLinkedList(struct Node* midNode, struct Node** firstHalf, struct Node** secondHalf) {
+    if (midNode == NULL) {
+        *firstHalf = NULL;
+        *secondHalf = NULL;
+        return;
+    }
+
+    *firstHalf = midNode->next;
+    midNode->next = NULL;
+    *secondHalf = *firstHalf;
+}
+
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insert(&head, value);
+    }
+
+    struct Node* midNode = findMid(head);
+    struct Node* firstHalf = head;
+    struct Node* secondHalf = midNode->next;
+    midNode->next = NULL;
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}
+
+"
+22730743,PES1UG22CS709,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730751,PES1UG22CS690,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}
+"
+22730751,PES1UG22CS690,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}
+"
+22730754,PES1UG22CS720,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}
+
+"
+22730754,PES1UG22CS720,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730757,PES1UG22CS697,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct node {
+    int x;
+    struct node* next;
+};
+
+struct node* findMidpoint(struct node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct node* slow = head;
+    struct node* fast = head;
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+void splitList(struct node* mid, struct Node** secondHalf) {
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+
+void printList(struct node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->x);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    
+    void insert_end(struct node **p,int a);
+
+
+    int ele;
+    scanf(""%d"", &ele);
+
+    struct node* head = NULL;
+    for (int i=0;i<ele;i++) 
+    {
+        int n;
+        scanf(""%d"", &n);
+        insert_end(&head, n);
+    }
+
+    struct node* mid = findMidpoint(head);
+    struct node* secondHalf = NULL;
+    splitList(mid, &secondHalf);
+
+    printList(head);
+    printList(secondHalf);
+
+    return 0;
+}
+
+
+
+void insert_end(struct node **p,int a)
+{
+    struct node *temp,*q;
+    temp=(struct node *)malloc(sizeof(struct node));
+    temp->x=a;
+    temp->next=NULL;
+    if(*p==NULL)
+        *p=temp;
+    else
+        {
+            q=*p;
+            while(q->next!=NULL)
+            {
+                q=q->next;
+            }
+            q->next=temp;
+        }
+}"
+22730757,PES1UG22CS697,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730760,PES1UG22CS692,Divide Linked List 2,0,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *head;
+    *head = newNode;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+void splitAndPrint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        printf(""List is too short to split.\n"");
+        return;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    struct Node* secondList = slow->next;
+    slow->next = NULL;
+
+    printf(""First List: "");
+    printList(head);
+
+    printf(""Second List: "");
+    printList(secondList);
+}
+
+int main() {
+    struct Node* head = NULL;
+    
+    // Insert elements into the linked list
+    insert(&head, 6);
+    insert(&head, 5);
+    insert(&head, 4);
+    insert(&head, 3);
+    insert(&head, 2);
+    insert(&head, 1);
+
+    printf(""Original List: "");
+    printList(head);
+
+    splitAndPrint(head);
+
+    return 0;
+}
+"
+22730760,PES1UG22CS692,ADD TWO NUMBERS 104,0,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* newNode(int data) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->data = data;
+    node->next = NULL;
+    return node;
+}
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = newNode(data);
+    newNode->next = *head;
+    *head = newNode;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node dummy = {0, NULL};
+    struct Node* current = &dummy;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + (list1 ? list1->data : 0) + (list2 ? list2->data : 0);
+        carry = sum / 10;
+        sum %= 10;
+
+        current->next = newNode(sum);
+        current = current->next;
+
+        if (list1) list1 = list1->next;
+        if (list2) list2 = list2->next;
+    }
+
+    return dummy.next;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    // Insert elements into the first linked list
+    insert(&list1, 3);
+    insert(&list1, 4);
+    insert(&list1, 2);
+
+    // Insert elements into the second linked list
+    insert(&list2, 4);
+    insert(&list2, 6);
+    insert(&list2, 5);
+
+    printf(""List 1: "");
+    printList(list1);
+
+    printf(""List 2: "");
+    printList(list2);
+
+    struct Node* sumList = addLists(list1, list2);
+    printf(""Sum List: "");
+    printList(sumList);
+
+    return 0;
+}
+"
+22730763,PES1UG22CS705,Divide Linked List 2,0,"#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+struct node {int data;struct node *next;};
+struct node *midpoint(struct node *head){
+  struct node *p = head;struct node *q = head;
+  while(q!=NULL&&q->next!=NULL){p=p->next;q=q->next->next;}
+  return p;
+}
+void split(struct node *head, struct node **L, struct node **R){
+    struct node *mid = midpoint(head);
+    *L = head;*R = mid->next;
+    mid->next = NULL;
+}
+void disp(struct node *head){
+    while (head!=NULL){
+        printf(""%d"",head->data);head=head->next;
+    }
+}
+int main(){
+  struct node *head=NULL;struct node *L=NULL,*R=NULL;int i;
+  for(i=1;i<=5;i++){struct node *b=(struct node *)malloc(sizeof(struct node));b->data=i;b->next=head;head=b;}
+  split(head,&L,&R);printf(""List (L) :   "");disp(L);printf(""\n"");printf(""List (R) :   "");disp(R);
+  return 0;
+}"
+22730765,PES2UG22CS084,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+void splitLinkedList(struct Node* head, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+    
+    while (fast != NULL) {
+        fast = fast->next;
+        if (fast != NULL) {
+            slow = slow->next;
+            fast = fast->next;
+        }
+    }
+    
+    *firstHalf = head;
+    *secondHalf = slow->next;
+    slow->next = NULL;
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+    
+    struct Node* head = NULL;
+    struct Node* tail = NULL;
+    
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        struct Node* newNode = createNode(value);
+        
+        if (head == NULL) {
+            head = newNode;
+            tail = newNode;
+        } else {
+            tail->next = newNode;
+            tail = newNode;
+        }
+    }
+    
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+    
+    splitLinkedList(head, &firstHalf, &secondHalf);
+    
+    printList(firstHalf);
+    printList(secondHalf);
+    
+    return 0;
+}"
+22730765,PES2UG22CS084,ADD TWO NUMBERS 104,7.5,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = createNode(data);
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* current = NULL;
+    int carry = 0;
+
+    while (list1 != NULL || list2 != NULL || carry != 0) {
+        int sum = carry;
+        if (list1 != NULL) {
+            sum += list1->data;
+            list1 = list1->next;
+        }
+        if (list2 != NULL) {
+            sum += list2->data;
+            list2 = list2->next;
+        }
+
+        carry = sum / 10;
+        sum = sum % 10;
+
+        if (result == NULL) {
+            result = createNode(sum);
+            current = result;
+        } else {
+            current->next = createNode(sum);
+            current = current->next;
+        }
+    }
+
+    return result;
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&list1, value);
+    }
+
+    for (int i = 0; i < n2; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&list2, value);
+    }
+
+    struct Node* result = addLists(list1, list2);
+    printList(result);
+
+    return 0;
+}"
+22730769,PES2UG22CS558,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+void splitLinkedList(struct Node* source, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* mid = findMidpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+
+    splitLinkedList(head, &firstHalf, &secondHalf);
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}
+
+"
+22730769,PES2UG22CS558,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730779,PES1UG22CS708,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}"
+22730779,PES1UG22CS708,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730780,PES1UG22CS703,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMid(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* mid = findMid(*head);
+
+    if (mid == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = mid->next;
+    mid->next = NULL;
+
+    return secondHalf;
+}
+
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}
+
+
+
+"
+22730780,PES1UG22CS703,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}
+"
+22730783,PES1UG22CS701,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+void add_element(struct node **p, int x)
+{
+    struct node *temp;
+    temp = (struct node*) malloc(sizeof(struct node));
+    temp->data = x;
+    temp->next = NULL;
+    if (*p == NULL)
+    {
+        *p = temp;
+    }
+    else
+    {
+        struct node *q;
+        q = *p;
+        while(q->next != NULL)
+        {
+            q = q->next;
+        }
+        q->next = temp;
+    }
+}
+
+void display(struct node *p)
+{
+    struct node *q;
+    q = p;
+    while(q != NULL)
+    {
+        printf(""%d "",q->data);
+        q = q->next;
+    }
+    printf(""\n"");
+}
+
+void split(struct node **p, int mp)
+{
+    struct node *q, *prev;
+    prev = NULL;
+    q = *p;
+    for (int i = 0; i<mp; i++)
+    {
+        prev = q;
+        q = q->next;
+    }
+    prev->next = NULL;
+    display(*p);
+    display(q);    
+}
+
+int main() 
+{
+    int n;
+    scanf(""%d"",&n);
+    struct node *head = NULL;
+    int x;
+    for (int i = 0; i<n; i++)
+    {
+        scanf(""%d"",&x);
+        add_element(&head, x);
+    }
+    int midpoint = (n+1)/2;
+    split(&head, midpoint);
+    return 0;
+}
+"
+22730783,PES1UG22CS701,ADD TWO NUMBERS 104,0,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node* next;
+};
+
+void add_element1(struct node **p, int x)
+{
+    struct node *temp;
+    temp = (struct node*) malloc(sizeof(struct node));
+    temp->data = x;
+    temp->next = NULL;
+    if (*p == NULL)
+    {
+        *p = temp;
+    }
+    else
+    {
+        struct node *q;
+        q = *p;
+        while (q->next != NULL)
+        {
+            q = q->next;
+        }
+        q->next = temp;
+    }
+}
+
+void add_element(struct node **p, int x)
+{
+    struct node *temp;
+    temp = (struct node*) malloc(sizeof(struct node));
+    temp->data = x;
+    temp->next = NULL;
+    if (*p == NULL)
+    {
+        *p = temp;
+    }
+    else
+    {
+        struct node *q;
+        q = *p;
+        temp->next = q;
+        *p = temp;
+    }
+}
+
+struct node* reverse(struct node *p)
+{
+    struct node *q;
+    struct node *r;
+    q = NULL;
+    r = q;
+    while(p->next != NULL)
+    {
+        add_element(&q,p->data);
+        p = p->next; 
+    }
+    return r;
+}
+
+void display(struct node *p)
+{
+    struct node *q;
+    q = p;
+    while(q != NULL)
+    {
+        printf(""%d "", q->data);
+        q = q->next;
+    }
+}
+
+struct node* add(struct node *p, struct node *q, int m, int n)
+{
+    int sum;
+    int carry = 0;
+    struct node *r;
+    r = NULL;
+    while(p != NULL || q != NULL || carry)
+    {
+        sum = carry;
+        carry = 0;
+        if (p != NULL && m>=n)
+        {
+            sum += p->data;
+            p = p->next;
+            m--;
+        }
+        if (q != NULL && n>=m)
+        {
+            sum += q->data;
+            q = q->next;
+            n--;
+        }
+        carry = sum/10;
+        sum = sum%10;
+        add_element1(&r,sum);
+    }
+    return r;
+}
+
+int main()
+{
+    int m,n,x;
+    scanf(""%d %d"", &m, &n);
+    struct node *head1, *head2;
+    head1 = head2 = NULL;
+    int a = 0;
+    int b = 0;
+    for (int i = 0; i<m; i++)
+    {
+        scanf(""%d"", &x);
+        a = a*10+x;
+        add_element(&head1, x);
+    }
+    for (int i = 0; i<n; i++)
+    {
+        scanf(""%d"", &x);
+        b = b*10+x;
+        add_element(&head2, x);
+    }
+    int c = a+b;
+    int d = 0;
+    while(c>0)
+    {
+        d = d*10+c%10;
+        printf(""%d "",c%10);
+        c = c/10;
+    }
+    /*struct node *new_head = NULL;
+    while(d>0)
+    {
+        
+    }*/
+    //struct node *sum = add(head1, head2, m, n);
+    //display(reverse(sum));
+    return 0;
+}
+"
+22730785,PES2UG22CS244,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+void splitLinkedList(struct Node* midNode, struct Node** firstHalf, struct Node** secondHalf) {
+    if (midNode == NULL) {
+        *firstHalf = NULL;
+        *secondHalf = NULL;
+        return;
+    }
+
+    *firstHalf = midNode->next;
+    midNode->next = NULL;
+    *secondHalf = *firstHalf;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insert(&head, value);
+    }
+
+    struct Node* midNode = findMidpoint(head);
+    struct Node* firstHalf = head;
+    struct Node* secondHalf = midNode->next;
+    midNode->next = NULL;
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}"
+22730785,PES2UG22CS244,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730798,PES1UG22CS678,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+}NODE;
+
+void insert(NODE **p, int x)
+{
+    NODE *q = (NODE*)malloc(sizeof(NODE));
+    q->data=x;
+    q->next=NULL;
+    
+    if(*p == NULL)
+    {
+            *p=q;
+    }
+    else
+    {
+        NODE *a = *p;
+        while(a->next!=NULL)
+        {
+            a=a->next;
+        }
+        a->next=q;
+    }
+}
+
+NODE* midpoint(NODE *p)
+{
+    if(p==NULL || p->next == NULL)
+    {
+        return p;
+    }
+    NODE* a = p;
+    NODE* b = p->next;
+    while(b!=NULL && b->next!=NULL)
+    {
+        a = a->next;
+        b = b->next->next;
+    }
+    return a;
+}
+
+void split(NODE* source, NODE** firstHalf, NODE** secondHalf) 
+{
+    NODE* mid = midpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+void display(NODE* head) 
+{
+    NODE* current = head;
+    while (current != NULL) 
+    {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+    NODE* head = NULL;
+    for (int i = 0; i < n; i++) 
+    {
+        int value;
+        scanf(""%d"", &value);
+        insert(&head, value);
+    }
+    NODE* firstHalf = NULL;
+    NODE* secondHalf = NULL;
+    split(head, &firstHalf, &secondHalf);
+    display(firstHalf);
+    display(secondHalf);
+    return 0;
+}"
+22730798,PES1UG22CS678,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730801,PES2UG22CS493,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+void splitLinkedList(struct Node* source, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* mid = findMidpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+
+    splitLinkedList(head, &firstHalf, &secondHalf);
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}
+"
+22730801,PES2UG22CS493,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}
+"
+22730802,PES1UG22CS694,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+}n;
+
+void disp(n *p)
+{
+    while(p!=NULL)
+    {
+        printf(""%d "",p->data);
+        p=p->next;
+    }
+    printf(""\n"");
+}
+void insertEnd(n **p,int x)
+{
+    n *t=(n *)malloc(sizeof(n));
+    t->data=x;
+    t->next=NULL;
+    if(*p==NULL) *p=t;
+    else
+    {
+        n *q=*p;
+        while(q->next!=NULL)
+            q=q->next;
+        q->next=t;
+    }
+}
+void split(n **p,int m)
+{
+    n *h1=NULL;
+    n *h2=NULL;
+    n *q=*p;
+    for(int i=0;(i<(m-m/2))&q!=NULL;i++)
+    {
+        insertEnd(&h1,q->data);
+        q=q->next;
+    }
+    for(int i=m/2;(i<m)&q!=NULL;i++)
+    {
+        insertEnd(&h2,q->data);
+        q=q->next;
+    }
+    disp(h1);
+    disp(h2);
+}
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
+    
+    int m,x;
+    scanf(""%d"",&m);
+    n *head=NULL;
+    for(int i=0;i<m;i++)
+    {
+        scanf(""%d"",&x);
+        insertEnd(&head,x);
+    }
+    split(&head,m);
+    
+    return 0;
+}
+"
+22730802,PES1UG22CS694,ADD TWO NUMBERS 104,7.5,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct node
+{
+    int data;
+    struct node *next;
+}n;
+
+void disp(n *p)
+{
+    while(p!=NULL)
+    {
+        printf(""%d "",p->data);
+        p=p->next;
+    }
+    printf(""\n"");
+}
+void insertFront(n **p,int x)
+{
+    n *t=malloc(sizeof(n));
+    t->data=x;
+    t->next=NULL;
+    if(*p==NULL) *p=t;
+    else
+    {
+        t->next=*p;
+        *p=t;
+    }
+}
+n *add(n **p1,int a,n **p2,int b)
+{
+    int s1=0,s2=0;
+    n *q=*p1;
+    for(int i=0;i<a;i++)
+    {
+        s1*=10;
+        s1+=q->data;
+        q=q->next;
+    }
+    q=*p2;
+    for(int i=0;i<b;i++)
+    {
+        s2*=10;
+        s2+=q->data;      
+        q=q->next;
+    }
+    int s3=s1+s2;
+    int t=0;
+    if(a==0||b==0)
+    {
+        if(a==0) return *p2;
+        else return *p1;
+    }
+    else if(((s3<pow(10,a))|(s3<pow(10,b))|(a==1)|(b==1)))
+    {for(int i=0;i<3;i++)
+    {
+        t*=10;
+        t+=s3%10;
+        s3/=10;
+    }
+    s3=t;}
+    else{for(int i=0;i<4;i++)
+    {
+        t*=10;
+        t+=s3%10;
+        s3/=10;
+    }
+    s3=t;}
+    n *h3=NULL;
+    if((s3%100==0)|(s3%10==0))
+    {
+        if(s3%100==0)
+        {
+            while(s3>0)
+            {
+                insertFront(&h3,s3%10);
+                s3/=10;
+            }
+            //insertFront(&h3,0);
+            //insertFront(&h3,0);
+        }
+        else
+        {
+            s3/=10;
+            while(s3>0)
+            {
+                insertFront(&h3,s3%10);
+                s3/=10;
+            }
+            //insertFront(&h3,0);
+        }
+    }
+    else
+    {
+        while(s3>0)
+        {
+            insertFront(&h3,s3%10);
+            s3/=10;
+        }
+    }
+    return h3;
+}
+
+
+int main() {
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    
+    int a,b,x;
+    scanf(""%d %d"",&a,&b);
+    n *h1=NULL;
+    n *h2=NULL;
+    for(int i=0;i<a;i++)
+    {
+        scanf(""%d"",&x);
+        insertFront(&h1,x);
+    }
+    for(int i=0;i<b;i++)
+    {
+        scanf(""%d"",&x);
+        insertFront(&h2,x);
+    }
+    n *h3=add(&h1,a,&h2,b);
+    disp(h3);
+    
+    return 0;
+}
+"
+22730803,PES2UG22CS140,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+void splitLinkedList(struct Node* midNode, struct Node** firstHalf, struct Node** secondHalf) {
+    if (midNode == NULL) {
+        *firstHalf = NULL;
+        *secondHalf = NULL;
+        return;
+    }
+
+    *firstHalf = midNode->next;
+    midNode->next = NULL;
+    *secondHalf = *firstHalf;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insert(&head, value);
+    }
+
+    struct Node* midNode = findMidpoint(head);
+    struct Node* firstHalf = head;
+    struct Node* secondHalf = midNode->next;
+    midNode->next = NULL;
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}"
+22730803,PES2UG22CS140,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730806,PES2UG22CS616,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void splitLinkedList(struct Node* midNode, struct Node** firstHalf, struct Node** secondHalf) {
+    if (midNode == NULL) {
+        *firstHalf = NULL;
+        *secondHalf = NULL;
+        return;
+    }
+
+    *firstHalf = midNode->next;
+    midNode->next = NULL;
+    *secondHalf = *firstHalf;
+}
+
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insert(&head, value);
+    }
+
+    struct Node* midNode = findMidpoint(head);
+    struct Node* firstHalf = head;
+    struct Node* secondHalf = midNode->next;
+    midNode->next = NULL;
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}"
+22730806,PES2UG22CS616,ADD TWO NUMBERS 104,7.5,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct ListNode {
+    int val;
+    struct ListNode* next;
+};
+
+
+void insertEnd(struct ListNode** head, int val) {
+    struct ListNode* newNode = (struct ListNode*)malloc(sizeof(struct ListNode));
+    newNode->val = val;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct ListNode* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+
+struct ListNode* addReversedLists(struct ListNode* l1, struct ListNode* l2) {
+    struct ListNode* dummy = (struct ListNode*)malloc(sizeof(struct ListNode));
+    struct ListNode* current = dummy;
+    int carry = 0;
+
+    while (l1 != NULL || l2 != NULL || carry > 0) {
+        int sum = carry;
+        if (l1 != NULL) {
+            sum += l1->val;
+            l1 = l1->next;
+        }
+        if (l2 != NULL) {
+            sum += l2->val;
+            l2 = l2->next;
+        }
+        carry = sum / 10;
+        sum %= 10;
+
+        insertEnd(&current->next, sum);
+        current = current->next;
+    }
+
+    return dummy->next;
+}
+
+
+void printList(struct ListNode* head) {
+    struct ListNode* temp = head;
+    while (temp != NULL) {
+        printf(""%d"", temp->val);
+        if (temp->next != NULL) {
+            printf("" "");
+        }
+        temp = temp->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2, val;
+
+    
+    scanf(""%d %d"", &n1, &n2);
+
+    struct ListNode* num1 = NULL;
+    struct ListNode* num2 = NULL;
+
+    
+    for (int i = 0; i < n1; i++) {
+        scanf(""%d"", &val);
+        insertEnd(&num1, val);
+    }
+
+    
+    for (int i = 0; i < n2; i++) {
+        scanf(""%d"", &val);
+        insertEnd(&num2, val);
+    }
+
+   
+    struct ListNode* sum = addReversedLists(num1, num2);
+
+    
+    printList(sum);
+
+    return 0;
+}"
+22730809,PES1UG22CS684,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+        return;
+    }
+
+    struct Node* current = *head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+    current->next = newNode;
+}
+
+
+struct Node* findmp(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void split(struct Node* midNode, struct Node** first, struct Node** second) {
+    if (midNode == NULL) {
+        *first = NULL;
+        *second = NULL;
+        return;
+    }
+
+    *first = midNode->next;
+    midNode->next = NULL;
+    *second = *first;
+}
+
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insert(&head, value);
+    }
+
+    struct Node* midNode = findmp(head);
+    struct Node* first = head;
+    struct Node* second = midNode->next;
+    midNode->next = NULL;
+
+    printList(first);
+    printList(second);
+
+    return 0;
+}"
+22730809,PES1UG22CS684,ADD TWO NUMBERS 104,7.5,"
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int x;
+    struct node* next;
+};
+int main() {
+    void insert_end(struct node** head, int x);
+    struct node* add(struct node* num1, struct node* num2);
+    void print(struct node* head);
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+    struct node* num1 = NULL;
+    struct node* num2 = NULL;
+    for (int i = 0; i < n1; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insert_end(&num1, value);
+    }
+    for (int i = 0; i < n2; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insert_end(&num2, value);
+    }
+    struct node* result = add(num1, num2);
+    print(result);
+
+    return 0;
+}
+struct node* add(struct node* num1, struct node* num2) 
+{
+    struct node* result = NULL;
+    struct node* current = NULL;
+    int carry = 0;
+
+    while (num1 != NULL || num2 != NULL || carry) {
+        int sum = carry + (num1 ? num1->x : 0) + (num2 ? num2->x : 0);
+        carry = sum / 10;
+        sum %= 10;
+
+        struct node* temp1 = (struct node*)malloc(sizeof(struct node));
+        temp1->x = sum;
+        temp1->next = NULL;
+
+        if (result == NULL) {
+            result = temp1;
+            current = temp1;
+        } else {
+            current->next = temp1;
+            current = temp1;
+        }
+
+        if (num1) num1 = num1->next;
+        if (num2) num2 = num2->next;
+    }
+
+    return result;
+}
+void insert_end(struct node** head, int x) 
+{
+    struct node* temp1 = (struct node*)malloc(sizeof(struct node));
+    temp1->x = x;
+    temp1->next = NULL;
+
+    if (*head == NULL) {
+        *head = temp1;
+        return;
+    }
+
+    struct node* temp = *head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = temp1;
+}
+void print(struct node* head) 
+{
+    while (head != NULL) {
+        printf(""%d "", head->x);
+        head = head->next;
+    }
+}"
+22730815,PES1UG22CS677,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a linked list node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to insert a new node at the end of the linked list
+void insertEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+// Function to find the midpoint of the linked list
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+// Function to split the linked list into two parts at the midpoint
+void splitLinkedList(struct Node* source, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* mid = findMidpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+// Function to print the elements of a linked list
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+
+    splitLinkedList(head, &firstHalf, &secondHalf);
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}   
+
+"
+22730815,PES1UG22CS677,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}
+"
+22730817,PES1UG22CS676,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct Node 
+{
+    int data;
+    struct Node* next;
+};
+
+
+void insertEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void splitLinkedList(struct Node* source, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* mid = findMidpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+
+    splitLinkedList(head, &firstHalf, &secondHalf);
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}"
+22730817,PES1UG22CS676,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730819,PES1UG22CS716,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}
+"
+22730819,PES1UG22CS716,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730828,PES2UG22CS260,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+// Definition of a singly linked list node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to insert a new node at the end of the linked list
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+// Function to find the midpoint of the linked list using fast and slow pointers
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+// Function to split the linked list into two parts at the midpoint
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+// Function to print the elements of a linked list
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}
+"
+22730828,PES2UG22CS260,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730833,PES1UG22CS683,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insert_end(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+
+struct Node* mid_point(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void splitlinkedlist(struct Node* source, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* midpoint = mid_point(source);
+    *firstHalf = source;
+    *secondHalf = midpoint->next;
+    midpoint->next = NULL;
+}
+
+
+void printlist(struct Node* head) {
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf(""%d "", temp->data);
+        temp = temp->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, data;
+    struct Node* head = NULL;
+
+    
+    scanf(""%d"", &n);
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &data);
+        insert_end(&head, data);
+    }
+
+    
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+    splitlinkedlist(head, &firstHalf, &secondHalf);
+
+    
+    printlist(firstHalf);
+    printlist(secondHalf);
+
+    return 0;
+}"
+22730833,PES1UG22CS683,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730839,PES1UG22CS704,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+
+void insert(struct node** head, int data) {
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct node* temp = *head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+}
+
+struct node* findMidpoint(struct node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct node* slow = head;
+    struct node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void splitLinkedList(struct node* p, struct node** first, struct node** second) {
+    struct node* midpoint = findMidpoint(p);
+    *first = p;
+    *second = midpoint->next;
+    midpoint->next = NULL;
+}
+
+
+void printList(struct node* head) {
+    struct node* temp = head;
+    while (temp != NULL) {
+        printf(""%d "", temp->data);
+        temp = temp->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n, data;
+    struct node* head = NULL;
+
+
+    scanf(""%d"", &n);
+    for (int i = 0; i < n; i++) {
+        scanf(""%d"", &data);
+        insert(&head, data);
+    }
+
+
+    struct node* first = NULL;
+    struct node* second = NULL;
+    splitLinkedList(head, &first, &second);
+
+
+    printList(first);
+    printList(second);
+
+    return 0;
+}"
+22730839,PES1UG22CS704,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730849,PES1UG22CS712,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a linked list node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to insert a new node at the end of the linked list
+void insertEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+// Function to find the midpoint of the linked list
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+// Function to split the linked list into two parts at the midpoint
+void splitLinkedList(struct Node* source, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* mid = findMidpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+// Function to print the elements of a linked list
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+
+    splitLinkedList(head, &firstHalf, &secondHalf);
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}"
+22730849,PES1UG22CS712,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}   
+    
+"
+22730860,PES1UG22CS675,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct Node 
+{
+    int data;
+    struct Node* next;
+};
+
+
+void insertEnd(struct Node** head, int value) 
+{
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL)
+    {
+        *head = newNode;
+    } else 
+    {
+        struct Node* current = *head;
+        while (current->next != NULL)
+        {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) 
+{
+    if (head == NULL || head->next == NULL) 
+    {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) 
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void splitLinkedList(struct Node* source, struct Node** firstHalf, struct Node** secondHalf)
+{
+    struct Node* mid = findMidpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+
+void printList(struct Node* head) 
+{
+    struct Node* current = head;
+    while (current != NULL)
+    {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() 
+{
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+
+    splitLinkedList(head, &firstHalf, &secondHalf);
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}"
+22730860,PES1UG22CS675,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22730895,PES2UG22CS139,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}
+"
+22730895,PES2UG22CS139,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}
+"
+22730992,PES1UG22CS693,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+
+void splitLinkedList(struct Node* source, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* mid = findMidpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+
+    splitLinkedList(head, &firstHalf, &secondHalf);
+
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}
+"
+22730992,PES1UG22CS693,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22747180,PES2UG22CS536,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+struct Node {
+    int data;
+    struct Node* next;
+};
+void insertEnd(struct Node** head, int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+void splitLinkedList(struct Node* source, struct Node** firstHalf, struct Node** secondHalf) {
+    struct Node* mid = findMidpoint(source);
+    *firstHalf = source;
+    *secondHalf = mid->next;
+    mid->next = NULL;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d "", current->data);
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertEnd(&head, value);
+    }
+    struct Node* firstHalf = NULL;
+    struct Node* secondHalf = NULL;
+    splitLinkedList(head, &firstHalf, &secondHalf);
+    printList(firstHalf);
+    printList(secondHalf);
+
+    return 0;
+}"
+22747180,PES2UG22CS536,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
+22813616,PES1UG22CS696,Divide Linked List 2,15,"#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node* next;
+};
+
+void insertEnd(struct Node** head,int value){
+    struct Node* newnode=(struct Node*)malloc(sizeof(struct Node));
+    newnode->data=value;
+    newnode->next=NULL;
+    if(*head==NULL){
+        *head=newnode;
+    }else{
+        struct Node* cur=*head;
+        while(cur->next!=NULL){
+            cur=cur->next;
+        }
+        cur->next=newnode;
+    }
+}
+struct Node* findmidpoint(struct Node* head){   
+    if(head==NULL||head->next==NULL){
+        return head;
+    }
+    struct Node* slow=head;
+    struct Node* fast=head->next;
+    while(fast!=NULL && fast->next!=NULL){
+        slow=slow->next;
+        fast=fast->next->next;
+    }
+    return slow;
+}
+void splitlinkedlist(struct Node* source,struct Node** firsthalf,struct Node** secondhalf){
+    struct Node* mid=findmidpoint(source);
+    *firsthalf=source;
+    *secondhalf=mid->next;
+    mid->next=NULL;
+}
+void printlinkedlist(struct Node* head){
+    struct Node* cur=head;
+    while(cur!=NULL){
+        printf(""%d "",cur->data);
+        cur=cur->next;
+    }
+    printf(""\n"");
+}
+int main(){
+    int n;
+    scanf(""%d"",&n);
+    
+    struct Node* head=NULL;
+    for(int i=0;i<n;i++){
+        int value;
+        scanf(""%d"",&value);
+        insertEnd(&head,value);
+    }
+    struct Node* firsthalf=NULL;
+    struct Node* secondhalf=NULL;
+    splitlinkedlist(head,&firsthalf,&secondhalf);
+    printlinkedlist(firsthalf);
+    printlinkedlist(secondhalf);
+}
+"
+22813616,PES1UG22CS696,ADD TWO NUMBERS 104,15,"#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node*next;
+};
+void push(struct Node**top,int data){
+    struct Node*newnode=(struct Node*)malloc(sizeof(struct Node));
+    newnode->data=data;
+    newnode->next=*top;
+    *top=newnode;
+}
+int pop(struct Node**top){
+    if(*top==NULL){
+        return 0;
+    }
+    struct Node* temp=*top;
+    *top=(*top)->next;
+    int data=temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addlists(struct Node*list1,struct Node*list2){
+    struct Node*result=NULL;
+    struct Node*temp=NULL;
+    int carry=0;
+    while (list1||list2||carry){
+        int sum=carry+pop(&list1)+pop(&list2);
+        carry=sum/10;
+            int value=sum%10;
+            push(&result,value);
+        }
+        
+        
+    return result;
+}
+void printlist(struct Node* head){
+    struct Node* current=head;
+    while(current!=NULL){
+        printf(""%d"",current->data);
+        if(current->next){
+            printf("" "");
+        }
+        current=current->next;
+    }
+    printf(""\n"");
+}
+int main(){
+    int n1,n2;
+    scanf(""%d %d"",&n1,&n2);
+    struct Node* list1=NULL;
+    struct Node* list2=NULL;
+    for(int i=0;i<n1;++i)
+    {
+        int value;
+        scanf(""%d"",&value);
+        push(&list1,value);
+    }
+    for(int i=0;i<n2;++i){
+        int value;
+        scanf(""%d"",&value);
+        push(&list2,value);
+    }
+    struct Node* sumlist=addlists(list1,list2);
+    printlist(sumlist);
+    return 0;
+}"
+22820854,PES2UG22CS181,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct node {
+    int x;
+    struct node* next;
+};
+
+
+int main() {
+    
+    void insert_end(struct node **p,int a);
+    struct node* midp(struct node* head);
+    void splitli(struct node* mid, struct node** list2);
+
+
+    int ele;
+    scanf(""%d"", &ele);
+
+    struct node* head = NULL;
+    
+    
+    for (int i=0;i<ele;i++) 
+    {
+        int n;
+        scanf(""%d"", &n);
+        insert_end(&head, n);
+    }
+
+    struct node* mid = midp(head);
+    struct node* list2 = NULL;
+    splitli(mid, &list2);
+
+
+    struct node *q1=head;
+    
+    while (q1!=NULL) 
+    {
+        printf(""%d "", q1->x);
+        q1=q1->next;
+    }
+    
+    printf(""\n"");
+    
+    struct node *q2=list2;
+    
+    while (q2!=NULL) 
+    {
+        printf(""%d "", q2->x);
+        q2=q2->next;
+    }
+    
+
+    return 0;
+}
+
+
+
+void insert_end(struct node **p,int a)
+{
+    struct node *temp,*q;
+    temp=(struct node *)malloc(sizeof(struct node));
+    temp->x=a;
+    temp->next=NULL;
+    if(*p==NULL)
+        *p=temp;
+    else
+        {
+            q=*p;
+            while(q->next!=NULL)
+            {
+                q=q->next;
+            }
+            q->next=temp;
+        }
+}
+
+
+struct node* midp(struct node* head) 
+{
+    if (head==NULL || head->next==NULL) 
+    {
+        return head;
+    }
+
+    struct node* slow = head;
+    struct node* fast = head;
+    while (fast->next!=NULL && fast->next->next!=NULL) 
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+
+
+
+void splitli(struct node* mid, struct node** list2) 
+{
+    *list2 = mid->next;
+    mid->next = NULL;
+}
+
+
+
+
+
+
+
+
+"
+22820854,PES2UG22CS181,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+
+#include <stdlib.h>
+
+struct Node {
+
+    int data;
+
+    struct Node* next;
+
+};
+
+void push(struct Node** top, int data) {
+
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+
+    newNode->data = data;
+
+    newNode->next = *top;
+
+    *top = newNode;
+
+}
+
+int pop(struct Node** top) {
+
+    if (*top == NULL) {
+
+        return 0;
+
+    }
+
+    struct Node* temp = *top;
+
+    *top = (*top)->next;
+
+    int data = temp->data;
+
+    free(temp);
+
+    return data;
+
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+
+    struct Node* result = NULL;
+
+    struct Node* temp = NULL;
+
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+
+        int sum = carry + pop(&list1) + pop(&list2);
+
+        carry = sum / 10;
+
+        int value = sum % 10;
+
+        push(&result, value);
+
+    }
+
+    return result;
+
+}
+
+void printList(struct Node* head) {
+
+    struct Node* current = head;
+
+    while (current != NULL) {
+
+        printf(""%d"", current->data);
+
+        if (current->next) {
+
+            printf("" "");
+
+        }
+
+        current = current->next;
+
+    }
+
+    printf(""\n"");
+
+}
+
+int main() {
+
+    int n1, n2;
+
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+
+        int value;
+
+        scanf(""%d"", &value);
+
+        push(&list1, value);
+
+    }
+
+    for (int i = 0; i < n2; ++i) {
+
+        int value;
+
+        scanf(""%d"", &value);
+
+        push(&list2, value);
+
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+
+    printList(sumList);
+
+    return 0;
+
+}
+"
+22821098,PES1UG22CS711,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node{
+    int data;
+    struct Node* next;
+};
+void insertNode(struct Node** head,int data){
+    struct Node* newNode=(struct Node*)malloc(sizeof(struct Node));
+    newNode->data= data;
+    newNode->next= NULL;
+    
+    if (*head == NULL){
+        *head = newNode;
+    }
+    else {
+        struct Node* current =*head;
+        while (current->next != NULL){
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+struct Node* findMidPoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+    struct Node* slow = head;
+    struct Node* fast = head;
+    while (fast->next != NULL && fast->next->next != NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}    
+ struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidPoint(*head);
+        
+        if (midpoint == NULL) {
+            return NULL;
+        }
+        struct Node* secondHalf = midpoint->next;
+        midpoint->next =NULL;
+        
+        return secondHalf;
+    }
+
+void printLinkedList(struct Node* head){
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head ->next;
+    }
+    printf(""\n"");
+}
+int main() {
+    int n;
+    scanf(""%d"", &n);
+    
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+    struct Node* secondHalf = splitLinkedList(&head);
+    
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}"
+22821098,PES1UG22CS711,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+typedef struct NODE_{
+    int val;
+    struct NODE_* next;
+} NODE;
+
+NODE *head1 = NULL, *head2 = NULL, *head3 = NULL; // a + b = c
+NODE *tail3;
+
+void read(int n, NODE** head){
+    NODE* prev = NULL, *p;
+    for (int i = 0; i < n; i++){
+        p = (NODE*) malloc(sizeof(NODE));
+        scanf(""%d"", &p->val);
+        p->next = prev;
+        prev = p;
+    }
+    *head = p;
+}
+
+void sum(int n1, int n2){
+    int n = n1 < n2 ? n1 : n2;
+    NODE *p1 = head1, *p2 = head2, *p3;
+    NODE* prev = NULL;
+    int carry = 0, flag = 0;
+    for (int i = 0; i < n; i++){
+        p3 = (NODE*) malloc(sizeof(NODE));
+        p3->val = (p1->val + p2->val + carry) % 10;
+        carry = (p1->val + p2->val + carry) / 10;
+        p3-> next = head3;
+        head3 = p3;
+        p1 = p1->next;
+        p2 = p2->next;
+        if (!flag){
+            tail3 = p3;
+            flag = 1;
+        }
+    }
+    if (p1){
+        while (p1 != NULL){
+            p3 = (NODE*) malloc(sizeof(NODE));
+            p3->val = (p1->val + carry) % 10;
+            carry = (p1->val + carry) / 10;
+            p3->next = head3;
+            head3 = p3;
+            p1 = p1->next;
+        }
+    }
+    else {
+        while (p2 != NULL){
+            p3 = (NODE*) malloc(sizeof(NODE));
+            p3->val = (p2->val + carry) % 10;
+            carry = (p2->val + carry) / 10;
+            p3->next = head3;
+            head3 = p3;
+            p2 = p2->next;
+        }
+    }
+    if (carry){
+        p3 = (NODE*) malloc(sizeof(NODE));
+        p3->val = carry;
+        p3->next = head3;
+        head3 = p3;
+        
+    }
+    // head3 = p3;
+}
+
+void traverse_(NODE **phead){
+    NODE* p = *phead;
+    while (p != NULL){
+        printf(""%d "", p->val);
+        p = p->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+    if (!n1 && !n2){
+        printf(""0\n"");
+        return 0;
+    }
+    read(n1, &head1);
+    read(n2, &head2);
+    sum(n1, n2);
+    traverse_(&head3);
+
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */    
+    return 0;
+}"
+22822642,PES2UG22CS635,Divide Linked List 2,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}
+
+
+"
+22822642,PES2UG22CS635,ADD TWO NUMBERS 104,15,"#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}
+"
+22822857,PES1UG22CS699,Divide Linked List 2,15,"#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+
+void insertNode(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    if (*head == NULL) {
+        *head = newNode;
+    } else {
+        struct Node* current = *head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+struct Node* findMidpoint(struct Node* head) {
+    if (head == NULL || head->next == NULL) {
+        return head;
+    }
+
+    struct Node* slow = head;
+    struct Node* fast = head;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+
+    return slow;
+}
+
+struct Node* splitLinkedList(struct Node** head) {
+    struct Node* midpoint = findMidpoint(*head);
+
+    if (midpoint == NULL) {
+        return NULL;
+    }
+
+    struct Node* secondHalf = midpoint->next;
+    midpoint->next = NULL;
+
+    return secondHalf;
+}
+
+void printLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf(""%d "", head->data);
+        head = head->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n;
+    scanf(""%d"", &n);
+
+    struct Node* head = NULL;
+    for (int i = 0; i < n; i++) {
+        int value;
+        scanf(""%d"", &value);
+        insertNode(&head, value);
+    }
+
+    struct Node* secondHalf = splitLinkedList(&head);
+
+    printLinkedList(head);
+    printLinkedList(secondHalf);
+
+    return 0;
+}"
+22822857,PES1UG22CS699,ADD TWO NUMBERS 104,15,"
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void push(struct Node** top, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = *top;
+    *top = newNode;
+}
+
+int pop(struct Node** top) {
+    if (*top == NULL) {
+        return 0;
+    }
+    struct Node* temp = *top;
+    *top = (*top)->next;
+    int data = temp->data;
+    free(temp);
+    return data;
+}
+
+struct Node* addLists(struct Node* list1, struct Node* list2) {
+    struct Node* result = NULL;
+    struct Node* temp = NULL;
+    int carry = 0;
+
+    while (list1 || list2 || carry) {
+        int sum = carry + pop(&list1) + pop(&list2);
+        carry = sum / 10;
+        int value = sum % 10;
+        push(&result, value);
+    }
+
+    return result;
+}
+
+void printList(struct Node* head) {
+    struct Node* current = head;
+    while (current != NULL) {
+        printf(""%d"", current->data);
+        if (current->next) {
+            printf("" "");
+        }
+        current = current->next;
+    }
+    printf(""\n"");
+}
+
+int main() {
+    int n1, n2;
+    scanf(""%d %d"", &n1, &n2);
+
+    struct Node* list1 = NULL;
+    struct Node* list2 = NULL;
+
+    for (int i = 0; i < n1; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list1, value);
+    }
+
+    for (int i = 0; i < n2; ++i) {
+        int value;
+        scanf(""%d"", &value);
+        push(&list2, value);
+    }
+
+    struct Node* sumList = addLists(list1, list2);
+    printList(sumList);
+
+    return 0;
+}"
